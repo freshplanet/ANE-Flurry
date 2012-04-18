@@ -108,10 +108,12 @@ package com.freshplanet.nativeExtensions
 						}
 						count++;
 					}
+					trace("[Flurry Debug]", "logEvent", eventName, parameterKeys, parameterValues);
 					extCtx.call("logEvent", eventName, parameterKeys, parameterValues);
 				} else
 				{
-					extCtx.call("logEvent", eventName);
+					trace("[Flurry Debug]", "logEvent", eventName);
+					extCtx.call("logEvent", eventName, [], []);
 				}
 			}
 		}
@@ -218,6 +220,8 @@ package com.freshplanet.nativeExtensions
 					trace("[Flurry Warning]", "event name too long (>255 characters)", eventName);
 					return;
 				}
+				trace("[Flurry Debug]", "start logEvent Timed", eventName);
+
 				extCtx.call("startTimedEvent", eventName)
 			}
 		}
@@ -237,6 +241,8 @@ package com.freshplanet.nativeExtensions
 					trace("[Flurry Warning]", "event name too long (>255 characters)", eventName);
 					return;
 				}
+				trace("[Flurry Debug]", "stop logEvent Timed", eventName);
+
 				extCtx.call("stopTimedEvent", eventName)
 			}
 		}

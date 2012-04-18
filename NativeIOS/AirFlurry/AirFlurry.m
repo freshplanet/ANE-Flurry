@@ -46,9 +46,9 @@ DEFINE_ANE_FUNCTION(logEvent)
     const uint8_t *value;
     FREGetObjectAsUTF8(argv[0], &stringLength, &value);
     NSString *eventName = [NSString stringWithUTF8String:(char*)value];
-    /*NSMutableDictionary *params;
+    NSMutableDictionary *params;
     
-    if (argc == 3)
+    if (argc > 1 && argv[1] != NULL && argv[2] != NULL && argv[1] != nil && argv[2] != NULL)
     {
         FREObject arrKey = argv[1]; // array
         uint32_t arr_len; // array length
@@ -92,9 +92,9 @@ DEFINE_ANE_FUNCTION(logEvent)
     {
         [FlurryAnalytics logEvent:eventName withParameters:params];
     } else
-    {*/
+    {
         [FlurryAnalytics logEvent:eventName];
-    //}
+    }
  
     return nil;
 }
