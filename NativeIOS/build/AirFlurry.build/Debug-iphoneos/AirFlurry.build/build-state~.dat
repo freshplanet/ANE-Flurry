@@ -1,0 +1,212 @@
+TAirFlurry
+v3
+r1
+cCheck dependencies
+cProcessPCH /var/folders/5k/z80853k16hn_mm7cjjznwfjc0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/AirFlurry-Prefix-ayxxvcnpavsfnucrpempcobqkkge/AirFlurry-Prefix.pch.gch AirFlurry/AirFlurry-Prefix.pch normal armv6 objective-c com.apple.compilers.llvmgcc42
+cProcessPCH /var/folders/5k/z80853k16hn_mm7cjjznwfjc0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/AirFlurry-Prefix-cplnpjdstlnaosgqcbxdxqzlpcrq/AirFlurry-Prefix.pch.gch AirFlurry/AirFlurry-Prefix.pch normal armv7 objective-c com.apple.compilers.llvmgcc42
+cCompileC build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv6/AirFlurry.o /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/AirFlurry/AirFlurry.m normal armv6 objective-c com.apple.compilers.llvmgcc42
+cCompileC build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv7/AirFlurry.o /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/AirFlurry/AirFlurry.m normal armv7 objective-c com.apple.compilers.llvmgcc42
+cLibtool /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv7/libAirFlurry.a normal armv7
+cLibtool /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv6/libAirFlurry.a normal armv6
+cCreateUniversalBinary /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/Debug-iphoneos/libAirFlurry.a normal "armv6 armv7"
+
+N/Applications/Adobe Flash Builder 4.6/sdks/4.6.0/include/FlashRuntimeExtensions.h
+c000000004F5FD2CD0000000000004FCB
+t1331679949
+s20427
+i<stdint.h>
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk
+c000000004D9A119B0000000000000110
+t1301942683
+s272
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/Foundation.framework/Foundation
+c000000004D93E1FD00000000003E22F0
+t1301537277
+s4072176
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
+c000000004D93E1E60000000000001466
+t1301537254
+s5222
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
+c000000004D99FA7C0000000000000AA1
+t1301936764
+s2721
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/stdint.h
+c000000004D4F6E9000000000000018EF
+t1297051280
+s6383
+
+N/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/AirFlurry/../../Flurry_3_1_0/FlurryAnalytics/FlurryAnalytics.h
+c000000004F7920B50000000000000D3E
+t1333338293
+s3390
+i<UIKit/UIKit.h>
+
+N/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/AirFlurry/../../Flurry_3_1_0/FlurryAnalytics/libFlurryAnalytics.a
+c000000004F7920B500000000001B0344
+t1333338293
+s1770308
+
+N/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/AirFlurry/AirFlurry-Prefix.pch
+c000000004F8DAEDD000000000000009F
+t1334685405
+s159
+i<Foundation/Foundation.h>
+
+N/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/AirFlurry/AirFlurry.h
+c000000004F8DC796000000000000033F
+t1334691734
+s831
+i<Foundation/Foundation.h>
+i"FlashRuntimeExtensions.h"
+i"FlurryAnalytics.h"
+
+N/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/AirFlurry/AirFlurry.m
+c000000004F8DC8DA0000000000000F8C
+t1334692058
+s3980
+i"AirFlurry.h"
+
+N/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv6/AirFlurry.LinkFileList
+c000000004F8DC8EA0000000000000089
+t1334692074
+s137
+
+N/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv6/AirFlurry.o
+t2
+s0
+
+N/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv6/libAirFlurry.a
+t2
+s0
+
+N/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv7/AirFlurry.LinkFileList
+c000000004F8DC8EA0000000000000089
+t1334692074
+s137
+
+N/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv7/AirFlurry.o
+t2
+s0
+
+N/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv7/libAirFlurry.a
+t2
+s0
+
+N/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/Debug-iphoneos/libAirFlurry.a
+t2
+s0
+
+N/var/folders/5k/z80853k16hn_mm7cjjznwfjc0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/AirFlurry-Prefix-ayxxvcnpavsfnucrpempcobqkkge/AirFlurry-Prefix.pch.gch
+t2
+s0
+
+N/var/folders/5k/z80853k16hn_mm7cjjznwfjc0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/AirFlurry-Prefix-cplnpjdstlnaosgqcbxdxqzlpcrq/AirFlurry-Prefix.pch.gch
+t2
+s0
+
+CBuild AST from /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/AirFlurry/AirFlurry.m
+r0
+
+CCheck dependencies
+r0
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependenciesb4ad326a003eb541^501dc76a003eb541^---0#1#0#--18"Check dependencies
+
+CCompileC build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv6/AirFlurry.o /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/AirFlurry/AirFlurry.m normal armv6 objective-c com.apple.compilers.llvmgcc42
+s356384875.554858
+e356384875.769792
+r1
+xCompileC
+xbuild/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv6/AirFlurry.o
+x/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/AirFlurry/AirFlurry.m
+xnormal
+xarmv6
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection80"Compile /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/AirFlurry/AirFlurry.m46288e6b003eb541^f90fc56b003eb541^---0#0#0#-19%DVTDocumentLocation2@88"file://localhost/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/AirFlurry/AirFlurry.m0000000000000000^2102"CompileC build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv6/AirFlurry.o AirFlurry/AirFlurry.m normal armv6 objective-c com.apple.compilers.llvmgcc42    cd /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wmissing-prototypes -Wreturn-type -Wunused-variable -DDEBUG=1 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/AirFlurry-generated-files.hmap -I/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/AirFlurry-own-target-headers.hmap -I/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/AirFlurry-all-target-headers.hmap -iquote /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/AirFlurry-project-headers.hmap -I/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/Debug-iphoneos/include -I/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/DerivedSources/armv6 -I/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/DerivedSources -F/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/Debug-iphoneos -include /var/folders/5k/z80853k16hn_mm7cjjznwfjc0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/AirFlurry-Prefix-ayxxvcnpavsfnucrpempcobqkkge/AirFlurry-Prefix.pch -c /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/AirFlurry/AirFlurry.m -o /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv6/AirFlurry.o
+
+CCompileC build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv7/AirFlurry.o /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/AirFlurry/AirFlurry.m normal armv7 objective-c com.apple.compilers.llvmgcc42
+s356384875.576954
+e356384875.764084
+r1
+xCompileC
+xbuild/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv7/AirFlurry.o
+x/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/AirFlurry/AirFlurry.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection80"Compile /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/AirFlurry/AirFlurry.m97ca936b003eb541^5f99c36b003eb541^---0#0#0#-19%DVTDocumentLocation2@88"file://localhost/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/AirFlurry/AirFlurry.m0000000000000000^2102"CompileC build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv7/AirFlurry.o AirFlurry/AirFlurry.m normal armv7 objective-c com.apple.compilers.llvmgcc42    cd /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wmissing-prototypes -Wreturn-type -Wunused-variable -DDEBUG=1 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/AirFlurry-generated-files.hmap -I/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/AirFlurry-own-target-headers.hmap -I/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/AirFlurry-all-target-headers.hmap -iquote /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/AirFlurry-project-headers.hmap -I/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/Debug-iphoneos/include -I/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/DerivedSources/armv7 -I/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/DerivedSources -F/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/Debug-iphoneos -include /var/folders/5k/z80853k16hn_mm7cjjznwfjc0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/AirFlurry-Prefix-cplnpjdstlnaosgqcbxdxqzlpcrq/AirFlurry-Prefix.pch -c /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/AirFlurry/AirFlurry.m -o /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv7/AirFlurry.o
+
+CCreateUniversalBinary /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/Debug-iphoneos/libAirFlurry.a normal "armv6 armv7"
+s356384875.823323
+e356384876.092537
+r1
+xCreateUniversalBinary
+x/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/Debug-iphoneos/libAirFlurry.a
+xnormal
+xarmv6 armv7
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection110"Create universal binary /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/Debug-iphoneos/libAirFlurry.a8dd5d26b003eb541^10af176c003eb541^---0#0#0#-19%DVTDocumentLocation2@102"file://localhost/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/Debug-iphoneos/libAirFlurry.a00f4f0a3dcffdf42^708"CreateUniversalBinary build/Debug-iphoneos/libAirFlurry.a normal "armv6 armv7"    cd /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/libtool -static /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv6/libAirFlurry.a /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv7/libAirFlurry.a -o /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/Debug-iphoneos/libAirFlurry.a
+
+CLibtool /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv6/libAirFlurry.a normal armv6
+s356384875.776571
+e356384875.814952
+r1
+xLibtool
+x/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv6/libAirFlurry.a
+xnormal
+xarmv6
+o/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/libtool: -dynamic not specified the following flags are invalid: -ObjC 
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection109"Libtool build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv6/libAirFlurry.a normal armv60536c76b003eb541^d89fd06b003eb541^---0#0#0#--1016"Libtool build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv6/libAirFlurry.a normal armv6    cd /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry    setenv IPHONEOS_DEPLOYMENT_TARGET 4.3    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/libtool -static -arch_only armv6 -syslibroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -L/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/Debug-iphoneos -L/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/../Flurry_3_1_0/FlurryAnalytics -filelist /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv6/AirFlurry.LinkFileList -ObjC -framework Foundation -lFlurryAnalytics -o /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv6/libAirFlurry.a
+
+CLibtool /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv7/libAirFlurry.a normal armv7
+s356384875.771061
+e356384875.816485
+r1
+xLibtool
+x/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv7/libAirFlurry.a
+xnormal
+xarmv7
+o/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/libtool: -dynamic not specified the following flags are invalid: -ObjC 
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection109"Libtool build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv7/libAirFlurry.a normal armv757afc66b003eb541^d504d16b003eb541^---0#0#0#--1016"Libtool build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv7/libAirFlurry.a normal armv7    cd /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry    setenv IPHONEOS_DEPLOYMENT_TARGET 4.3    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/libtool -static -arch_only armv7 -syslibroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -L/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/Debug-iphoneos -L/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/../Flurry_3_1_0/FlurryAnalytics -filelist /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv7/AirFlurry.LinkFileList -ObjC -framework Foundation -lFlurryAnalytics -o /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/Objects-normal/armv7/libAirFlurry.a
+
+CLibtool /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/Debug-iphoneos/libAirFlurry.a normal armv7
+r0
+
+CProcessPCH /Users/titi/Library/Developer/Xcode/DerivedData/AirFlurry-gszivzecjgszeactvafyunhnjmun/Index/PrecompiledHeaders/AirFlurry-Prefix-asxpqzcjrlvlqyefguijtywxgywc_ast/AirFlurry-Prefix.pch.pth AirFlurry/AirFlurry-Prefix.pch normal armv6 objective-c com.apple.compilers.llvm.clang.1_0.astbuilder
+r0
+
+CProcessPCH /Users/titi/Library/Developer/Xcode/DerivedData/AirFlurry-gszivzecjgszeactvafyunhnjmun/Index/PrecompiledHeaders/AirFlurry-Prefix-dibrrgazbwvuhuarqkydpnmacakt_ast/AirFlurry-Prefix.pch.pth AirFlurry/AirFlurry-Prefix.pch normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.astbuilder
+r0
+
+CProcessPCH /var/folders/5k/z80853k16hn_mm7cjjznwfjc0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/AirFlurry-Prefix-ayxxvcnpavsfnucrpempcobqkkge/AirFlurry-Prefix.pch.gch AirFlurry/AirFlurry-Prefix.pch normal armv6 objective-c com.apple.compilers.llvmgcc42
+s356384874.803669
+e356384875.548049
+r1
+xProcessPCH
+x/var/folders/5k/z80853k16hn_mm7cjjznwfjc0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/AirFlurry-Prefix-ayxxvcnpavsfnucrpempcobqkkge/AirFlurry-Prefix.pch.gch
+xAirFlurry/AirFlurry-Prefix.pch
+xnormal
+xarmv6
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection41"Precompile AirFlurry/AirFlurry-Prefix.pch6bf1cd6a003eb541^734a8c6b003eb541^---0#0#0#-19%DVTDocumentLocation2@97"file://localhost/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/AirFlurry/AirFlurry-Prefix.pch0000000000000000^2066"ProcessPCH /var/folders/5k/z80853k16hn_mm7cjjznwfjc0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/AirFlurry-Prefix-ayxxvcnpavsfnucrpempcobqkkge/AirFlurry-Prefix.pch.gch AirFlurry/AirFlurry-Prefix.pch normal armv6 objective-c com.apple.compilers.llvmgcc42    cd /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c-header -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wmissing-prototypes -Wreturn-type -Wunused-variable -DDEBUG=1 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/AirFlurry-generated-files.hmap -I/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/AirFlurry-own-target-headers.hmap -I/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/AirFlurry-all-target-headers.hmap -iquote /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/AirFlurry-project-headers.hmap -I/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/Debug-iphoneos/include -I/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/DerivedSources/armv6 -I/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/DerivedSources -F/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/Debug-iphoneos -c /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/AirFlurry/AirFlurry-Prefix.pch -o /var/folders/5k/z80853k16hn_mm7cjjznwfjc0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/AirFlurry-Prefix-ayxxvcnpavsfnucrpempcobqkkge/AirFlurry-Prefix.pch.gch
+
+CProcessPCH /var/folders/5k/z80853k16hn_mm7cjjznwfjc0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/AirFlurry-Prefix-cplnpjdstlnaosgqcbxdxqzlpcrq/AirFlurry-Prefix.pch.gch AirFlurry/AirFlurry-Prefix.pch normal armv7 objective-c com.apple.compilers.llvmgcc42
+s356384874.803671
+e356384875.569212
+r1
+xProcessPCH
+x/var/folders/5k/z80853k16hn_mm7cjjznwfjc0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/AirFlurry-Prefix-cplnpjdstlnaosgqcbxdxqzlpcrq/AirFlurry-Prefix.pch.gch
+xAirFlurry/AirFlurry-Prefix.pch
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection41"Precompile AirFlurry/AirFlurry-Prefix.pch6bf1cd6a003eb541^21b1916b003eb541^---0#0#0#-19%DVTDocumentLocation2@97"file://localhost/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/AirFlurry/AirFlurry-Prefix.pch0000000000000000^2066"ProcessPCH /var/folders/5k/z80853k16hn_mm7cjjznwfjc0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/AirFlurry-Prefix-cplnpjdstlnaosgqcbxdxqzlpcrq/AirFlurry-Prefix.pch.gch AirFlurry/AirFlurry-Prefix.pch normal armv7 objective-c com.apple.compilers.llvmgcc42    cd /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c-header -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wmissing-prototypes -Wreturn-type -Wunused-variable -DDEBUG=1 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.3 -iquote /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/AirFlurry-generated-files.hmap -I/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/AirFlurry-own-target-headers.hmap -I/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/AirFlurry-all-target-headers.hmap -iquote /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/AirFlurry-project-headers.hmap -I/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/Debug-iphoneos/include -I/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/DerivedSources/armv7 -I/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/AirFlurry.build/Debug-iphoneos/AirFlurry.build/DerivedSources -F/Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/build/Debug-iphoneos -c /Users/titi/Projects/AirFlurry/NativeIOS/AirFlurry/AirFlurry/AirFlurry-Prefix.pch -o /var/folders/5k/z80853k16hn_mm7cjjznwfjc0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/AirFlurry-Prefix-cplnpjdstlnaosgqcbxdxqzlpcrq/AirFlurry-Prefix.pch.gch
+
