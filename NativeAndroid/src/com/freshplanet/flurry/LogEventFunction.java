@@ -52,6 +52,7 @@ public class LogEventFunction implements FREFunction {
 					FREObject value = paramsValue.getObjectAt(i);
 					String keyString = key.getAsString();
 					String valueString = value.getAsString();
+					Log.d(TAG, "["+keyString+"] -> "+valueString);
 					params.put(keyString, valueString);
 				}
 			
@@ -75,10 +76,14 @@ public class LogEventFunction implements FREFunction {
 		}
 		
 		if (eventName != null) {
-			if (params != null && params.size() > 0) {
+			if (params != null) {
+				Log.d(TAG, "log event with params");
 				FlurryAgent.logEvent(eventName, params);
+				//FlurryAgent.onEvent(eventName, params);
 			} else {
+				Log.d(TAG, "log event without params");
 				FlurryAgent.logEvent(eventName);
+				//FlurryAgent.onEvent(eventName);
 			}
 		} else {
 			Log.d(Extension.TAG, "null event name");

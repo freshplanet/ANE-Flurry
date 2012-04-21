@@ -30,9 +30,11 @@ DEFINE_ANE_FUNCTION(setAppVersion)
 {
     uint32_t length = 0;
     const uint8_t *value = NULL;
-    FREGetObjectAsUTF8( argv[0], &length, &value );
-    NSString* versionName = [NSString stringWithUTF8String: (char*) value];
-    [FlurryAnalytics setAppVersion:versionName];
+    if (FREGetObjectAsUTF8( argv[0], &length, &value ) == FRE_OK)
+    {
+        NSString* versionName = [NSString stringWithUTF8String: (char*) value];
+        [FlurryAnalytics setAppVersion:versionName];
+    }
     
     return nil;
 }
@@ -44,20 +46,26 @@ DEFINE_ANE_FUNCTION(logEvent)
     uint32_t stringLength;
     
     const uint8_t *value;
-    FREGetObjectAsUTF8(argv[0], &stringLength, &value);
+    if (FREGetObjectAsUTF8(argv[0], &stringLength, &value) != FRE_OK)
+    {
+        return nil;
+    }
     NSString *eventName = [NSString stringWithUTF8String:(char*)value];
     NSMutableDictionary *params;
     
     if (argc > 1 && argv[1] != NULL && argv[2] != NULL && argv[1] != nil && argv[2] != NULL)
     {
         FREObject arrKey = argv[1]; // array
-        uint32_t arr_len; // array length
+        uint32_t arr_len = 0; // array length
         
         FREObject arrValue = argv[2]; // array
         
         if (arrKey != nil)
         {
-            FREGetArrayLength(arrKey, &arr_len);
+            if (FREGetArrayLength(arrKey, &arr_len) != FRE_OK)
+            {
+                arr_len = 0;
+            }
             
             params = [[NSMutableDictionary alloc] init];
             
@@ -65,20 +73,32 @@ DEFINE_ANE_FUNCTION(logEvent)
                 
                 // get an element at index
                 FREObject key;
-                FREGetArrayElementAt(arrKey, i, &key);
+                if (FREGetArrayElementAt(arrKey, i, &key) != FRE_OK)
+                {
+                    continue;
+                }
                 
                 FREObject value;
-                FREGetArrayElementAt(arrValue, i, &value);
+                if (FREGetArrayElementAt(arrValue, i, &value) != FRE_OK)
+                {
+                    continue;
+                }
                 
                 
                 // convert it to NSString
                 uint32_t stringLength;
                 const uint8_t *keyString;
-                FREGetObjectAsUTF8(key, &stringLength, &keyString);
+                if (FREGetObjectAsUTF8(key, &stringLength, &keyString) != FRE_OK)
+                {
+                    continue;
+                }
                 
                 
                 const uint8_t *valueString;
-                FREGetObjectAsUTF8(value, &stringLength, &valueString);
+                if (FREGetObjectAsUTF8(value, &stringLength, &valueString) != FRE_OK)
+                {
+                    continue;
+                }
                 
                 [params setValue:[NSString stringWithUTF8String:(char*)valueString] forKey:[NSString stringWithUTF8String:(char*)keyString]];
             }
@@ -105,16 +125,16 @@ DEFINE_ANE_FUNCTION(logEvent)
 DEFINE_ANE_FUNCTION(logError)
 {
     uint32_t length = 0;
-    const uint8_t *error;
-    FREGetObjectAsUTF8( argv[0], &length, &error );
-    NSString* errorId = [NSString stringWithUTF8String: (char*) error];
-
-    const uint8_t *msg;
-    FREGetObjectAsUTF8( argv[1], &length, &msg );
-    NSString* message = [NSString stringWithUTF8String: (char*) msg];
-
+    const uint8_t *valueId = NULL;
+    const uint8_t *valueMessage = NULL;
+    
+    if( FREGetObjectAsUTF8( argv[0], &length, &valueId ) != FRE_OK ) return NULL;
+    NSString* errorId = [NSString stringWithUTF8String: (char*) valueId];
+    
+    if( FREGetObjectAsUTF8( argv[1], &length, &valueMessage ) != FRE_OK ) return NULL;
+    NSString* message = [NSString stringWithUTF8String: (char*) valueMessage];
+    
     [FlurryAnalytics logError:errorId message:message error:nil];
-
     return NULL;
 }
 
@@ -123,26 +143,31 @@ DEFINE_ANE_FUNCTION(setUserId)
 {
     uint32_t length = 0;
     const uint8_t *value = NULL;
-    FREGetObjectAsUTF8( argv[0], &length, &value );
-    NSString* userId = [NSString stringWithUTF8String: (char*) value];
-    [FlurryAnalytics setUserID:userId];
-
-    return NULL;
+    if (FREGetObjectAsUTF8( argv[0], &length, &value ) == FRE_OK)
+    {
+        NSString* userId = [NSString stringWithUTF8String: (char*) value];
+        [FlurryAnalytics setUserID:userId];
+    }
+    return nil;
 }
 
 DEFINE_ANE_FUNCTION(setUserInfo)
 {
     int32_t age = 0;
-    FREGetObjectAsInt32(argv[0], &age);
-    [FlurryAnalytics setAge:age];
+    if (FREGetObjectAsInt32(argv[0], &age) == FRE_OK)
+    {
+        [FlurryAnalytics setAge:age];
+    }
 
     uint32_t length = 0;
     const uint8_t *gnd = NULL;
-    FREGetObjectAsUTF8( argv[1], &length, &gnd );
-    NSString* gender = [NSString stringWithUTF8String: (char*) gnd];
-    [FlurryAnalytics setGender:gender];
+    if (FREGetObjectAsUTF8( argv[1], &length, &gnd ) == FRE_OK)
+    {
+        NSString* gender = [NSString stringWithUTF8String: (char*) gnd];
+        [FlurryAnalytics setGender:gender];
+    }
    
-    return NULL;
+    return nil;
 }
 
 
@@ -150,12 +175,13 @@ DEFINE_ANE_FUNCTION(setUserInfo)
 DEFINE_ANE_FUNCTION(setSendEventsOnPause)
 {
     uint32_t onPause = NO;
-    FREGetObjectAsBool(argv[0], &onPause);
-
-    [FlurryAnalytics setSessionReportsOnPauseEnabled:onPause];
-    [FlurryAnalytics setSessionReportsOnCloseEnabled:!onPause];
+    if (FREGetObjectAsBool(argv[0], &onPause) == FRE_OK)
+    {
+        [FlurryAnalytics setSessionReportsOnPauseEnabled:onPause];
+        [FlurryAnalytics setSessionReportsOnCloseEnabled:!onPause];
+    }
   
-    return NULL;
+    return nil;
 }
 
 DEFINE_ANE_FUNCTION(startTimedEvent)
@@ -163,12 +189,13 @@ DEFINE_ANE_FUNCTION(startTimedEvent)
     uint32_t stringLength;
     
     const uint8_t *value;
-    FREGetObjectAsUTF8(argv[0], &stringLength, &value);
-    NSString *eventName = [NSString stringWithUTF8String:(char*)value];
+    if (FREGetObjectAsUTF8(argv[0], &stringLength, &value) == FRE_OK)
+    {
+        NSString *eventName = [NSString stringWithUTF8String:(char*)value];
+        [FlurryAnalytics logEvent:eventName timed:YES];
+    }
 
-    [FlurryAnalytics logEvent:eventName timed:YES];
-
-    return NULL;
+    return nil;
 }
 
 
@@ -177,10 +204,11 @@ DEFINE_ANE_FUNCTION(stopTimedEvent)
     uint32_t stringLength;
     
     const uint8_t *value;
-    FREGetObjectAsUTF8(argv[0], &stringLength, &value);
-    NSString *eventName = [NSString stringWithUTF8String:(char*)value];
-
-    [FlurryAnalytics endTimedEvent:eventName withParameters:nil];
+    if (FREGetObjectAsUTF8(argv[0], &stringLength, &value) == FRE_OK)
+    {
+        NSString *eventName = [NSString stringWithUTF8String:(char*)value];
+        [FlurryAnalytics endTimedEvent:eventName withParameters:nil];
+    }
 
     return NULL;
 }
@@ -191,16 +219,17 @@ DEFINE_ANE_FUNCTION(startSession)
     uint32_t stringLength;
     
     const uint8_t *value;
-    FREGetObjectAsUTF8(argv[0], &stringLength, &value);
-    NSString *apiKey = [NSString stringWithUTF8String:(char*)value];
-
-    [FlurryAnalytics startSession:apiKey];
-    return NULL;
+    if (FREGetObjectAsUTF8(argv[0], &stringLength, &value) == FRE_OK)
+    {
+        NSString *apiKey = [NSString stringWithUTF8String:(char*)value];
+        [FlurryAnalytics startSession:apiKey];
+    }
+    return nil;
 }
 
 DEFINE_ANE_FUNCTION(stopSession)
 {
-    return NULL;
+    return nil;
 }
 
 

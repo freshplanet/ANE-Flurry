@@ -38,6 +38,8 @@ public class ExtensionContext extends FREContext {
 		functionMap.put("setUserId", new SetUserIdFunction());
 		functionMap.put("setUserInfo", new SetUserInfoFunction());
 		functionMap.put("setSendEventsOnPause", new SetSendEventsOnPauseFunction());
+		functionMap.put("startTimedEvent", new StartTimedEventFunction());
+		functionMap.put("stopTimedEvent", new StopTimedEventFunction());
 		return functionMap;	
 	}
 

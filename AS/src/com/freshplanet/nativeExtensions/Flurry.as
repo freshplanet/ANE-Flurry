@@ -76,6 +76,8 @@ package com.freshplanet.nativeExtensions
 		 */
 		public function logEvent(eventName:String, properties:Object = null):void
 		{
+			trace("[Flurry Debug]", "logEvent", eventName, properties);
+
 			if (isFlurrySupported)
 			{
 				if (!checkLength(eventName))
@@ -84,8 +86,8 @@ package com.freshplanet.nativeExtensions
 					return;
 				}
 
-				var parameterKeys:Array;
-				var parameterValues:Array;
+				var parameterKeys:Array = [];
+				var parameterValues:Array = [];
 				if (properties != null)
 				{
 					var value:String;
@@ -124,19 +126,27 @@ package com.freshplanet.nativeExtensions
 		}
 		
 		
+		
 		/**
 		 * Report Application errors. Limits:
 		 * Flurry will report the first 10 errors to occur in each session
-		 *  
+		 * 
+		 * We also limit error and message to 255 characters (truncate if higher). 
+		 * 
 		 * @param errorId
 		 * @param message
 		 * 
 		 */
 		public function logError(errorId:String, message:String):void
 		{
-			if (isFlurrySupported)
+			if (isFlurrySupported && errorId != null)
 			{
-				extCtx.call("logEvent", errorId, message)
+				errorId = errorId.length > 255 ? errorId.substr(0, 253) : errorId;
+				
+				message = message == null ? "" : message;
+				message = message.length > 255 ? message.substr(0, 253) : message;
+
+				extCtx.call("logError", errorId, message)
 			}
 		}
 		
@@ -213,6 +223,8 @@ package com.freshplanet.nativeExtensions
 		 */
 		public function startTimedEvent(eventName:String):void
 		{
+			trace("[Flurry Debug]", "startTimedEvent", eventName);
+
 			if (isFlurrySupported)
 			{
 				if (!checkLength(eventName))
@@ -234,6 +246,8 @@ package com.freshplanet.nativeExtensions
 		 */
 		public function stopTimedEvent(eventName:String):void
 		{
+			trace("[Flurry Debug]", "stopTimedEvent", eventName);
+
 			if (isFlurrySupported)
 			{
 				if (!checkLength(eventName))
