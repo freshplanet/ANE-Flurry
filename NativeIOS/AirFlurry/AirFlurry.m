@@ -1,15 +1,24 @@
+//////////////////////////////////////////////////////////////////////////////////////
 //
-//  AirFlurry.m
-//  AirFlurry
-//
-//  Created by Thibaut Crenn on 4/17/12.
-//  Copyright 2012 __MyCompanyName__. All rights reserved.
-//
+//  Copyright 2012 Freshplanet (http://freshplanet.com | opensource@freshplanet.com)
+//  
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//  
+//    http://www.apache.org/licenses/LICENSE-2.0
+//  
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//  
+//////////////////////////////////////////////////////////////////////////////////////
 
 #import "AirFlurry.h"
 
 #define DEFINE_ANE_FUNCTION(fn) FREObject (fn)(FREContext context, void* functionData, uint32_t argc, FREObject argv[])
-
 
 
 @implementation AirFlurry
@@ -165,6 +174,7 @@ DEFINE_ANE_FUNCTION(setUserInfo)
     {
         NSString* gender = [NSString stringWithUTF8String: (char*) gnd];
         [FlurryAnalytics setGender:gender];
+        FREDispatchStatusEventAsync(context, (uint8_t*)"Setting Gender", (uint8_t*)[gender UTF8String]); 
     }
    
     return nil;
