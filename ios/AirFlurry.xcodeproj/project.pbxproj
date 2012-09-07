@@ -1,0 +1,404 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		39DAC99015F7A2BC00BE307F /* libInMobi_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39DAC98F15F7A2BC00BE307F /* libInMobi_iOS.a */; };
+		39DAC99715F7A46300BE307F /* jtUniversalLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39DAC99215F7A46300BE307F /* jtUniversalLib.a */; };
+		39DAC99815F7A46300BE307F /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39DAC99315F7A46300BE307F /* libGoogleAdMobAds.a */; };
+		39DAC99915F7A46300BE307F /* libGreystripeSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39DAC99415F7A46300BE307F /* libGreystripeSDK.a */; };
+		39DAC99A15F7A46300BE307F /* libMMSDK_4.5.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39DAC99515F7A46300BE307F /* libMMSDK_4.5.3.a */; };
+		39DAC99B15F7A46300BE307F /* libMobclix.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39DAC99615F7A46300BE307F /* libMobclix.a */; };
+		5A9BCDD9153E87040018E174 /* FlashRuntimeExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5AF8AF22153DE6D8000A8447 /* FlashRuntimeExtensions.h */; };
+		5AF18021157D6EA20043C2CF /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AF18020157D6EA20043C2CF /* MediaPlayer.framework */; };
+		5AF8AF16153DE65D000A8447 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AF8AF15153DE65D000A8447 /* Foundation.framework */; };
+		5AF8AF1C153DE65D000A8447 /* AirFlurry.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF8AF1B153DE65D000A8447 /* AirFlurry.m */; };
+		FA20572D15E2AA1600030F51 /* Flurry.h in Headers */ = {isa = PBXBuildFile; fileRef = FA20572715E2AA1600030F51 /* Flurry.h */; };
+		FA20572E15E2AA1600030F51 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA20572815E2AA1600030F51 /* libFlurry.a */; };
+		FA20572F15E2AA1600030F51 /* FlurryAdDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = FA20572A15E2AA1600030F51 /* FlurryAdDelegate.h */; };
+		FA20573015E2AA1600030F51 /* FlurryAds.h in Headers */ = {isa = PBXBuildFile; fileRef = FA20572B15E2AA1600030F51 /* FlurryAds.h */; };
+		FA20573115E2AA1600030F51 /* libFlurryAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA20572C15E2AA1600030F51 /* libFlurryAds.a */; };
+		FA46420615EBC8510075C2EB /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA46420515EBC8510075C2EB /* libz.1.2.3.dylib */; };
+		FA99091015EBD3E600AAA396 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA99090F15EBD3E600AAA396 /* iAd.framework */; };
+		FAD8E79A15E8409900BAD3C3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E79915E8409900BAD3C3 /* SystemConfiguration.framework */; };
+		FAD8E79C15E840A200BAD3C3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E79B15E840A200BAD3C3 /* AVFoundation.framework */; };
+		FAD8E79E15E840B800BAD3C3 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E79D15E840B800BAD3C3 /* Security.framework */; };
+		FAD8E7A015E840C100BAD3C3 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E79F15E840C100BAD3C3 /* MessageUI.framework */; };
+		FAD8E7A215E840D200BAD3C3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E7A115E840D200BAD3C3 /* CoreGraphics.framework */; };
+		FAD8E7A415E840DD00BAD3C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E7A315E840DD00BAD3C3 /* UIKit.framework */; };
+		FAD8E7A615E8422700BAD3C3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E7A515E8422700BAD3C3 /* AudioToolbox.framework */; };
+		FAD8E7CE15EBC1AF00BAD3C3 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E7CD15EBC1AF00BAD3C3 /* OpenAL.framework */; };
+		FAD8E7D015EBC1B700BAD3C3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E7CF15EBC1B700BAD3C3 /* QuartzCore.framework */; };
+		FAD8E7D215EBC1C100BAD3C3 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E7D115EBC1C100BAD3C3 /* libsqlite3.dylib */; };
+		FAD8E7D415EBC1C800BAD3C3 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E7D315EBC1C800BAD3C3 /* libz.dylib */; };
+		FAD8E7DF15EBC3E900BAD3C3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E7DE15EBC3E900BAD3C3 /* CoreLocation.framework */; };
+		FAD8E7E315EBC51100BAD3C3 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E7E215EBC51100BAD3C3 /* MobileCoreServices.framework */; };
+		FAD8E80315EBC5B600BAD3C3 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E80115EBC5B600BAD3C3 /* AddressBook.framework */; };
+		FAD8E80415EBC5B600BAD3C3 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E80215EBC5B600BAD3C3 /* AddressBookUI.framework */; };
+		FAD8E80615EBC5BB00BAD3C3 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E80515EBC5BB00BAD3C3 /* CoreMotion.framework */; };
+		FAD8E80815EBC5C200BAD3C3 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E80715EBC5C200BAD3C3 /* EventKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		39DAC98F15F7A2BC00BE307F /* libInMobi_iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libInMobi_iOS.a; sourceTree = "<group>"; };
+		39DAC99215F7A46300BE307F /* jtUniversalLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = jtUniversalLib.a; sourceTree = "<group>"; };
+		39DAC99315F7A46300BE307F /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
+		39DAC99415F7A46300BE307F /* libGreystripeSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGreystripeSDK.a; sourceTree = "<group>"; };
+		39DAC99515F7A46300BE307F /* libMMSDK_4.5.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMMSDK_4.5.3.a; sourceTree = "<group>"; };
+		39DAC99615F7A46300BE307F /* libMobclix.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobclix.a; sourceTree = "<group>"; };
+		5AF18020157D6EA20043C2CF /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		5AF8AF12153DE65D000A8447 /* libAirFlurry.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAirFlurry.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AF8AF15153DE65D000A8447 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		5AF8AF19153DE65D000A8447 /* AirFlurry-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AirFlurry-Prefix.pch"; sourceTree = "<group>"; };
+		5AF8AF1A153DE65D000A8447 /* AirFlurry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AirFlurry.h; sourceTree = "<group>"; };
+		5AF8AF1B153DE65D000A8447 /* AirFlurry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirFlurry.m; sourceTree = "<group>"; };
+		5AF8AF22153DE6D8000A8447 /* FlashRuntimeExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FlashRuntimeExtensions.h; path = "/Applications/Adobe Flash Builder 4.6/sdks/4.6.0/include/FlashRuntimeExtensions.h"; sourceTree = "<absolute>"; };
+		FA20572715E2AA1600030F51 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		FA20572815E2AA1600030F51 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
+		FA20572A15E2AA1600030F51 /* FlurryAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAdDelegate.h; sourceTree = "<group>"; };
+		FA20572B15E2AA1600030F51 /* FlurryAds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAds.h; sourceTree = "<group>"; };
+		FA20572C15E2AA1600030F51 /* libFlurryAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurryAds.a; sourceTree = "<group>"; };
+		FA46420515EBC8510075C2EB /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
+		FA99090F15EBD3E600AAA396 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		FAD8E79915E8409900BAD3C3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		FAD8E79B15E840A200BAD3C3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		FAD8E79D15E840B800BAD3C3 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		FAD8E79F15E840C100BAD3C3 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		FAD8E7A115E840D200BAD3C3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		FAD8E7A315E840DD00BAD3C3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		FAD8E7A515E8422700BAD3C3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		FAD8E7CD15EBC1AF00BAD3C3 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		FAD8E7CF15EBC1B700BAD3C3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		FAD8E7D115EBC1C100BAD3C3 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		FAD8E7D315EBC1C800BAD3C3 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		FAD8E7DE15EBC3E900BAD3C3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		FAD8E7E215EBC51100BAD3C3 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		FAD8E80115EBC5B600BAD3C3 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		FAD8E80215EBC5B600BAD3C3 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		FAD8E80515EBC5BB00BAD3C3 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		FAD8E80715EBC5C200BAD3C3 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5AF8AF0F153DE65D000A8447 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA99091015EBD3E600AAA396 /* iAd.framework in Frameworks */,
+				FA46420615EBC8510075C2EB /* libz.1.2.3.dylib in Frameworks */,
+				FAD8E80815EBC5C200BAD3C3 /* EventKit.framework in Frameworks */,
+				FAD8E80615EBC5BB00BAD3C3 /* CoreMotion.framework in Frameworks */,
+				FAD8E80315EBC5B600BAD3C3 /* AddressBook.framework in Frameworks */,
+				FAD8E80415EBC5B600BAD3C3 /* AddressBookUI.framework in Frameworks */,
+				FAD8E7E315EBC51100BAD3C3 /* MobileCoreServices.framework in Frameworks */,
+				FAD8E7DF15EBC3E900BAD3C3 /* CoreLocation.framework in Frameworks */,
+				FAD8E7D415EBC1C800BAD3C3 /* libz.dylib in Frameworks */,
+				FAD8E7D215EBC1C100BAD3C3 /* libsqlite3.dylib in Frameworks */,
+				FAD8E7D015EBC1B700BAD3C3 /* QuartzCore.framework in Frameworks */,
+				FAD8E7CE15EBC1AF00BAD3C3 /* OpenAL.framework in Frameworks */,
+				FAD8E7A615E8422700BAD3C3 /* AudioToolbox.framework in Frameworks */,
+				FAD8E7A415E840DD00BAD3C3 /* UIKit.framework in Frameworks */,
+				FAD8E7A215E840D200BAD3C3 /* CoreGraphics.framework in Frameworks */,
+				FAD8E7A015E840C100BAD3C3 /* MessageUI.framework in Frameworks */,
+				FAD8E79E15E840B800BAD3C3 /* Security.framework in Frameworks */,
+				FAD8E79C15E840A200BAD3C3 /* AVFoundation.framework in Frameworks */,
+				FAD8E79A15E8409900BAD3C3 /* SystemConfiguration.framework in Frameworks */,
+				5AF18021157D6EA20043C2CF /* MediaPlayer.framework in Frameworks */,
+				5AF8AF16153DE65D000A8447 /* Foundation.framework in Frameworks */,
+				FA20572E15E2AA1600030F51 /* libFlurry.a in Frameworks */,
+				FA20573115E2AA1600030F51 /* libFlurryAds.a in Frameworks */,
+				39DAC99015F7A2BC00BE307F /* libInMobi_iOS.a in Frameworks */,
+				39DAC99715F7A46300BE307F /* jtUniversalLib.a in Frameworks */,
+				39DAC99815F7A46300BE307F /* libGoogleAdMobAds.a in Frameworks */,
+				39DAC99915F7A46300BE307F /* libGreystripeSDK.a in Frameworks */,
+				39DAC99A15F7A46300BE307F /* libMMSDK_4.5.3.a in Frameworks */,
+				39DAC99B15F7A46300BE307F /* libMobclix.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5AF8AF07153DE65D000A8447 = {
+			isa = PBXGroup;
+			children = (
+				5AF8AF17153DE65D000A8447 /* AirFlurry */,
+				5AF8AF14153DE65D000A8447 /* Frameworks */,
+				5AF8AF13153DE65D000A8447 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5AF8AF13153DE65D000A8447 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5AF8AF12153DE65D000A8447 /* libAirFlurry.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5AF8AF14153DE65D000A8447 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5AF8AF22153DE6D8000A8447 /* FlashRuntimeExtensions.h */,
+				FA20572615E2AA1600030F51 /* Flurry */,
+				FA20572915E2AA1600030F51 /* FlurryAds */,
+				FA99091215EBDDE100AAA396 /* Networks */,
+				FAD8E7D315EBC1C800BAD3C3 /* libz.dylib */,
+				FAD8E7D115EBC1C100BAD3C3 /* libsqlite3.dylib */,
+				FA46420515EBC8510075C2EB /* libz.1.2.3.dylib */,
+				FA99090F15EBD3E600AAA396 /* iAd.framework */,
+				FAD8E80715EBC5C200BAD3C3 /* EventKit.framework */,
+				FAD8E80515EBC5BB00BAD3C3 /* CoreMotion.framework */,
+				FAD8E80115EBC5B600BAD3C3 /* AddressBook.framework */,
+				FAD8E80215EBC5B600BAD3C3 /* AddressBookUI.framework */,
+				FAD8E7E215EBC51100BAD3C3 /* MobileCoreServices.framework */,
+				FAD8E7DE15EBC3E900BAD3C3 /* CoreLocation.framework */,
+				FAD8E7CF15EBC1B700BAD3C3 /* QuartzCore.framework */,
+				FAD8E7CD15EBC1AF00BAD3C3 /* OpenAL.framework */,
+				FAD8E7A515E8422700BAD3C3 /* AudioToolbox.framework */,
+				5AF18020157D6EA20043C2CF /* MediaPlayer.framework */,
+				FAD8E7A315E840DD00BAD3C3 /* UIKit.framework */,
+				FAD8E7A115E840D200BAD3C3 /* CoreGraphics.framework */,
+				FAD8E79F15E840C100BAD3C3 /* MessageUI.framework */,
+				FAD8E79D15E840B800BAD3C3 /* Security.framework */,
+				FAD8E79B15E840A200BAD3C3 /* AVFoundation.framework */,
+				FAD8E79915E8409900BAD3C3 /* SystemConfiguration.framework */,
+				5AF8AF15153DE65D000A8447 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5AF8AF17153DE65D000A8447 /* AirFlurry */ = {
+			isa = PBXGroup;
+			children = (
+				5AF8AF1A153DE65D000A8447 /* AirFlurry.h */,
+				5AF8AF1B153DE65D000A8447 /* AirFlurry.m */,
+				5AF8AF18153DE65D000A8447 /* Supporting Files */,
+			);
+			path = AirFlurry;
+			sourceTree = "<group>";
+		};
+		5AF8AF18153DE65D000A8447 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5AF8AF19153DE65D000A8447 /* AirFlurry-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FA20572615E2AA1600030F51 /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				FA20572715E2AA1600030F51 /* Flurry.h */,
+				FA20572815E2AA1600030F51 /* libFlurry.a */,
+			);
+			path = Flurry;
+			sourceTree = "<group>";
+		};
+		FA20572915E2AA1600030F51 /* FlurryAds */ = {
+			isa = PBXGroup;
+			children = (
+				FA20572A15E2AA1600030F51 /* FlurryAdDelegate.h */,
+				FA20572B15E2AA1600030F51 /* FlurryAds.h */,
+				FA20572C15E2AA1600030F51 /* libFlurryAds.a */,
+			);
+			path = FlurryAds;
+			sourceTree = "<group>";
+		};
+		FA99091215EBDDE100AAA396 /* Networks */ = {
+			isa = PBXGroup;
+			children = (
+				39DAC99215F7A46300BE307F /* jtUniversalLib.a */,
+				39DAC99315F7A46300BE307F /* libGoogleAdMobAds.a */,
+				39DAC99415F7A46300BE307F /* libGreystripeSDK.a */,
+				39DAC99515F7A46300BE307F /* libMMSDK_4.5.3.a */,
+				39DAC99615F7A46300BE307F /* libMobclix.a */,
+				39DAC98F15F7A2BC00BE307F /* libInMobi_iOS.a */,
+			);
+			path = Networks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		5AF8AF10153DE65D000A8447 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A9BCDD9153E87040018E174 /* FlashRuntimeExtensions.h in Headers */,
+				FA20572D15E2AA1600030F51 /* Flurry.h in Headers */,
+				FA20572F15E2AA1600030F51 /* FlurryAdDelegate.h in Headers */,
+				FA20573015E2AA1600030F51 /* FlurryAds.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		5AF8AF11153DE65D000A8447 /* AirFlurry */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5AF8AF1F153DE65D000A8447 /* Build configuration list for PBXNativeTarget "AirFlurry" */;
+			buildPhases = (
+				5AF8AF0E153DE65D000A8447 /* Sources */,
+				5AF8AF0F153DE65D000A8447 /* Frameworks */,
+				5AF8AF10153DE65D000A8447 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AirFlurry;
+			productName = AirFlurry;
+			productReference = 5AF8AF12153DE65D000A8447 /* libAirFlurry.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5AF8AF09153DE65D000A8447 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = 5AF8AF0C153DE65D000A8447 /* Build configuration list for PBXProject "AirFlurry" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 5AF8AF07153DE65D000A8447;
+			productRefGroup = 5AF8AF13153DE65D000A8447 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5AF8AF11153DE65D000A8447 /* AirFlurry */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5AF8AF0E153DE65D000A8447 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5AF8AF1C153DE65D000A8447 /* AirFlurry.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		5AF8AF1D153DE65D000A8447 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos4.3;
+			};
+			name = Debug;
+		};
+		5AF8AF1E153DE65D000A8447 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos4.3;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5AF8AF20153DE65D000A8447 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/AirFlurry.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AirFlurry/AirFlurry-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = ../;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Flurry\"",
+					"\"$(SRCROOT)/FlurryAds\"",
+					"\"$(SRCROOT)/Networks\"",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos4.3;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5AF8AF21153DE65D000A8447 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/AirFlurry.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AirFlurry/AirFlurry-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = ../;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Flurry\"",
+					"\"$(SRCROOT)/FlurryAds\"",
+					"\"$(SRCROOT)/Networks\"",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos4.3;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5AF8AF0C153DE65D000A8447 /* Build configuration list for PBXProject "AirFlurry" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5AF8AF1D153DE65D000A8447 /* Debug */,
+				5AF8AF1E153DE65D000A8447 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5AF8AF1F153DE65D000A8447 /* Build configuration list for PBXNativeTarget "AirFlurry" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5AF8AF20153DE65D000A8447 /* Debug */,
+				5AF8AF21153DE65D000A8447 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5AF8AF09153DE65D000A8447 /* Project object */;
+}
