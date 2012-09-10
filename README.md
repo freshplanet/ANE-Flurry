@@ -27,10 +27,10 @@ Build script
 
 Should you need to edit the extension source code and/or recompile it, you will find an ant build script (build.xml) in the *build* folder:
 
-* cd /path/to/the/ane/build
-* mv example.build.config build.config
-* *edit the build.config file to provide your machine-specific paths*
-* ant
+    cd /path/to/the/ane/build
+    mv example.build.config build.config
+    #edit the build.config file to provide your machine-specific paths
+    ant
 
 
 Authors
