@@ -30,7 +30,8 @@ On iOS:
 
 * you will need to package against the iOS SDK 4.3. If you want to use iOS SDK 5 or 6, you need to edit *build/platform.xml* and replace *-lz.1.2.3* with *-lz.1.2.5*.
 * if you want to use third-party networks, you need to add your credentials as an Info.plist addition in your application descriptor:
-
+    
+    ```xml
     <iPhone>
         <InfoAdditions><![CDATA[
             ...
@@ -54,6 +55,7 @@ On iOS:
         ]]></InfoAdditions>
         ...
     </iPhone>
+    ```
 
 On Android:
 
