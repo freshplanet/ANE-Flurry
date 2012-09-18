@@ -37,8 +37,22 @@ typedef enum {
 @optional
 
 /*!
- *  @brief Invoked when an ad will display on the specified @c adSpace.
+ *  @brief Invoked when an ad is loaded on the specified @c adSpace.
  *  @since 4.0.0
+ * 
+ *  This method informs the app that an ad has been loaded for display. You can decide at this point not to show this ad by simply returning NO.
+ *
+ *  @see FlurryAds#showAdForSpace:view:size:timeout: for details on the method that will invoke this delegate.
+ *
+ *  @param adSpace The placement of an ad in your app, where placement may
+ *  be splash screen for SPLASH_AD.
+ *  @param adType The type of ad to be displayed. See @c FlurryAdType in the FlurryAdDelegate.h file for allowable values.
+ */
+- (BOOL) spaceShouldDisplay:(NSString*)adSpace forType:(FlurryAdType)adType;
+
+/*!
+ *  @brief Invoked when an ad will display on the specified @c adSpace.
+ *  @since 4.1
  * 
  *  This method informs the app that an ad will display to the user. You can use this to pause app states. You can also decide not to show this ad by simply returning NO.
  *
@@ -48,7 +62,18 @@ typedef enum {
  *  be splash screen for SPLASH_AD.
  *  @param adType The type of ad to be displayed. See @c FlurryAdType in the FlurryAdDelegate.h file for allowable values.
  */
-- (BOOL) spaceShouldDisplay:(NSString*)adSpace forType:(FlurryAdType)adType;
+- (void) spaceWillDisplay:(NSString*)adSpace forType:(FlurryAdType)adType;
+
+/*!
+ *  @brief Invoked when the ad will be removed.
+ *  @since 4.1
+ * 
+ *  This method informs the app that an ad will be removed. 
+ *
+ *  @param adSpace The placement of an ad in your app, where placement may
+ *  be splash screen for SPLASH_AD.
+ */
+- (void)spaceWillDismiss:(NSString *)adSpace;
 
 /*!
  *  @brief Invoked when the ad has been removed.
@@ -87,7 +112,6 @@ typedef enum {
  */
 - (void)spaceDidReward:(NSString *)adSpace userCookies:(NSDictionary *)userCookies;
 
-
 /*!
  *  @brief Invoked when an ad fails to render.
  *  @since 4.0.0
@@ -99,8 +123,38 @@ typedef enum {
  */
 - (void) spaceDidFailToRender:(NSString *)space;
 
+/*!
+ *  @brief Invoked when a space will be expanded.
+ *  @since 4.1
+ * 
+ *  This method informs the app an ad space (typcially a banner) will be expanded. Apps should pause their state when they receive this notification
+ *
+ *  @param adSpace The placement of an ad in your app, where placement may
+ *  be splash screen for SPLASH_AD.
+ */
+- (void) spaceWillExpand:(NSString *)adSpace;
 
+/*!
+ *  @brief Invoked when a space will be collapsed.
+ *  @since 4.1
+ * 
+ *  This method informs the app an ad space (typcially a banner) will be collapsed.
+ *
+ *  @param adSpace The placement of an ad in your app, where placement may
+ *  be splash screen for SPLASH_AD.
+ */
+- (void) spaceWillCollapse:(NSString *)adSpace;
 
+/*!
+ *  @brief Invoked when a space has been collapsed.
+ *  @since 4.1
+ * 
+ *  This method informs the app an ad space (typcially a banner) has been collapsed. Apps should resume their state when they receive this notification
+ *
+ *  @param adSpace The placement of an ad in your app, where placement may
+ *  be splash screen for SPLASH_AD.
+ */
+ - (void) spaceDidCollapse:(NSString *)adSpace;
 
 @optional
 
@@ -173,46 +227,16 @@ typedef enum {
 #pragma mark Callbacks
 
 /*!
- *  @brief Invoked when an ad will display for a given @c networkName.
+ *  @brief [Deprecated] Allow you to set your rootViewController.
  *  @since 4.0.0
+ *  @deprecated
  * 
- *  This method informs the app that an ad will display from a given network.
- *
- *  @param networkName The network ad that will display.
- */
-- (void)appSpotWillPresentModal:(NSString *)networkName;
-
-/*!
- *  @brief Invoked when an ad will be removed for a given @c networkName.
- *  @since 4.0.0
- * 
- *  This method informs the app that an ad will be removed from a given network.
- *
- *  @param networkName The network ad that is closing.
- */
-- (void)appSpotWillDismissModal:(NSString *)networkName;
-
-/*!
- *  @brief Allow you to set your rootViewController.
- *  @since 4.0.0
- * 
- *  This method set your rootViewController.  This is needed by some 3rd party networks.
+ *  This method has been deprecated.  Please call FlurryAds#initialze: instead.
  *
  */
 - (id)appSpotRootViewController;
 
 #pragma mark Optional settings
-
-/*!
- *  @brief Some networks support a test mode that serves fake ads to avoid false clicks.
- *  @since 4.0.0
- * 
- *  This method allows you to set test mode for ad networks that support this setting via the client sdk.  Set to YES during testing. Make sure to remove or set to NO for deployment.
- *
- *  @note AdMob test mode is set via the web tool and not via this setting.
- *
- */
-- (BOOL)appSpotTestMode;
 
 /**
  Some networks support accelerometer-enabled ads.  
@@ -226,27 +250,6 @@ typedef enum {
  */
 - (BOOL)appSpotAccelerometerEnabled;
 
-#pragma mark Generic ad network Callbacks
-
-
-- (void)appSpotGenericAdCreate:(NSString *)genericAd;
-
 //@}
-
-/**********Future Methods*************/
-/*
- called when an ad space is fully expanded.
- */
-- (void) spaceExpanded:(NSString *)adSpace;
-
-/*
- called when an ad banner is fully collapsed.
- */
-- (void) spaceCollapsed:(NSString *)adSpace;
-
-/*
- called when an ad banner is hidden, in the event where there are no more ads to show.
- */
-- (void) spaceHidden:(NSString *)adSpace;
 
 @end

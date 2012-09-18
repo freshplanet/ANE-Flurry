@@ -8,13 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-
 typedef enum {
     BANNER_TOP    = 1,
     BANNER_BOTTOM = 2,
     FULLSCREEN    = 3,
 } FlurryAdSize;
 
+@protocol FlurryCustomAdNetwork;
+@protocol FlurryCustomAdNetworkProperties;
 
 /*!
  *  @brief Provides all available methods for displaying ads.
@@ -296,6 +297,16 @@ typedef enum {
  */
 + (void) clearKeywords;
 
+/*!
+ *  @brief Method to add a custom ad network to be served through the standard Flurry ad system.
+ *  @since 4.0.0
+ * 
+ *  This method adds a network with the necessary publisher supplied properties to the Flurry sdk.
+ * 
+ *  @see @c FlurryCustomAdNetwork and @c FlurryCustomAdNetworkProperties for details.
+ *
+ */
++ (void) addCustomAdNetwork:(Class<FlurryCustomAdNetwork>)adNetworkClass withProperties:(id<FlurryCustomAdNetworkProperties>)adNetworkProperties;
 
 
 @end
