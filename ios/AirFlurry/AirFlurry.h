@@ -17,21 +17,20 @@
 //////////////////////////////////////////////////////////////////////////////////////
 
 #import "FlashRuntimeExtensions.h"
+#import "FlurryAds.h"
 #import "FlurryAdDelegate.h"
 
 
 @interface AirFlurry : NSObject <FlurryAdDelegate>
 
-@property (strong, nonatomic) NSString *adMobPublisherID;
-@property (strong, nonatomic) NSString *greystripeApplicationID;
-@property (strong, nonatomic) NSString *inMobiAppKey;
-@property (strong, nonatomic) NSString *jumptapApplicationID;
-@property (strong, nonatomic) NSString *millenialAppKey;
-@property (strong, nonatomic) NSString *millenialInterstitialAppKey;
-@property (strong, nonatomic) NSString *mobclixApplicationID;
-
 + (AirFlurry *)sharedInstance;
 
+// Analytics
+- (void)startSession:(NSString *)apiKey;
+
+// Ads
+- (BOOL)showAdForSpace:(NSString *)space size:(FlurryAdSize)size timeout:(int64_t)timeout;
+- (void)removeAdFromSpace:(NSString *)space;
 - (void)addUserCookieWithValue:(NSString *)value forKey:(NSString *)key;
 - (void)clearUserCookies;
 

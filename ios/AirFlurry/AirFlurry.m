@@ -18,40 +18,46 @@
 
 #import "AirFlurry.h"
 #import "Flurry.h"
-#import "FlurryAds.h"
 
 FREContext AirFlurryCtx = nil;
 
 
 @interface AirFlurry ()
 {
+    UIWindow *_applicationWindow;
+    NSString *_currentAdSpace;
     NSMutableDictionary *_cookies;
+    NSString *_adMobPublisherID;
+    NSString *_greystripeApplicationID;
+    NSString *_inMobiAppKey;
+    NSString *_jumptapApplicationID;
+    NSString *_millenialAppKey;
+    NSString *_millenialInterstitialAppKey;
+    NSString *_mobclixApplicationID;
 }
+
+- (void)onWindowDidBecomeKey:(NSNotification *)notification;
+
 @end
 
 
 @implementation AirFlurry
 
-@synthesize adMobPublisherID = _adMobPublisherID;
-@synthesize greystripeApplicationID = _greystripeApplicationID;
-@synthesize inMobiAppKey = _inMobiAppKey;
-@synthesize jumptapApplicationID = _jumptapApplicationID;
-@synthesize millenialAppKey = _millenialAppKey;
-@synthesize millenialInterstitialAppKey = _millenialInterstitialAppKey;
-@synthesize mobclixApplicationID = _mobclixApplicationID;
-
 #pragma mark - Memory management
 
 - (void)dealloc
 {
-    self.adMobPublisherID = nil;
-    self.greystripeApplicationID = nil;
-    self.inMobiAppKey = nil;
-    self.jumptapApplicationID = nil;
-    self.millenialAppKey = nil;
-    self.millenialInterstitialAppKey = nil;
-    self.mobclixApplicationID = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIWindowDidBecomeKeyNotification object:nil];
+    [_applicationWindow release];
+    [_currentAdSpace release];
     [_cookies release];
+    [_adMobPublisherID release];
+    [_greystripeApplicationID release];
+    [_inMobiAppKey release];
+    [_jumptapApplicationID release];
+    [_millenialAppKey release];
+    [_millenialInterstitialAppKey release];
+    [_mobclixApplicationID release];
     [super dealloc];
 }
 
@@ -82,6 +88,56 @@ static id sharedInstance = nil;
 
 
 #pragma mark - Analytics
+
+- (void)startSession:(NSString *)apiKey
+{
+    _applicationWindow = [[[UIApplication sharedApplication] keyWindow] retain];
+    
+    [Flurry setDebugLogEnabled:YES];
+    [Flurry startSession:apiKey];
+    
+    [FlurryAds enableTestAds:NO];
+    [FlurryAds setAdDelegate:self];
+    [FlurryAds initialize:_applicationWindow.rootViewController];
+    
+    // Set third-party networks credentials
+    NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
+    NSDictionary *credentials = [info objectForKey:@"AppSpotCredentials"];
+    if (credentials)
+    {
+        _adMobPublisherID = [[credentials objectForKey:@"AdMobPublisherID"] retain];
+        _greystripeApplicationID = [[credentials objectForKey:@"GreystripeApplicationID"] retain];
+        _inMobiAppKey = [[credentials objectForKey:@"InMobiAppKey"] retain];
+        _jumptapApplicationID = [[credentials objectForKey:@"JumptapApplicationID"] retain];
+        _millenialAppKey = [[credentials objectForKey:@"MillenialAppKey"] retain];
+        _millenialInterstitialAppKey = [[credentials objectForKey:@"MillenialInterstitialAppKey"] retain];
+        _mobclixApplicationID = [[credentials objectForKey:@"MobclixApplicationID"] retain];
+    }
+    
+    // Listen to key window notification (bugfix for interstitial that disappear)
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onWindowDidBecomeKey:) name:UIWindowDidBecomeKeyNotification object:nil];
+}
+
+
+#pragma mark - Ads
+
+- (BOOL)showAdForSpace:(NSString *)space size:(FlurryAdSize)size timeout:(int64_t)timeout
+{
+    UIView *rootView = _applicationWindow.rootViewController.view;
+    BOOL result = [FlurryAds showAdForSpace:space view:rootView size:size timeout:timeout];
+    if (result) _currentAdSpace = [space retain];
+    return result;
+}
+
+- (void)removeAdFromSpace:(NSString *)space
+{
+    if ([space isEqualToString:_currentAdSpace])
+    {
+        [_currentAdSpace release];
+        _currentAdSpace = nil;
+    }
+    [FlurryAds removeAdFromSpace:space];
+}
 
 - (void)addUserCookieWithValue:(NSString *)value forKey:(NSString *)key
 {
@@ -151,37 +207,52 @@ static id sharedInstance = nil;
 
 - (NSString *)appSpotAdMobPublisherID
 {
-    return self.adMobPublisherID;
+    return _adMobPublisherID;
 }
 
 - (NSString *)appSpotGreystripeApplicationID
 {
-    return self.greystripeApplicationID;
+    return _greystripeApplicationID;
 }
 
 - (NSString *)appSpotInMobiAppKey
 {
-    return self.inMobiAppKey;
+    return _inMobiAppKey;
 }
 
 - (NSString *)appSpotJumptapApplicationID
 {
-    return self.jumptapApplicationID;
+    return _jumptapApplicationID;
 }
 
 - (NSString *)appSpotMillennialAppKey
 {
-    return self.millenialAppKey;
+    return _millenialAppKey;
 }
 
 - (NSString *)appSpotMillennialInterstitalAppKey
 {
-    return self.millenialInterstitialAppKey;
+    return _millenialInterstitialAppKey;
 }
 
 - (NSString *)appSpotMobclixApplicationID
 {
-    return self.mobclixApplicationID;
+    return _mobclixApplicationID;
+}
+
+
+#pragma mark - NSNotificationCenter
+
+- (void)onWindowDidBecomeKey:(NSNotification *)notification
+{
+    UIWindow *window = (UIWindow *)notification.object;
+    
+    if (window == _applicationWindow && _currentAdSpace != nil)
+    {
+        [self spaceDidDismiss:_currentAdSpace];
+        [_currentAdSpace release];
+        _currentAdSpace = nil;
+    }
 }
 
 @end
@@ -197,29 +268,7 @@ DEFINE_ANE_FUNCTION(startSession)
     if (FREGetObjectAsUTF8(argv[0], &stringLength, &value) == FRE_OK)
     {
         NSString *apiKey = [NSString stringWithUTF8String:(char*)value];
-        UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
-        
-        [Flurry setDebugLogEnabled:YES];
-        [Flurry startSession:apiKey];
-        
-        [FlurryAds enableTestAds:NO];
-        [FlurryAds setAdDelegate:[AirFlurry sharedInstance]];
-        [FlurryAds initialize:rootViewController];
-        
-        // Set third-party networks credentials
-        NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
-        NSDictionary *credentials = [info objectForKey:@"AppSpotCredentials"];
-        if (credentials)
-        {
-            AirFlurry *flurry = [AirFlurry sharedInstance];
-            flurry.adMobPublisherID = [credentials objectForKey:@"AdMobPublisherID"];
-            flurry.greystripeApplicationID = [credentials objectForKey:@"GreystripeApplicationID"];
-            flurry.inMobiAppKey = [credentials objectForKey:@"InMobiAppKey"];
-            flurry.jumptapApplicationID = [credentials objectForKey:@"JumptapApplicationID"];
-            flurry.millenialAppKey = [credentials objectForKey:@"MillenialAppKey"];
-            flurry.millenialInterstitialAppKey = [credentials objectForKey:@"MillenialInterstitialAppKey"];
-            flurry.mobclixApplicationID = [credentials objectForKey:@"MobclixApplicationID"];
-        }
+        [[AirFlurry sharedInstance] startSession:apiKey];
     }
     return nil;
 }
@@ -465,13 +514,8 @@ DEFINE_ANE_FUNCTION(showAd)
     
     if (space != nil)
     {
-        // Retrieve the root view
-        UIView *rootView = [[[[UIApplication sharedApplication] keyWindow] rootViewController] view];
-        
-        NSLog(@"Root view: %@", rootView);
-        
         // Try to show an ad
-        BOOL isAdAvailable = [FlurryAds showAdForSpace:space view:rootView size:sizeValue timeout:timeout];
+        BOOL isAdAvailable = [[AirFlurry sharedInstance] showAdForSpace:space size:sizeValue timeout:timeout];
         
         // Return the result (YES is the ad was shown, NO otherwise)
         FREObject result;
@@ -503,7 +547,7 @@ DEFINE_ANE_FUNCTION(removeAd)
     if (space != nil)
     {
         // Remove the ad
-        [FlurryAds removeAdFromSpace:space];
+        [[AirFlurry sharedInstance] removeAdFromSpace:space];
     }
     
     return nil;
