@@ -34,32 +34,129 @@ typedef enum {
 }
 
 /*!
- *  @brief Check if an ad is available for the given @c space.
- *  @since 4.0.0
+ *  @brief Retrieves an ad for the given @c space.
+ *  @since 4.1.0
  * 
- *  This method will verify with the Flurry server if an ad is currently available for this 
- *  user. If an ad is not available, we recommend not providing the user the 
- *  option to view. For example, you may have a button that reads "See other great apps!".
- *  That button should only be displayed if this method returns YES.
+ *  This method will attempt to retrieve ads for the given space from the Flurry server.
  * 
- *  @note If this method returns YES, you are guranteed an ad will be available when you attempt to display an ad with the same parameters. \n
-    The @c space simply represents the placement of the ad in your app and should be 
+ *  @note The @c space simply represents the placement of the ad in your app and should be 
  *  unique for each placement. For example, if you are displaying a full screen ad on your 
  *  splash screen and after level completeion, you may have the following spaces 
  *  @c @"SPLASH_AD" and @c @"LEVEL_AD".
  * 
- *  @see #showAdForSpace:view:size:timeout: for details on displaying an available ad.
+ *  @see #removeAdFromSpace: for details on manually removing an ad from a view. \n
+ *  FlurryAdDelegate#spaceDidReceiveAd: for details on the notification of ads being received.
+ *  FlurryAdDelegate#spaceDidFailToReceiveAd:error: for details on notification of failure to receive ads from this request.
+ *  #displayAdForSpace: for details on displaying an available ad.
+ *
+ *  @code
+ *  - (void)fetchAd:(NSString *)placement 
+ {
+    // Placement may be SPLASH_AD as noted above
+    [FlurryAds fetchAdForSpace:placement view:self.view.frame size:FULLSCREEN]; 
+ }
+ 
+    // Show whenever delegate is invoked
+ - (void) spaceDidReceiveAd:(NSString *)adSpace {
+    // Received Ad
+    [FlurryAds displayAdForSpace:adSpace];
+ }
+    // Alternatively, try to display at a certain point in the app
+ - (void) levelComplete {
+    if([FlurryAds adReadyForSpace:adSpace]) {
+        [FlurryAds displayAdForSpace:adSpace];
+    }
+ }
+ *  @endcode
+ * 
+ *  @param space The placement of an ad in your app, where placement may
+ *  be splash screen for SPLASH_AD.
+ *  @param frame The frame of the view that will be used for the ad container. Note: for fullscreen ads, this value is not used (you can pass in bounds of window).
+ *  @param size The default size of an ad space. This can be overriden on the server. See @c FlurryAdSize in the FlurryAds.h file for allowable values.
+ */
++(void) fetchAdForSpace:(NSString*)space frame:(CGRect)frame size:(FlurryAdSize)size;
+
+/*!
+ *  @brief Returns if an ad is currently ready to display for a given @c space.
+ *  @since 4.1.0
+ * 
+ *  This method will verify if there is an ad is currently available for this 
+ *  user. If an ad is not available, you may call #fetchAdForSpace:view:size: to load a new ad.
+ * 
+ *  @note If this method returns YES, an ad will be available when you attempt to display an ad. However, it is still advisable to listen to the delegate FlurryAdsDelegate#spaceDidFailToRender:. \n
+ The @c space simply represents the placement of the ad in your app and should be 
+ *  unique for each placement. For example, if you are displaying a full screen ad on your 
+ *  splash screen and after level completeion, you may have the following spaces 
+ *  @c @"SPLASH_AD" and @c @"LEVEL_AD".
+ * 
+ *  @see #fetchAdForSpace:view:size: for details on retrieving an ad.\n
+    #displayAdForSpace: for details on displaying the available ad.
  *
  *  @code
  *  - (void)showButtonForAd:(NSString *)placement 
-    {
-        // Placement may be SPLASH_AD as noted above
-        if([FlurryAds isAdAvailableForSpace:placement view:self.view size:FULLSCREEN timeout:3000]) 
-        {
-            // Show button that ads are available.
-        }
-    }
+ {
+ // Placement may be SPLASH_AD as noted above
+ if([FlurryAds adReadyForSpace:placement]) 
+ {
+ // Show button that ads are available.
+ }
+ }
  *  @endcode
+ * 
+ *  @param space The placement of an ad in your app, where placement may
+ *  be splash screen for SPLASH_AD.
+ *
+ *  @return YES/NO to indicate if an ad is ready to be displayed.
+ */
++(BOOL) adReadyForSpace:(NSString*)space;
+
+/*!
+ *  @brief Display an ad for the given @c space.
+ *  @since 4.1.0
+ * 
+ *  This method will display an ad if one is ready for display on the device.
+ * 
+ *  @note The @c space simply represents the placement of the ad in your app and should be 
+ *  unique for each placement. Only one ad will show at a time for any given ad space. For example, if you are displaying a full screen ad on your 
+ *  splash screen and after level completeion, you may have the following spaces 
+ *  @c @"SPLASH_AD" and @c @"LEVEL_AD".
+ * 
+ *  @see #fetchAdForSpace:view:size: for details on retrieving an ad.\n
+    #adReadyForSpace: for details on verifying is an ad is ready to be displayed. \n
+ *  #removeAdFromSpace: for details on manually removing an ad from a view. \n
+ *  FlurryAdDelegate#spaceShouldDisplay:forType: for details on controlling whether an ad will display immediately before it is set to be rendered to the user.
+ *  FlurryAdDelegate#spaceDidFailToRender:error: for details on notification of error in rendering an ad for this request.
+ *
+ *  @code
+ *  - (void)showFullscreenAd:(NSString *)placement 
+ {
+ // Placement may be SPLASH_AD as noted above
+ if([FlurryAds adReadyForSpace:placement])
+ {
+    [FlurryAds displayAdForSpace:placement onView:view];
+ }
+ }
+ *  @endcode
+ * 
+ *  @param space The placement of an ad in your app, where placement may
+ *  @param view The view to place the ad. The view frame should be identical to the view frame passed in #fetchAdForSpace:frame:size. Note view is not used for interstitials.
+ *  be splash screen for SPLASH_AD.
+ */
++ (void)displayAdForSpace:(NSString*)space onView:(UIView *)view;
+
+/*!
+ *  @brief [Deprecated] Check if an ad is available for the given @c space.
+ *  @since 4.0.0
+ *  @deprecated
+ * 
+ *  [Deprecated] This method will verify with the Flurry server if an ad is currently available for this 
+ *  user. If an ad is not available, we recommend not providing the user the 
+ *  option to view. For example, you may have a button that reads "See other great apps!".
+ *  That button should only be displayed if this method returns YES.
+ * 
+ *  @note This method has been deprecated. 
+ * 
+ *  @see #fetchAdForSpace:view:size: for replacement method.\n
  * 
  *  @param space The placement of an ad in your app, where placement may
  *  be splash screen for SPLASH_AD.
@@ -72,40 +169,16 @@ typedef enum {
 +(BOOL) isAdAvailableForSpace:(NSString*)space view:(UIView *)view size:(FlurryAdSize)size timeout:(int64_t)timeout;
 
 /*!
- *  @brief Display an ad for the given @c space.
+ *  @brief [Deprecated] Display an ad for the given @c space.
  *  @since 4.0.0
+ *  @deprecated
  * 
- *  This method will display an ad if one is available from the Flurry server for this 
- *  user. If an ad is not available, this method will return NO within the specified @c timeout.
+ *  [Deprecated] This method will display an ad if one is available from the Flurry server for this 
+ *  user.
  * 
- *  @note If this method returns YES, an ad has been displayed for the space. \n
- *  This is a blocking method that allows you to change the user experience based on availability of an ad. If you would like to display an ad in the background, just set timeout to 0. This is useful in the case of banners for instance where the user should not wait for its display. \n
- *  The @c space simply represents the placement of the ad in your app and should be 
- *  unique for each placement. Only one ad will show at a time for any given ad space. For example, if you are displaying a full screen ad on your 
- *  splash screen and after level completeion, you may have the following spaces 
- *  @c @"SPLASH_AD" and @c @"LEVEL_AD".
+ *  @note This method has been deprecated.
  * 
- *  @see #isAdAvailableForSpace:view:size:timeout: for details on displaying an available ad. \n
- *  #removeAdFromSpace: for details on manually removing an ad from a view. \n
- *  FlurryAdDelegate#spaceShouldDisplay:forType: for details on controlling whether an ad will display immediately before it is set to be rendered to the user.
- *
- *  @code
- *  - (void)showFullscreenAd:(NSString *)placement 
- {
-    // Placement may be SPLASH_AD as noted above
-    if(![FlurryAds showAdForSpace:placement view:self.view size:FULLSCREEN timeout:3000]) 
-    {
-        // Ad not shown, do some other action
-    }
- }
- 
-    - (void)viewWillAppear:(BOOL)animated 
-    {
-        // Show a banner whenever this view appears
-        // Display banner ad completely asyncrhonously by providing timeout == 0
-        [FlurryAds showAdForSpace:@"VIEW_XYZ_BANNER_AD" view:self.view size:BANNER_BOTTOM timeout:0];
-    }
- *  @endcode
+ *  @see #fetchAndDisplayAdForSpace:view:size:timeout: for replacement method
  * 
  *  @param space The placement of an ad in your app, where placement may
  *  be splash screen for SPLASH_AD.
@@ -116,6 +189,50 @@ typedef enum {
  *  @return YES/NO to indicate if an ad is available.
  */
 + (BOOL)showAdForSpace:(NSString*)space view:(UIView *)viewContainer size:(FlurryAdSize)size timeout:(int64_t)timeout;
+
+/*!
+ *  @brief Fetch and Display an ad for the given @c space.
+ *  @since 4.0.0
+ *
+ *  This method will display an ad if one is available from the Flurry server for this
+ *  user.
+ *
+ *  @note If this method returns YES, an ad is available for the space within @c timeout. \n
+ *  This is a blocking method that allows you to change the user experience based on availability of an ad. If you would like to display an ad asynchronously, just set timeout to 0. This is useful in the case of banners for instance where the user should not wait for its display. If you are loading async with timeout set to 0, ignore the return value of this method and rely exclusively on the relevant delegate methods listed below\n
+ *  The @c space simply represents the placement of the ad in your app and should be
+ *  unique for each placement. Only one ad will show at a time for any given ad space. For example, if you are displaying a full screen ad on your
+ *  splash screen and after level completeion, you may have the following spaces
+ *  @c @"SPLASH_AD" and @c @"LEVEL_AD".
+ *
+ *  @see #adReadyForSpace: for details on verifying is an ad is ready to be displayed. \n
+ *  #removeAdFromSpace: for details on manually removing an ad from a view. \n
+ *  FlurryAdDelegate#spaceDidReceiveAd: for details on the notification of ads being received.
+ *  FlurryAdDelegate#spaceDidFailToReceiveAd:error: for details on notification of failure to receive ads from this request.
+ *  FlurryAdDelegate#spaceShouldDisplay:forType: for details on controlling whether an ad will display immediately before it is set to be rendered to the user.
+ *  FlurryAdDelegate#spaceDidFailToRender:error: for details on notification of error in rendering an ad for this request.
+ *
+ *  @code
+ *  - (void)showFullscreenAd:(NSString *)placement
+ {
+ // Placement may be SPLASH_AD as noted above
+ [FlurryAds fetchAndDisplayAdForSpace:placement view:self.view size:FULLSCREEN timeout:3000];
+ 
+ }
+ 
+ - (void)viewWillAppear:(BOOL)animated
+ {
+ // Show a banner whenever this view appears
+ // Display banner ad completely asyncrhonously by providing timeout == 0
+ [FlurryAds fetchAndDisplayAdForSpace:@"VIEW_XYZ_BANNER_AD" view:self.view size:BANNER_BOTTOM timeout:0];
+ }
+ *  @endcode
+ *
+ *  @param space The placement of an ad in your app, where placement may
+ *  be splash screen for SPLASH_AD.
+ *  @param view The UIView in your app that the ad will be placed as a subview. Note: for fullscreen ads, this view is not used as a container.
+ *  @param size The default size of an ad space. This can be overriden on the server. See @c FlurryAdSize in the FlurryAds.h file for allowable values.
+ */
++ (void)fetchAndDisplayAdForSpace:(NSString*)space view:(UIView *)viewContainer size:(FlurryAdSize)size;
 
 /*!
  *  @brief Removes an ad for the given @c space.

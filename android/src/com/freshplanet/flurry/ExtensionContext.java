@@ -33,6 +33,7 @@ import com.flurry.android.FlurryAdType;
 import com.flurry.android.IListener;
 import com.freshplanet.flurry.functions.ads.AddUserCookieFunction;
 import com.freshplanet.flurry.functions.ads.ClearCookieFunction;
+import com.freshplanet.flurry.functions.ads.FetchAdFunction;
 import com.freshplanet.flurry.functions.ads.RemoveAdFunction;
 import com.freshplanet.flurry.functions.ads.ShowAdFunction;
 import com.freshplanet.flurry.functions.analytics.LogErrorFunction;
@@ -83,6 +84,7 @@ public class ExtensionContext extends FREContext implements IListener
 		functionMap.put("stopTimedEvent", new StopTimedEventFunction());
 		
 		functionMap.put("showAd", new ShowAdFunction());
+		functionMap.put("fetchAd", new FetchAdFunction());
 		functionMap.put("removeAd", new RemoveAdFunction());
 		functionMap.put("addUserCookie", new AddUserCookieFunction());
 		functionMap.put("clearCookie", new ClearCookieFunction());

@@ -406,6 +406,25 @@ package com.freshplanet.nativeExtensions
 		}
 		
 		/**
+		 * Fetch an ad to be displayed later (with <code>showAd()</code>).
+		 * 
+		 * @param space String: Name of the adSpace that you defined on the Flurry website.
+		 * @param size String: Size of the ad. This is generally overridden on the server-side
+		 * by the size specified on the Flurry website.
+		 * 
+		 * @see #showAd()
+		 * @see FlurryAdSize
+		 */
+		public function fetchAd( space : String, size : String ) : void
+		{
+			if (!isFlurrySupported) return;
+			
+			trace('[Flurry] Fetch ad "'+space+'" with size "'+size+'"');
+			
+			extCtx.call('fetchAd', space, size);
+		}
+		
+		/**
 		 * Remove an ad from the screen.
 		 * 
 		 * @param space String: Name of the adSpace that you defined on the Flurry website.

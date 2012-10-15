@@ -124,9 +124,29 @@ static id sharedInstance = nil;
 - (BOOL)showAdForSpace:(NSString *)space size:(FlurryAdSize)size timeout:(int64_t)timeout
 {
     UIView *rootView = _applicationWindow.rootViewController.view;
-    BOOL result = [FlurryAds showAdForSpace:space view:rootView size:size timeout:timeout];
-    if (result) _currentAdSpace = [space retain];
-    return result;
+    
+    if ([FlurryAds adReadyForSpace:space]) // if ad is ready, show it
+    {
+        [FlurryAds displayAdForSpace:space onView:rootView];
+        _currentAdSpace = [space retain];
+        return YES;
+    }
+    else if (timeout == 0) // else if async display requested, fetch then show
+    {
+        [FlurryAds fetchAndDisplayAdForSpace:space view:rootView size:size];
+        _currentAdSpace = [space retain];
+        return YES;
+    }
+    else // else, ad unavailable
+    {
+        return NO;
+    }
+}
+
+- (void)fetchAdForSpace:(NSString *)space size:(FlurryAdSize)size
+{
+    UIView *rootView = _applicationWindow.rootViewController.view;
+    [FlurryAds fetchAdForSpace:space frame:rootView.frame size:size];
 }
 
 - (void)removeAdFromSpace:(NSString *)space
@@ -162,7 +182,7 @@ static id sharedInstance = nil;
 
 #pragma mark - FlurryAdDelegate
 
-- (void)spaceDidDismiss:(NSString *)adSpace
+- (void)spaceDidDismiss:(NSString *)adSpace interstitial:(BOOL)interstitial
 {
     NSLog(@"[Flurry] Closed ad: %@", adSpace);
     
@@ -182,9 +202,9 @@ static id sharedInstance = nil;
     }
 }
 
-- (void)spaceDidFailToRender:(NSString *)space
+- (void)spaceDidFailToRender:(NSString *)space error:(NSError *)error
 {
-    NSLog(@"[Flurry] Ad failed to render: %@", space);
+    NSLog(@"[Flurry] Ad failed to render: %@. Error: %@", space, [error localizedDescription]);
     
     if (AirFlurryCtx != nil)
     {
@@ -194,16 +214,6 @@ static id sharedInstance = nil;
 
 
 #pragma mark - FlurryAdDelegate - 3rd-party networks
-
-- (BOOL)appSpotTestMode
-{
-    return NO;
-}
-
-- (id)appSpotRootViewController
-{
-    return [[[UIApplication sharedApplication] keyWindow] rootViewController];
-}
 
 - (NSString *)appSpotAdMobPublisherID
 {
@@ -249,7 +259,7 @@ static id sharedInstance = nil;
     
     if (window == _applicationWindow && _currentAdSpace != nil)
     {
-        [self spaceDidDismiss:_currentAdSpace];
+        [self spaceDidDismiss:_currentAdSpace interstitial:YES];
         [_currentAdSpace release];
         _currentAdSpace = nil;
     }
@@ -532,6 +542,43 @@ DEFINE_ANE_FUNCTION(showAd)
     return nil;
 }
 
+DEFINE_ANE_FUNCTION(fetchAd)
+{
+    NSString *space = nil;
+    FlurryAdSize sizeValue;
+    uint32_t stringLength;
+    
+    // Retrieve the ad space name
+    const uint8_t *spaceString;
+    if (FREGetObjectAsUTF8(argv[0], &stringLength, &spaceString) == FRE_OK)
+    {
+        space = [NSString stringWithUTF8String:(char*)spaceString];
+    }
+    
+    // Retrieve the ad size
+    const uint8_t *sizeString;
+    if (FREGetObjectAsUTF8(argv[1], &stringLength, &sizeString) == FRE_OK)
+    {
+        NSString *size = [NSString stringWithUTF8String:(char*)sizeString];
+        
+        if ([size isEqualToString:@"BANNER_TOP"]) sizeValue = BANNER_TOP;
+        else if ([size isEqualToString:@"BANNER_BOTTOM"]) sizeValue = BANNER_BOTTOM;
+        else sizeValue = FULLSCREEN;
+    }
+    else
+    {
+        NSLog(@"[Flurry] showAd - Couldn't retrieve ad size. Defaulting to fullscreen.");
+        sizeValue = FULLSCREEN;
+    }
+    
+    if (space != nil)
+    {
+        [[AirFlurry sharedInstance] fetchAdForSpace:space size:sizeValue];
+    }
+    
+    return nil;
+}
+
 DEFINE_ANE_FUNCTION(removeAd)
 {
     NSString *space = nil;
@@ -592,7 +639,7 @@ void AirFlurryContextInitializer(void* extData, const uint8_t* ctxType, FREConte
                                 uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet) 
 {    
     // Register the links btwn AS3 and ObjC. (dont forget to modify the nbFuntionsToLink integer if you are adding/removing functions)
-    NSInteger nbFuntionsToLink = 14;
+    NSInteger nbFuntionsToLink = 15;
     *numFunctionsToTest = nbFuntionsToLink;
     
     FRENamedFunction* func = (FRENamedFunction*) malloc(sizeof(FRENamedFunction) * nbFuntionsToLink);
@@ -649,17 +696,21 @@ void AirFlurryContextInitializer(void* extData, const uint8_t* ctxType, FREConte
     func[10].functionData = NULL;
     func[10].function = &showAd;
     
-    func[11].name = (const uint8_t*) "removeAd";
+    func[11].name = (const uint8_t*) "fetchAd";
     func[11].functionData = NULL;
-    func[11].function = &removeAd;
+    func[11].function = &fetchAd;
     
-    func[12].name = (const uint8_t*) "addUserCookie";
+    func[12].name = (const uint8_t*) "removeAd";
     func[12].functionData = NULL;
-    func[12].function = &addUserCookie;
+    func[12].function = &removeAd;
     
-    func[13].name = (const uint8_t*) "clearUserCookies";
+    func[13].name = (const uint8_t*) "addUserCookie";
     func[13].functionData = NULL;
-    func[13].function = &clearUserCookies;
+    func[13].function = &addUserCookie;
+    
+    func[14].name = (const uint8_t*) "clearUserCookies";
+    func[14].functionData = NULL;
+    func[14].function = &clearUserCookies;
 
     AirFlurryCtx = ctx;
     
