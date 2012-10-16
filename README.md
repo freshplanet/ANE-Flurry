@@ -7,18 +7,18 @@ This is an [Air native extension](http://www.adobe.com/devnet/air/native-extensi
 Flurry SDK
 ---------
 
-This ANE uses Flurry SDK version 4.0.2 on iOS and 3.0.2 on Android.
+This ANE uses Flurry SDK version 4.0.6 on iOS and 3.0.3 on Android.
 
 It supports most features of Flurry Analytics and Flurry Ads. See the documentation of the Actioncript **Flurry** class for more information.
 
 The following third-party ad networks are supported:
 
 * AdMob
-* Greystripe
+* Greystripe (iOS only)
 * InMobi
-* Jumptap
+* Jumptap (iOS only)
 * Millenial Media (iOS only)
-* Mobclix
+* Mobclix (iOS only)
 
 
 Installation
