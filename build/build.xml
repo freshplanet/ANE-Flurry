@@ -49,10 +49,10 @@
         <mkdir dir="../android/temp/zip"/>
         <unzip src="../android/libs/FlurryAgent.jar" dest="../android/temp/zip"/>
         <unzip src="../android/libs/AdMob.jar" dest="../android/temp/zip" />
-        <unzip src="../android/libs/Jumptap.jar" dest="../android/temp/zip" />
+        <!-- <unzip src="../android/libs/Jumptap.jar" dest="../android/temp/zip" /> -->
         <!-- <unzip src="../android/libs/MillenialMedia.jar" dest="../android/temp/zip" /> -->
         <unzip src="../android/libs/InMobi.jar" dest="../android/temp/zip" />
-        <unzip src="../android/libs/Mobclix.jar" dest="../android/temp/zip" />
+        <!-- <unzip src="../android/libs/Mobclix.jar" dest="../android/temp/zip" /> -->
         <copydir src="../android/temp/zip/com" dest="../android/temp/classes/com"/>
 
         <mkdir dir="../temp/android/"/>

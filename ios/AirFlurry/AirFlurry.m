@@ -25,7 +25,7 @@ FREContext AirFlurryCtx = nil;
 @interface AirFlurry ()
 {
     UIWindow *_applicationWindow;
-    NSString *_currentAdSpace;
+    NSString *_interstitialDisplayed;
     NSMutableDictionary *_cookies;
     NSString *_adMobPublisherID;
     NSString *_greystripeApplicationID;
@@ -36,12 +36,18 @@ FREContext AirFlurryCtx = nil;
     NSString *_mobclixApplicationID;
 }
 
+@property (nonatomic, readonly) NSMutableDictionary *spacesStatus;
+
 - (void)onWindowDidBecomeKey:(NSNotification *)notification;
+- (BOOL)statusForSpace:(NSString *)space;
+- (void)setStatus:(BOOL)status forSpace:(NSString *)space;
 
 @end
 
 
 @implementation AirFlurry
+
+@synthesize spacesStatus = _spacesStatus;
 
 #pragma mark - Memory management
 
@@ -49,7 +55,8 @@ FREContext AirFlurryCtx = nil;
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIWindowDidBecomeKeyNotification object:nil];
     [_applicationWindow release];
-    [_currentAdSpace release];
+    [_spacesStatus release];
+    [_interstitialDisplayed release];
     [_cookies release];
     [_adMobPublisherID release];
     [_greystripeApplicationID release];
@@ -93,7 +100,7 @@ static id sharedInstance = nil;
 {
     _applicationWindow = [[[UIApplication sharedApplication] keyWindow] retain];
     
-    [Flurry setDebugLogEnabled:YES];
+    [Flurry setDebugLogEnabled:NO];
     [Flurry startSession:apiKey];
     
     [FlurryAds enableTestAds:NO];
@@ -121,20 +128,46 @@ static id sharedInstance = nil;
 
 #pragma mark - Ads
 
+- (NSMutableDictionary *)spacesStatus
+{
+    if (!_spacesStatus)
+    {
+        _spacesStatus = [[NSMutableDictionary alloc] initWithCapacity:1];
+    }
+    
+    return _spacesStatus;
+}
+
+- (BOOL)statusForSpace:(NSString *)space
+{
+    if (!space) return NO;
+    
+    NSNumber *numberStatus = [self.spacesStatus objectForKey:space];
+    
+    return numberStatus ? [numberStatus boolValue] : NO;
+}
+
+- (void)setStatus:(BOOL)status forSpace:(NSString *)space
+{
+    [self.spacesStatus setObject:[NSNumber numberWithBool:status] forKey:space];
+}
+
 - (BOOL)showAdForSpace:(NSString *)space size:(FlurryAdSize)size timeout:(int64_t)timeout
 {
     UIView *rootView = _applicationWindow.rootViewController.view;
     
     if ([FlurryAds adReadyForSpace:space]) // if ad is ready, show it
     {
+        [self setStatus:YES forSpace:space];
+        if (size == FULLSCREEN) _interstitialDisplayed = [space retain];
         [FlurryAds displayAdForSpace:space onView:rootView];
-        _currentAdSpace = [space retain];
         return YES;
     }
     else if (timeout == 0) // else if async display requested, fetch then show
     {
+        [self setStatus:YES forSpace:space];
+        if (size == FULLSCREEN) _interstitialDisplayed = [space retain];
         [FlurryAds fetchAndDisplayAdForSpace:space view:rootView size:size];
-        _currentAdSpace = [space retain];
         return YES;
     }
     else // else, ad unavailable
@@ -151,10 +184,11 @@ static id sharedInstance = nil;
 
 - (void)removeAdFromSpace:(NSString *)space
 {
-    if ([space isEqualToString:_currentAdSpace])
+    [self setStatus:NO forSpace:space];
+    if ([space isEqualToString:_interstitialDisplayed])
     {
-        [_currentAdSpace release];
-        _currentAdSpace = nil;
+        [_interstitialDisplayed release];
+        _interstitialDisplayed = nil;
     }
     [FlurryAds removeAdFromSpace:space];
 }
@@ -181,6 +215,11 @@ static id sharedInstance = nil;
 
 
 #pragma mark - FlurryAdDelegate
+
+- (BOOL)spaceShouldDisplay:(NSString *)adSpace interstitial:(BOOL)interstitial
+{
+    return [self statusForSpace:adSpace];
+}
 
 - (void)spaceDidDismiss:(NSString *)adSpace interstitial:(BOOL)interstitial
 {
@@ -257,11 +296,11 @@ static id sharedInstance = nil;
 {
     UIWindow *window = (UIWindow *)notification.object;
     
-    if (window == _applicationWindow && _currentAdSpace != nil)
+    if (window == _applicationWindow && _interstitialDisplayed!= nil)
     {
-        [self spaceDidDismiss:_currentAdSpace interstitial:YES];
-        [_currentAdSpace release];
-        _currentAdSpace = nil;
+        [self spaceDidDismiss:_interstitialDisplayed interstitial:YES];
+        [_interstitialDisplayed release];
+        _interstitialDisplayed = nil;
     }
 }
 

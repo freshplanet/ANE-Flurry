@@ -50,11 +50,12 @@ public class StartSessionFunction implements FREFunction
 		if (apiKey != null)
 		{
 			// Set Flurry logs
-			FlurryAgent.setLogEnabled(true);
+			FlurryAgent.setLogEnabled(false);
 			FlurryAgent.setLogLevel(Log.DEBUG);
 			
 			// Start Flurry session and initialize ads
 			FlurryAgent.onStartSession(arg0.getActivity(), apiKey);
+			FlurryAgent.enableTestAds(false);
 			FlurryAgent.initializeAds(arg0.getActivity());
 			FlurryAgent.setAdListener((ExtensionContext)arg0);
 			Log.d(TAG, "Started session and initalized ads");
