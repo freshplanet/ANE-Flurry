@@ -29,8 +29,8 @@ import android.widget.RelativeLayout;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
+import com.flurry.android.FlurryAdListener;
 import com.flurry.android.FlurryAdType;
-import com.flurry.android.IListener;
 import com.freshplanet.flurry.functions.ads.AddUserCookieFunction;
 import com.freshplanet.flurry.functions.ads.ClearCookieFunction;
 import com.freshplanet.flurry.functions.ads.FetchAdFunction;
@@ -47,7 +47,7 @@ import com.freshplanet.flurry.functions.analytics.StartTimedEventFunction;
 import com.freshplanet.flurry.functions.analytics.StopSessionFunction;
 import com.freshplanet.flurry.functions.analytics.StopTimedEventFunction;
 
-public class ExtensionContext extends FREContext implements IListener
+public class ExtensionContext extends FREContext implements FlurryAdListener
 {
 	private static String TAG = "Flurry - Context";
 	
@@ -163,8 +163,16 @@ public class ExtensionContext extends FREContext implements IListener
 	}
 	
 	@Override
-	public void onReward(String myAdSpaceName, Map<String, String> args)
+	public void spaceDidReceiveAd(String myAdSpaceName)
 	{
-		Log.d(TAG, "Received rewards for ad: " + myAdSpaceName);
+		Log.d(TAG, "Space did receive ad: " + myAdSpaceName);
+	}
+	
+	@Override
+	public void spaceDidFailToReceiveAd(String myAdSpaceName)
+	{
+		Log.d(TAG, "Space did fail to receive ad: " + myAdSpaceName);
+		
+		dispatchStatusEventAsync("SPACE_DID_FAIL_TO_RENDER", myAdSpaceName);
 	}
 }

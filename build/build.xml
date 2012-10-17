@@ -38,21 +38,20 @@
             <classpath>
                 <pathelement location="${android.sdk}/android.jar"/>
                 <pathelement location="${flex.sdk}/lib/android/FlashRuntimeExtensions.jar"/>
-                <pathelement location="../android/libs/FlurryAgent.jar"/>
-                <pathelement location="../android/libs/AdMob.jar"/>
-                <pathelement location="../android/libs/Jumptap.jar"/>
-                <!-- <pathelement location="../android/libs/MillenialMedia.jar"/> -->
-                <pathelement location="../android/libs/Mobclix.jar"/>
+                <pathelement location="../android/libs/FlurryAgent-3.0.4.jar"/>
+                <pathelement location="../android/libs/AdMob-4.3.1.jar"/>
+                <pathelement location="../android/libs/Millenial-4.5.1.jar"/>
+                <pathelement location="../android/libs/InMobi-3.0.0.jar"/>
+                <pathelement location="../android/libs/Mobclix-3.2.0.jar"/>
             </classpath>
         </javac>
 
         <mkdir dir="../android/temp/zip"/>
-        <unzip src="../android/libs/FlurryAgent.jar" dest="../android/temp/zip"/>
-        <unzip src="../android/libs/AdMob.jar" dest="../android/temp/zip" />
-        <!-- <unzip src="../android/libs/Jumptap.jar" dest="../android/temp/zip" /> -->
-        <!-- <unzip src="../android/libs/MillenialMedia.jar" dest="../android/temp/zip" /> -->
-        <unzip src="../android/libs/InMobi.jar" dest="../android/temp/zip" />
-        <!-- <unzip src="../android/libs/Mobclix.jar" dest="../android/temp/zip" /> -->
+        <unzip src="../android/libs/FlurryAgent-3.0.4.jar" dest="../android/temp/zip"/>
+        <unzip src="../android/libs/AdMob-4.3.1.jar" dest="../android/temp/zip" />
+        <unzip src="../android/libs/Millenial-4.5.1.jar" dest="../android/temp/zip" />
+        <unzip src="../android/libs/InMobi-3.0.0.jar" dest="../android/temp/zip" />
+        <unzip src="../android/libs/Mobclix-3.2.0.jar" dest="../android/temp/zip" />
         <copydir src="../android/temp/zip/com" dest="../android/temp/classes/com"/>
 
         <mkdir dir="../temp/android/"/>
