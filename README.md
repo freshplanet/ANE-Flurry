@@ -7,7 +7,7 @@ This is an [Air native extension](http://www.adobe.com/devnet/air/native-extensi
 Flurry SDK
 ---------
 
-This ANE uses Flurry SDK version 4.0.6 on iOS and 3.0.3 on Android.
+This ANE uses Flurry SDK version 4.0.6 on iOS and 3.0.4 on Android.
 
 It supports most features of Flurry Analytics and Flurry Ads. See the documentation of the Actioncript **Flurry** class for more information.
 
@@ -87,8 +87,6 @@ On Android:
                     <activity android:name="com.google.ads.AdActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
                     <!-- InMobi -->
                     <activity android:name="com.inmobi.androidsdk.IMBrowserActivity" android:configChanges="keyboardHidden|orientation|keyboard"/>
-                    <!-- Mobclix -->
-                    <activity android:name="com.mobclix.android.sdk.MobclixBrowserActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:hardwareAccelerated="true"/>
                      
                     <!-- Flurry 3rd-Party Networks MetaData -->
                     <!-- AdMob -->
@@ -96,10 +94,6 @@ On Android:
                     <!-- InMobi -->
                     <meta-data android:name="com.flurry.inmobi.MY_APP_ID" android:value="..."/>
                     <!-- <meta-data android:name="com.flurry.inmobi.test" android:value="true"/> -->
-                    <!-- Mobclix -->
-                    <meta-data android:name="com.mobclix.APPLICATION_ID" android:value="..."/>
-                    <!-- Jumptap -->
-                    <meta-data android:name="com.flurry.jumptap.PUBLISHER_ID" android:value="..."/>
                     
                 </application>
 
