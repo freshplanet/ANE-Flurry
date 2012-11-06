@@ -47,6 +47,10 @@ public class RemoveAdFunction implements FREFunction
 			return null;
 		}
 		
+		// Update space status
+		ExtensionContext context = (ExtensionContext)arg0;
+		context.setStatusForSpace(false, space);
+		
 		// Remove the ad
 		RelativeLayout adLayout = ((ExtensionContext)arg0).getCurrentAdLayout();
 		FlurryAgent.removeAd(arg0.getActivity(), space, adLayout);

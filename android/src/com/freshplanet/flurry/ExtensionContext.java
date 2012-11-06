@@ -54,6 +54,7 @@ public class ExtensionContext extends FREContext implements FlurryAdListener
 	private RelativeLayout _adLayout = null;
 	
 	private Map<String, String> _userCookies = null;
+	private Map<String, Boolean> _spacesStatus = null;
 	
 
 	public ExtensionContext()
@@ -129,6 +130,28 @@ public class ExtensionContext extends FREContext implements FlurryAdListener
 		return _userCookies;
 	}
 	
+	// Spaces status (true when a space should be displayed, false otherwise)
+	
+	private Map<String, Boolean> spacesStatus()
+	{
+		if (_spacesStatus == null)
+		{
+			_spacesStatus = new HashMap<String, Boolean>();
+		}
+		
+		return _spacesStatus;
+	}
+	
+	public Boolean getStatusForSpace(String space)
+	{
+		return this.spacesStatus().containsKey(space) ? this.spacesStatus().get(space) : false;
+	}
+	
+	public void setStatusForSpace(Boolean status, String space)
+	{
+		this.spacesStatus().put(space, status);
+	}
+	
 	
 	// Flurry IListener
 	
@@ -143,7 +166,7 @@ public class ExtensionContext extends FREContext implements FlurryAdListener
 	@Override
 	public boolean shouldDisplayAd(String myAdSpaceName, FlurryAdType type)
 	{
-		return true;
+		return getStatusForSpace(myAdSpaceName);
 	}
 	
 	@Override
@@ -174,5 +197,17 @@ public class ExtensionContext extends FREContext implements FlurryAdListener
 		Log.d(TAG, "Space did fail to receive ad: " + myAdSpaceName);
 		
 		dispatchStatusEventAsync("SPACE_DID_FAIL_TO_RENDER", myAdSpaceName);
+	}
+	
+	@Override
+	public void onAdClicked(String myAdSpaceName)
+	{
+		Log.d(TAG, "Space was clicked: " + myAdSpaceName);
+	}
+	
+	@Override
+	public void onAdOpened(String myAdSpaceName)
+	{
+		Log.d(TAG, "Space was opened: " + myAdSpaceName);
 	}
 }

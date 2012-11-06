@@ -87,6 +87,10 @@ public class ShowAdFunction implements FREFunction
 			timeout = 0;
 		}
 		
+		// Update space status
+		ExtensionContext context = (ExtensionContext)arg0;
+		context.setStatusForSpace(true, space);
+		
 		// Try to show an ad
 		RelativeLayout adLayout = ((ExtensionContext)arg0).getNewAdLayout();
 		Boolean result = FlurryAgent.getAd(arg0.getActivity(), space, adLayout, size, timeout);
