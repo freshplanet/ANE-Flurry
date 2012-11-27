@@ -29,7 +29,7 @@ import com.adobe.fre.FREExtension;
 
 public class Extension implements FREExtension
 {
-	public static String TAG = "Flurry";
+	public static String TAG = "AirFlurry";
 	public static FREContext context;
 	public static Map<String, RelativeLayout> adLayouts;
 

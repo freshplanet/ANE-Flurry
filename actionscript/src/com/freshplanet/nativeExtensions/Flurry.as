@@ -456,13 +456,38 @@ package com.freshplanet.nativeExtensions
 		/**
 		 * Clear the stored cookies.
 		 * 
-		 * @see addUserCookie
+		 * @see #addUserCookie()
 		 */
 		public function clearUserCookies() : void
 		{
 			if (isFlurrySupported)
 			{
 				extCtx.call("clearUserCookies");
+			}
+		}
+		
+		/**
+		 * Adds a key/value pair to the targeting keywords.
+		 * Those keywords are used to target ads.
+		 */
+		public function addTargetingKeyword( key : String, value : String ) : void
+		{
+			if (isFlurrySupported)
+			{
+				extCtx.call("addTargetingKeyword", key, value);
+			}
+		}
+		
+		/**
+		 * Clear the stored targeting keywords.
+		 * 
+		 * @see #addTargetingKeyword()
+		 */
+		public function clearTargetingKeywords() : void
+		{
+			if (isFlurrySupported)
+			{
+				extCtx.call("clearTargetingKeywords");
 			}
 		}
 	}

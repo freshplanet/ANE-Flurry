@@ -27,6 +27,7 @@ FREContext AirFlurryCtx = nil;
     UIWindow *_applicationWindow;
     NSString *_interstitialDisplayed;
     NSMutableDictionary *_cookies;
+    NSMutableDictionary *_targetingKeywords;
     NSString *_adMobPublisherID;
     NSString *_greystripeApplicationID;
     NSString *_inMobiAppKey;
@@ -58,6 +59,7 @@ FREContext AirFlurryCtx = nil;
     [_spacesStatus release];
     [_interstitialDisplayed release];
     [_cookies release];
+    [_targetingKeywords release];
     [_adMobPublisherID release];
     [_greystripeApplicationID release];
     [_inMobiAppKey release];
@@ -100,7 +102,7 @@ static id sharedInstance = nil;
 {
     _applicationWindow = [[[UIApplication sharedApplication] keyWindow] retain];
     
-    [Flurry setDebugLogEnabled:NO];
+    [Flurry setDebugLogEnabled:YES];
     [Flurry startSession:apiKey];
     
     [FlurryAds enableTestAds:NO];
@@ -210,6 +212,26 @@ static id sharedInstance = nil;
     {
         [_cookies removeAllObjects];
         [FlurryAds setUserCookies:_cookies];
+    }
+}
+
+- (void)addTargetingKeywordWithValue:(NSString *)value forKey:(NSString *)key
+{
+    if (!_targetingKeywords)
+    {
+        _targetingKeywords = [[NSMutableDictionary alloc] initWithCapacity:2];
+    }
+    
+    [_targetingKeywords setObject:value forKey:key];
+    [FlurryAds setKeywordsForTargeting:_targetingKeywords];
+}
+
+- (void)clearTargetingKeywords
+{
+    if (_targetingKeywords)
+    {
+        [_targetingKeywords removeAllObjects];
+        [FlurryAds setKeywordsForTargeting:_targetingKeywords];
     }
 }
 
@@ -668,17 +690,43 @@ DEFINE_ANE_FUNCTION(clearUserCookies)
     return nil;
 }
 
+DEFINE_ANE_FUNCTION(addTargetingKeyword)
+{
+    uint32_t stringLength;
+    
+    const uint8_t *keyString;
+    if (FREGetObjectAsUTF8(argv[0], &stringLength, &keyString) == FRE_OK)
+    {
+        return nil;
+    }
+    NSString *key = [NSString stringWithUTF8String:(char*)keyString];
+    
+    const uint8_t *valueString;
+    if (FREGetObjectAsUTF8(argv[1], &stringLength, &valueString) == FRE_OK)
+    {
+        return nil;
+    }
+    NSString *value = [NSString stringWithUTF8String:(char*)valueString];
+    
+    [[AirFlurry sharedInstance] addTargetingKeywordWithValue:value forKey:key];
+    
+    return nil;
+}
+
+DEFINE_ANE_FUNCTION(clearTargetingKeywords)
+{
+    [[AirFlurry sharedInstance] clearTargetingKeywords];
+    return nil;
+}
+
 
 #pragma mark - ANE setup
 
-// ContextInitializer()
-//
-// The context initializer is called when the runtime creates the extension context instance.
 void AirFlurryContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, 
                                 uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet) 
 {    
     // Register the links btwn AS3 and ObjC. (dont forget to modify the nbFuntionsToLink integer if you are adding/removing functions)
-    NSInteger nbFuntionsToLink = 15;
+    NSInteger nbFuntionsToLink = 17;
     *numFunctionsToTest = nbFuntionsToLink;
     
     FRENamedFunction* func = (FRENamedFunction*) malloc(sizeof(FRENamedFunction) * nbFuntionsToLink);
@@ -750,36 +798,28 @@ void AirFlurryContextInitializer(void* extData, const uint8_t* ctxType, FREConte
     func[14].name = (const uint8_t*) "clearUserCookies";
     func[14].functionData = NULL;
     func[14].function = &clearUserCookies;
+    
+    func[15].name = (const uint8_t*) "addTargetingKeyword";
+    func[15].functionData = NULL;
+    func[15].function = &addTargetingKeyword;
+    
+    func[16].name = (const uint8_t*) "clearTargetingKeywords";
+    func[16].functionData = NULL;
+    func[16].function = &clearTargetingKeywords;
+    
 
     AirFlurryCtx = ctx;
     
     *functionsToSet = func;
 }
 
-// ContextFinalizer()
-//
-// Set when the context extension is created.
-
-void AirFlurryContextFinalizer(FREContext ctx)
-{
-    NSLog(@"Entering ContextFinalizer()");
-    
-    NSLog(@"Exiting ContextFinalizer()");	
-}
-
-// AirFlurryInitializer()
-//
-// The extension initializer is called the first time the ActionScript side of the extension
-// calls ExtensionContext.createExtensionContext() for any context.
+void AirFlurryContextFinalizer(FREContext ctx) {}
 
 void AirFlurryInitializer(void** extDataToSet, FREContextInitializer* ctxInitializerToSet, FREContextFinalizer* ctxFinalizerToSet ) 
 {
-    
-    NSLog(@"Entering ExtInitializer()");                    
-    
 	*extDataToSet = NULL;
 	*ctxInitializerToSet = &AirFlurryContextInitializer; 
 	*ctxFinalizerToSet = &AirFlurryContextFinalizer;
-    
-    NSLog(@"Exiting ExtInitializer()"); 
 }
+
+void AirFlurryFinalizer(void *extData) {}

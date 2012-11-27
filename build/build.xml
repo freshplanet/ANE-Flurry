@@ -38,7 +38,7 @@
             <classpath>
                 <pathelement location="${android.sdk}/android.jar"/>
                 <pathelement location="${flex.sdk}/lib/android/FlashRuntimeExtensions.jar"/>
-                <pathelement location="../android/libs/FlurryAgent-3.0.4.jar"/>
+                <pathelement location="../android/libs/FlurryAgent-3.0.6.jar"/>
                 <pathelement location="../android/libs/AdMob-4.3.1.jar"/>
                 <pathelement location="../android/libs/Millenial-4.5.1.jar"/>
                 <pathelement location="../android/libs/InMobi-3.0.0.jar"/>
@@ -47,7 +47,7 @@
         </javac>
 
         <mkdir dir="../android/temp/zip"/>
-        <unzip src="../android/libs/FlurryAgent-3.0.4.jar" dest="../android/temp/zip"/>
+        <unzip src="../android/libs/FlurryAgent-3.0.6.jar" dest="../android/temp/zip"/>
         <unzip src="../android/libs/AdMob-4.3.1.jar" dest="../android/temp/zip" />
         <unzip src="../android/libs/Millenial-4.5.1.jar" dest="../android/temp/zip" />
         <unzip src="../android/libs/InMobi-3.0.0.jar" dest="../android/temp/zip" />

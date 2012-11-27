@@ -31,8 +31,10 @@ import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
 import com.flurry.android.FlurryAdListener;
 import com.flurry.android.FlurryAdType;
+import com.freshplanet.flurry.functions.ads.AddTargetingKeywordFunction;
 import com.freshplanet.flurry.functions.ads.AddUserCookieFunction;
 import com.freshplanet.flurry.functions.ads.ClearCookieFunction;
+import com.freshplanet.flurry.functions.ads.ClearTargetingKeywordsFunction;
 import com.freshplanet.flurry.functions.ads.FetchAdFunction;
 import com.freshplanet.flurry.functions.ads.RemoveAdFunction;
 import com.freshplanet.flurry.functions.ads.ShowAdFunction;
@@ -49,23 +51,22 @@ import com.freshplanet.flurry.functions.analytics.StopTimedEventFunction;
 
 public class ExtensionContext extends FREContext implements FlurryAdListener
 {
-	private static String TAG = "Flurry - Context";
-	
 	private RelativeLayout _adLayout = null;
 	
 	private Map<String, String> _userCookies = null;
+	private Map<String, String> _targetingKeywords = null;
 	private Map<String, Boolean> _spacesStatus = null;
 	
 
 	public ExtensionContext()
 	{
-		Log.d(TAG, "Context created.");
+		Log.d(Extension.TAG, "Context created.");
 	}
 	
 	@Override
 	public void dispose()
 	{
-		Log.d(TAG, "Context disposed.");
+		Log.d(Extension.TAG, "Context disposed.");
 		Extension.context = null;
 	}
 
@@ -89,6 +90,8 @@ public class ExtensionContext extends FREContext implements FlurryAdListener
 		functionMap.put("removeAd", new RemoveAdFunction());
 		functionMap.put("addUserCookie", new AddUserCookieFunction());
 		functionMap.put("clearCookie", new ClearCookieFunction());
+		functionMap.put("addTargetingKeyword", new AddTargetingKeywordFunction());
+		functionMap.put("clearTargetingKeywords", new ClearTargetingKeywordsFunction());
 		
 		return functionMap;	
 	}
@@ -130,6 +133,18 @@ public class ExtensionContext extends FREContext implements FlurryAdListener
 		return _userCookies;
 	}
 	
+	// Targeting keywords
+	
+	public Map<String, String> getTargetingKeywords()
+	{
+		if (_targetingKeywords == null)
+		{
+			_targetingKeywords = new HashMap<String, String>();
+		}
+		
+		return _targetingKeywords;
+	}
+	
 	// Spaces status (true when a space should be displayed, false otherwise)
 	
 	private Map<String, Boolean> spacesStatus()
@@ -158,7 +173,7 @@ public class ExtensionContext extends FREContext implements FlurryAdListener
 	@Override
 	public void onRenderFailed(String myAdSpaceName)
 	{
-		Log.d(TAG, "Ad render failed: " + myAdSpaceName);
+		Log.d(Extension.TAG, "Ad render failed: " + myAdSpaceName);
 		
 		dispatchStatusEventAsync("SPACE_DID_FAIL_TO_RENDER", myAdSpaceName);
 	}
@@ -172,7 +187,7 @@ public class ExtensionContext extends FREContext implements FlurryAdListener
 	@Override
 	public void onAdClosed(String myAdSpaceName)
 	{
-		Log.d(TAG, "Closed ad: " + myAdSpaceName);
+		Log.d(Extension.TAG, "Closed ad: " + myAdSpaceName);
 		
 		dispatchStatusEventAsync("SPACE_DID_DISMISS", myAdSpaceName);
 	}
@@ -180,7 +195,7 @@ public class ExtensionContext extends FREContext implements FlurryAdListener
 	@Override
 	public void onApplicationExit(String myAdSpaceName)
 	{
-		Log.d(TAG, "Exit application after clicking on ad: " + myAdSpaceName);
+		Log.d(Extension.TAG, "Exit application after clicking on ad: " + myAdSpaceName);
 		
 		dispatchStatusEventAsync("SPACE_WILL_LEAVE_APPLICATION", myAdSpaceName);
 	}
@@ -188,26 +203,26 @@ public class ExtensionContext extends FREContext implements FlurryAdListener
 	@Override
 	public void spaceDidReceiveAd(String myAdSpaceName)
 	{
-		Log.d(TAG, "Space did receive ad: " + myAdSpaceName);
+		Log.d(Extension.TAG, "Space did receive ad: " + myAdSpaceName);
 	}
 	
 	@Override
 	public void spaceDidFailToReceiveAd(String myAdSpaceName)
 	{
-		Log.d(TAG, "Space did fail to receive ad: " + myAdSpaceName);
+		Log.d(Extension.TAG, "Space did fail to receive ad: " + myAdSpaceName);
 		
 		dispatchStatusEventAsync("SPACE_DID_FAIL_TO_RENDER", myAdSpaceName);
 	}
 	
 	@Override
-	public void onAdClicked(String myAdSpaceName)
+	public void onAdOpened(String myAdSpaceName)
 	{
-		Log.d(TAG, "Space was clicked: " + myAdSpaceName);
+		Log.d(Extension.TAG, "Ad opened: " + myAdSpaceName);
 	}
 	
 	@Override
-	public void onAdOpened(String myAdSpaceName)
+	public void onAdClicked(String myAdSpaceName)
 	{
-		Log.d(TAG, "Space was opened: " + myAdSpaceName);
+		Log.d(Extension.TAG, "Ad clicked: " + myAdSpaceName);
 	}
 }

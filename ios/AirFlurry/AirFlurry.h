@@ -34,6 +34,8 @@
 - (void)removeAdFromSpace:(NSString *)space;
 - (void)addUserCookieWithValue:(NSString *)value forKey:(NSString *)key;
 - (void)clearUserCookies;
+- (void)addTargetingKeywordWithValue:(NSString *)value forKey:(NSString *)key;
+- (void)clearTargetingKeywords;
 
 @end
 
@@ -57,6 +59,8 @@ DEFINE_ANE_FUNCTION(fetchAd);
 DEFINE_ANE_FUNCTION(removeAd);
 DEFINE_ANE_FUNCTION(addUserCookie);
 DEFINE_ANE_FUNCTION(clearUserCookies);
+DEFINE_ANE_FUNCTION(addTargetingKeyword);
+DEFINE_ANE_FUNCTION(clearTargetingKeywords);
 
 
 // ANE setup
@@ -64,3 +68,4 @@ void AirFlurryContextInitializer(void* extData, const uint8_t* ctxType, FREConte
                                  uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet);
 void AirFlurryContextFinalizer(FREContext ctx);
 void AirFlurryInitializer(void** extDataToSet, FREContextInitializer* ctxInitializerToSet, FREContextFinalizer* ctxFinalizerToSet );
+void AirFlurryFinalizer(void *extData);

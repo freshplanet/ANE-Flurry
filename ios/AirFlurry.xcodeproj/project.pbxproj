@@ -21,9 +21,9 @@
 		39020B82162C7F79000826EA /* JumpTapAppReport.h in Headers */ = {isa = PBXBuildFile; fileRef = 39020B7F162C7F79000826EA /* JumpTapAppReport.h */; };
 		3983B809162305760006E95F /* libInMobiAdNetwork-3.6.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3983B806162305760006E95F /* libInMobiAdNetwork-3.6.0.a */; };
 		3983B80A162305760006E95F /* libInMobiCommons-3.6.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3983B807162305760006E95F /* libInMobiCommons-3.6.0.a */; };
-		3983B80B162305760006E95F /* libMMSDK_4.6.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3983B808162305760006E95F /* libMMSDK_4.6.1.a */; };
 		39DAC99815F7A46300BE307F /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39DAC99315F7A46300BE307F /* libGoogleAdMobAds.a */; };
 		39DAC99B15F7A46300BE307F /* libMobclix.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39DAC99615F7A46300BE307F /* libMobclix.a */; };
+		39E41C92164C0A0C001E7E9F /* libMMSDK_4.6.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39E41C91164C0A0C001E7E9F /* libMMSDK_4.6.2.a */; };
 		5A9BCDD9153E87040018E174 /* FlashRuntimeExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5AF8AF22153DE6D8000A8447 /* FlashRuntimeExtensions.h */; };
 		5AF18021157D6EA20043C2CF /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AF18020157D6EA20043C2CF /* MediaPlayer.framework */; };
 		5AF8AF16153DE65D000A8447 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AF8AF15153DE65D000A8447 /* Foundation.framework */; };
@@ -69,9 +69,9 @@
 		39020B7F162C7F79000826EA /* JumpTapAppReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JumpTapAppReport.h; sourceTree = "<group>"; };
 		3983B806162305760006E95F /* libInMobiAdNetwork-3.6.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libInMobiAdNetwork-3.6.0.a"; sourceTree = "<group>"; };
 		3983B807162305760006E95F /* libInMobiCommons-3.6.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libInMobiCommons-3.6.0.a"; sourceTree = "<group>"; };
-		3983B808162305760006E95F /* libMMSDK_4.6.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMMSDK_4.6.1.a; sourceTree = "<group>"; };
 		39DAC99315F7A46300BE307F /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
 		39DAC99615F7A46300BE307F /* libMobclix.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobclix.a; sourceTree = "<group>"; };
+		39E41C91164C0A0C001E7E9F /* libMMSDK_4.6.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMMSDK_4.6.2.a; sourceTree = "<group>"; };
 		5AF18020157D6EA20043C2CF /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		5AF8AF12153DE65D000A8447 /* libAirFlurry.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAirFlurry.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AF8AF15153DE65D000A8447 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -137,9 +137,9 @@
 				39DAC99B15F7A46300BE307F /* libMobclix.a in Frameworks */,
 				3983B809162305760006E95F /* libInMobiAdNetwork-3.6.0.a in Frameworks */,
 				3983B80A162305760006E95F /* libInMobiCommons-3.6.0.a in Frameworks */,
-				3983B80B162305760006E95F /* libMMSDK_4.6.1.a in Frameworks */,
 				39020B7B162C7134000826EA /* libGreystripeSDK.a in Frameworks */,
 				39020B81162C7F79000826EA /* jtUniversalLib.a in Frameworks */,
+				39E41C92164C0A0C001E7E9F /* libMMSDK_4.6.2.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,8 +265,8 @@
 				39020B69162C7134000826EA /* Greystripe */,
 				3983B806162305760006E95F /* libInMobiAdNetwork-3.6.0.a */,
 				3983B807162305760006E95F /* libInMobiCommons-3.6.0.a */,
-				3983B808162305760006E95F /* libMMSDK_4.6.1.a */,
 				39DAC99315F7A46300BE307F /* libGoogleAdMobAds.a */,
+				39E41C91164C0A0C001E7E9F /* libMMSDK_4.6.2.a */,
 				39DAC99615F7A46300BE307F /* libMobclix.a */,
 			);
 			path = Networks;
