@@ -19,6 +19,7 @@
 		39020B80162C7F79000826EA /* JTAdWidget.h in Headers */ = {isa = PBXBuildFile; fileRef = 39020B7D162C7F79000826EA /* JTAdWidget.h */; };
 		39020B81162C7F79000826EA /* jtUniversalLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39020B7E162C7F79000826EA /* jtUniversalLib.a */; };
 		39020B82162C7F79000826EA /* JumpTapAppReport.h in Headers */ = {isa = PBXBuildFile; fileRef = 39020B7F162C7F79000826EA /* JumpTapAppReport.h */; };
+		39120B6916789BEA009F41AD /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 39120B6816789BEA009F41AD /* libz.1.2.5.dylib */; };
 		3983B809162305760006E95F /* libInMobiAdNetwork-3.6.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3983B806162305760006E95F /* libInMobiAdNetwork-3.6.0.a */; };
 		3983B80A162305760006E95F /* libInMobiCommons-3.6.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3983B807162305760006E95F /* libInMobiCommons-3.6.0.a */; };
 		39DAC99815F7A46300BE307F /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39DAC99315F7A46300BE307F /* libGoogleAdMobAds.a */; };
@@ -33,7 +34,6 @@
 		FA20572F15E2AA1600030F51 /* FlurryAdDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = FA20572A15E2AA1600030F51 /* FlurryAdDelegate.h */; };
 		FA20573015E2AA1600030F51 /* FlurryAds.h in Headers */ = {isa = PBXBuildFile; fileRef = FA20572B15E2AA1600030F51 /* FlurryAds.h */; };
 		FA20573115E2AA1600030F51 /* libFlurryAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA20572C15E2AA1600030F51 /* libFlurryAds.a */; };
-		FA46420615EBC8510075C2EB /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA46420515EBC8510075C2EB /* libz.1.2.3.dylib */; };
 		FA99091015EBD3E600AAA396 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA99090F15EBD3E600AAA396 /* iAd.framework */; };
 		FAD8E79A15E8409900BAD3C3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E79915E8409900BAD3C3 /* SystemConfiguration.framework */; };
 		FAD8E79C15E840A200BAD3C3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E79B15E840A200BAD3C3 /* AVFoundation.framework */; };
@@ -67,6 +67,7 @@
 		39020B7D162C7F79000826EA /* JTAdWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTAdWidget.h; sourceTree = "<group>"; };
 		39020B7E162C7F79000826EA /* jtUniversalLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = jtUniversalLib.a; sourceTree = "<group>"; };
 		39020B7F162C7F79000826EA /* JumpTapAppReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JumpTapAppReport.h; sourceTree = "<group>"; };
+		39120B6816789BEA009F41AD /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		3983B806162305760006E95F /* libInMobiAdNetwork-3.6.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libInMobiAdNetwork-3.6.0.a"; sourceTree = "<group>"; };
 		3983B807162305760006E95F /* libInMobiCommons-3.6.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libInMobiCommons-3.6.0.a"; sourceTree = "<group>"; };
 		39DAC99315F7A46300BE307F /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
@@ -84,7 +85,6 @@
 		FA20572A15E2AA1600030F51 /* FlurryAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAdDelegate.h; sourceTree = "<group>"; };
 		FA20572B15E2AA1600030F51 /* FlurryAds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAds.h; sourceTree = "<group>"; };
 		FA20572C15E2AA1600030F51 /* libFlurryAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurryAds.a; sourceTree = "<group>"; };
-		FA46420515EBC8510075C2EB /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		FA99090F15EBD3E600AAA396 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		FAD8E79915E8409900BAD3C3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		FAD8E79B15E840A200BAD3C3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -110,8 +110,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39120B6916789BEA009F41AD /* libz.1.2.5.dylib in Frameworks */,
 				FA99091015EBD3E600AAA396 /* iAd.framework in Frameworks */,
-				FA46420615EBC8510075C2EB /* libz.1.2.3.dylib in Frameworks */,
 				FAD8E80815EBC5C200BAD3C3 /* EventKit.framework in Frameworks */,
 				FAD8E80615EBC5BB00BAD3C3 /* CoreMotion.framework in Frameworks */,
 				FAD8E80315EBC5B600BAD3C3 /* AddressBook.framework in Frameworks */,
@@ -198,7 +198,7 @@
 				FA99091215EBDDE100AAA396 /* Networks */,
 				FAD8E7D315EBC1C800BAD3C3 /* libz.dylib */,
 				FAD8E7D115EBC1C100BAD3C3 /* libsqlite3.dylib */,
-				FA46420515EBC8510075C2EB /* libz.1.2.3.dylib */,
+				39120B6816789BEA009F41AD /* libz.1.2.5.dylib */,
 				FA99090F15EBD3E600AAA396 /* iAd.framework */,
 				FAD8E80715EBC5C200BAD3C3 /* EventKit.framework */,
 				FAD8E80515EBC5BB00BAD3C3 /* CoreMotion.framework */,
@@ -372,7 +372,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				SDKROOT = iphoneos4.3;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -388,7 +388,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				SDKROOT = iphoneos4.3;
+				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -411,7 +411,7 @@
 				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos4.3;
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -435,7 +435,7 @@
 				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos4.3;
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
