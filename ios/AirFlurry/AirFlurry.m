@@ -37,6 +37,8 @@ FREContext AirFlurryCtx = nil;
     NSString *_mobclixApplicationID;
 }
 
+@property (nonatomic, readonly) UIView *rootView;
+@property (nonatomic, readonly) UIView *bannerContainer;
 @property (nonatomic, readonly) NSMutableDictionary *spacesStatus;
 
 - (void)onWindowDidBecomeKey:(NSNotification *)notification;
@@ -48,6 +50,7 @@ FREContext AirFlurryCtx = nil;
 
 @implementation AirFlurry
 
+@synthesize bannerContainer = _bannerContainer;
 @synthesize spacesStatus = _spacesStatus;
 
 #pragma mark - Memory management
@@ -56,6 +59,7 @@ FREContext AirFlurryCtx = nil;
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIWindowDidBecomeKeyNotification object:nil];
     [_applicationWindow release];
+    [_bannerContainer release];
     [_spacesStatus release];
     [_interstitialDisplayed release];
     [_cookies release];
@@ -130,6 +134,31 @@ static id sharedInstance = nil;
 
 #pragma mark - Ads
 
+- (UIView *)rootView
+{
+    return [[[[UIApplication sharedApplication] keyWindow] rootViewController] view];
+}
+
+- (UIView *)bannerContainer
+{
+    if (!_bannerContainer)
+    {
+        CGRect bannerFrame = CGRectZero;
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        {
+            bannerFrame.size = CGSizeMake(728, 90);
+        }
+        else
+        {
+            bannerFrame.size = CGSizeMake(320, 50);
+        }
+        
+        _bannerContainer = [[UIView alloc] initWithFrame:bannerFrame];
+    }
+    
+    return _bannerContainer;
+}
+
 - (NSMutableDictionary *)spacesStatus
 {
     if (!_spacesStatus)
@@ -156,20 +185,29 @@ static id sharedInstance = nil;
 
 - (BOOL)showAdForSpace:(NSString *)space size:(FlurryAdSize)size timeout:(int64_t)timeout
 {
-    UIView *rootView = _applicationWindow.rootViewController.view;
+    UIView *adView = (size == FULLSCREEN) ? self.rootView : self.bannerContainer;
+    
+    if (size == BANNER_BOTTOM || size == BANNER_TOP)
+    {
+        CGRect bannerFrame = adView.frame;
+        bannerFrame.origin.y = (size == BANNER_BOTTOM) ? self.rootView.bounds.size.height - bannerFrame.size.height : 0;
+        adView.frame = bannerFrame;
+    }
     
     if ([FlurryAds adReadyForSpace:space]) // if ad is ready, show it
     {
         [self setStatus:YES forSpace:space];
         if (size == FULLSCREEN) _interstitialDisplayed = [space retain];
-        [FlurryAds displayAdForSpace:space onView:rootView];
+        else [self.rootView addSubview:adView];
+        [FlurryAds displayAdForSpace:space onView:adView];
         return YES;
     }
     else if (timeout == 0) // else if async display requested, fetch then show
     {
         [self setStatus:YES forSpace:space];
         if (size == FULLSCREEN) _interstitialDisplayed = [space retain];
-        [FlurryAds fetchAndDisplayAdForSpace:space view:rootView size:size];
+        else [self.rootView addSubview:adView];
+        [FlurryAds fetchAndDisplayAdForSpace:space view:adView size:size];
         return YES;
     }
     else // else, ad unavailable
@@ -180,18 +218,25 @@ static id sharedInstance = nil;
 
 - (void)fetchAdForSpace:(NSString *)space size:(FlurryAdSize)size
 {
-    UIView *rootView = _applicationWindow.rootViewController.view;
-    [FlurryAds fetchAdForSpace:space frame:rootView.frame size:size];
+    UIView *adView = (size == FULLSCREEN) ? self.rootView : self.bannerContainer;
+    
+    [FlurryAds fetchAdForSpace:space frame:adView.frame size:size];
 }
 
 - (void)removeAdFromSpace:(NSString *)space
 {
     [self setStatus:NO forSpace:space];
+    
     if ([space isEqualToString:_interstitialDisplayed])
     {
         [_interstitialDisplayed release];
         _interstitialDisplayed = nil;
     }
+    else
+    {
+        [self.bannerContainer removeFromSuperview];
+    }
+    
     [FlurryAds removeAdFromSpace:space];
 }
 
@@ -318,12 +363,34 @@ static id sharedInstance = nil;
 {
     UIWindow *window = (UIWindow *)notification.object;
     
-    if (window == _applicationWindow && _interstitialDisplayed!= nil)
+    if (window == _applicationWindow)
+    {
+        [AirFlurry log:@"Application window became key"];
+    }
+    else
+    {
+        [AirFlurry log:@"Other window became key"];
+    }
+    
+    if (_interstitialDisplayed != nil)
+    {
+        [AirFlurry log:[NSString stringWithFormat:@"Interstitial displayed: %@", _interstitialDisplayed]];
+    }
+    
+    if (window == _applicationWindow && _interstitialDisplayed != nil)
     {
         [self spaceDidDismiss:_interstitialDisplayed interstitial:YES];
         [_interstitialDisplayed release];
         _interstitialDisplayed = nil;
     }
+}
+
+
+#pragma mark - Other
+
++ (void)log:(NSString *)message
+{
+    FREDispatchStatusEventAsync(AirFlurryCtx, (const uint8_t *)"LOGGING", (const uint8_t *)[message UTF8String]);
 }
 
 @end

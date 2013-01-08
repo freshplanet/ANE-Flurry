@@ -70,7 +70,7 @@ public class LogErrorFunction implements FREFunction {
 		
 		if (errorId != null)
 		{
-			FlurryAgent.onError(errorId, message, null);
+			FlurryAgent.onError(errorId, message, "");
 		} else
 		{
 			Log.e(TAG, "errorId is null");

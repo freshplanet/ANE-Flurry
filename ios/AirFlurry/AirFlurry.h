@@ -25,6 +25,8 @@
 
 + (AirFlurry *)sharedInstance;
 
++ (void)log:(NSString *)message;
+
 // Analytics
 - (void)startSession:(NSString *)apiKey;
 
