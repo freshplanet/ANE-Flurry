@@ -23,7 +23,7 @@ import java.util.Map;
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
 import com.adobe.fre.FREObject;
-import com.flurry.android.FlurryAgent;
+import com.flurry.android.FlurryAds;
 import com.freshplanet.flurry.ExtensionContext;
 
 public class ClearTargetingKeywordsFunction implements FREFunction
@@ -33,7 +33,7 @@ public class ClearTargetingKeywordsFunction implements FREFunction
 	{
 		Map<String, String> targetingKeywords = ((ExtensionContext)arg0).getTargetingKeywords();
 		targetingKeywords.clear();
-		FlurryAgent.clearTargetingKeywords();
+		FlurryAds.clearTargetingKeywords();
 		return null;
 	}
 }

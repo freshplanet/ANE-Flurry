@@ -25,7 +25,7 @@ import android.util.Log;
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
 import com.adobe.fre.FREObject;
-import com.flurry.android.FlurryAgent;
+import com.flurry.android.FlurryAds;
 import com.freshplanet.flurry.Extension;
 import com.freshplanet.flurry.ExtensionContext;
 
@@ -51,7 +51,7 @@ public class AddTargetingKeywordFunction implements FREFunction
 		{
 			Map<String, String> targetingKeywords = ((ExtensionContext)arg0).getTargetingKeywords();
 			targetingKeywords.put(key, value);
-			FlurryAgent.setTargetingKeywords(targetingKeywords);
+			FlurryAds.setTargetingKeywords(targetingKeywords);
 		}
 		else
 		{
