@@ -18,11 +18,7 @@
 
 package com.freshplanet.flurry;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import android.util.Log;
-import android.widget.RelativeLayout;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREExtension;
@@ -31,7 +27,6 @@ public class Extension implements FREExtension
 {
 	public static String TAG = "AirFlurry";
 	public static FREContext context;
-	public static Map<String, RelativeLayout> adLayouts;
 
 	
 	public FREContext createContext(String extId)
@@ -49,19 +44,5 @@ public class Extension implements FREExtension
 	public void initialize()
 	{
 		Log.d(TAG, "Extension initialized.");
-	}
-	
-	public static RelativeLayout getAdLayout(String space)
-	{
-		if (adLayouts == null) return null;
-		
-		return adLayouts.get(space);
-	}
-	
-	public static void setAdLayout(String space, RelativeLayout layout)
-	{
-		if (adLayouts == null) adLayouts = new HashMap<String, RelativeLayout>();
-		
-		adLayouts.put(space, layout);
 	}
 }

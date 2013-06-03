@@ -17,11 +17,9 @@
 //////////////////////////////////////////////////////////////////////////////////////
 
 #import "FlashRuntimeExtensions.h"
-#import "FlurryAds.h"
-#import "FlurryAdDelegate.h"
 
 
-@interface AirFlurry : NSObject <FlurryAdDelegate>
+@interface AirFlurry : NSObject
 
 + (AirFlurry *)sharedInstance;
 
@@ -29,15 +27,6 @@
 
 // Analytics
 - (void)startSession:(NSString *)apiKey;
-
-// Ads
-- (BOOL)showAdForSpace:(NSString *)space size:(FlurryAdSize)size timeout:(int64_t)timeout;
-- (void)fetchAdForSpace:(NSString *)space size:(FlurryAdSize)size;
-- (void)removeAdFromSpace:(NSString *)space;
-- (void)addUserCookieWithValue:(NSString *)value forKey:(NSString *)key;
-- (void)clearUserCookies;
-- (void)addTargetingKeywordWithValue:(NSString *)value forKey:(NSString *)key;
-- (void)clearTargetingKeywords;
 
 @end
 
@@ -53,16 +42,6 @@ DEFINE_ANE_FUNCTION(startTimedEvent);
 DEFINE_ANE_FUNCTION(stopTimedEvent);
 DEFINE_ANE_FUNCTION(startSession);
 DEFINE_ANE_FUNCTION(stopSession);
-
-
-// C interface - Ads
-DEFINE_ANE_FUNCTION(showAd);
-DEFINE_ANE_FUNCTION(fetchAd);
-DEFINE_ANE_FUNCTION(removeAd);
-DEFINE_ANE_FUNCTION(addUserCookie);
-DEFINE_ANE_FUNCTION(clearUserCookies);
-DEFINE_ANE_FUNCTION(addTargetingKeyword);
-DEFINE_ANE_FUNCTION(clearTargetingKeywords);
 
 
 // ANE setup

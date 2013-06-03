@@ -7,56 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		39120B6916789BEA009F41AD /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 39120B6816789BEA009F41AD /* libz.1.2.5.dylib */; };
 		5A9BCDD9153E87040018E174 /* FlashRuntimeExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5AF8AF22153DE6D8000A8447 /* FlashRuntimeExtensions.h */; };
-		5AF18021157D6EA20043C2CF /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AF18020157D6EA20043C2CF /* MediaPlayer.framework */; };
 		5AF8AF16153DE65D000A8447 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AF8AF15153DE65D000A8447 /* Foundation.framework */; };
 		5AF8AF1C153DE65D000A8447 /* AirFlurry.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF8AF1B153DE65D000A8447 /* AirFlurry.m */; };
 		FA20572D15E2AA1600030F51 /* Flurry.h in Headers */ = {isa = PBXBuildFile; fileRef = FA20572715E2AA1600030F51 /* Flurry.h */; };
 		FA20572E15E2AA1600030F51 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA20572815E2AA1600030F51 /* libFlurry.a */; };
-		FA20572F15E2AA1600030F51 /* FlurryAdDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = FA20572A15E2AA1600030F51 /* FlurryAdDelegate.h */; };
-		FA20573015E2AA1600030F51 /* FlurryAds.h in Headers */ = {isa = PBXBuildFile; fileRef = FA20572B15E2AA1600030F51 /* FlurryAds.h */; };
-		FA20573115E2AA1600030F51 /* libFlurryAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA20572C15E2AA1600030F51 /* libFlurryAds.a */; };
-		FA99091015EBD3E600AAA396 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA99090F15EBD3E600AAA396 /* iAd.framework */; };
 		FAD8E79A15E8409900BAD3C3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E79915E8409900BAD3C3 /* SystemConfiguration.framework */; };
-		FAD8E79C15E840A200BAD3C3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E79B15E840A200BAD3C3 /* AVFoundation.framework */; };
-		FAD8E79E15E840B800BAD3C3 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E79D15E840B800BAD3C3 /* Security.framework */; };
-		FAD8E7A015E840C100BAD3C3 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E79F15E840C100BAD3C3 /* MessageUI.framework */; };
-		FAD8E7A215E840D200BAD3C3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E7A115E840D200BAD3C3 /* CoreGraphics.framework */; };
 		FAD8E7A415E840DD00BAD3C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E7A315E840DD00BAD3C3 /* UIKit.framework */; };
-		FAD8E7A615E8422700BAD3C3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E7A515E8422700BAD3C3 /* AudioToolbox.framework */; };
-		FAD8E7CE15EBC1AF00BAD3C3 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E7CD15EBC1AF00BAD3C3 /* OpenAL.framework */; };
-		FAD8E7D015EBC1B700BAD3C3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E7CF15EBC1B700BAD3C3 /* QuartzCore.framework */; };
-		FAD8E7D215EBC1C100BAD3C3 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E7D115EBC1C100BAD3C3 /* libsqlite3.dylib */; };
-		FAD8E7D415EBC1C800BAD3C3 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E7D315EBC1C800BAD3C3 /* libz.dylib */; };
-		FAD8E7DF15EBC3E900BAD3C3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E7DE15EBC3E900BAD3C3 /* CoreLocation.framework */; };
-		FAD8E7E315EBC51100BAD3C3 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E7E215EBC51100BAD3C3 /* MobileCoreServices.framework */; };
-		FAD8E80315EBC5B600BAD3C3 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E80115EBC5B600BAD3C3 /* AddressBook.framework */; };
-		FAD8E80415EBC5B600BAD3C3 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E80215EBC5B600BAD3C3 /* AddressBookUI.framework */; };
-		FAD8E80615EBC5BB00BAD3C3 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E80515EBC5BB00BAD3C3 /* CoreMotion.framework */; };
-		FAD8E80815EBC5C200BAD3C3 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E80715EBC5C200BAD3C3 /* EventKit.framework */; };
-		FAEF1B29169B74D700204BCD /* GSAd.h in Headers */ = {isa = PBXBuildFile; fileRef = FAEF1B17169B74D700204BCD /* GSAd.h */; };
-		FAEF1B2A169B74D700204BCD /* GSAdDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = FAEF1B18169B74D700204BCD /* GSAdDelegate.h */; };
-		FAEF1B2B169B74D700204BCD /* GSBannerAdView.h in Headers */ = {isa = PBXBuildFile; fileRef = FAEF1B19169B74D700204BCD /* GSBannerAdView.h */; };
-		FAEF1B2C169B74D700204BCD /* GSConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = FAEF1B1A169B74D700204BCD /* GSConstants.h */; };
-		FAEF1B2D169B74D700204BCD /* GSFullscreenAd.h in Headers */ = {isa = PBXBuildFile; fileRef = FAEF1B1B169B74D700204BCD /* GSFullscreenAd.h */; };
-		FAEF1B2E169B74D700204BCD /* GSLeaderboardAdView.h in Headers */ = {isa = PBXBuildFile; fileRef = FAEF1B1C169B74D700204BCD /* GSLeaderboardAdView.h */; };
-		FAEF1B2F169B74D700204BCD /* GSMediumRectangleAdView.h in Headers */ = {isa = PBXBuildFile; fileRef = FAEF1B1D169B74D700204BCD /* GSMediumRectangleAdView.h */; };
-		FAEF1B30169B74D700204BCD /* GSMobileBannerAdView.h in Headers */ = {isa = PBXBuildFile; fileRef = FAEF1B1E169B74D700204BCD /* GSMobileBannerAdView.h */; };
-		FAEF1B31169B74D700204BCD /* libGreystripeSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FAEF1B1F169B74D700204BCD /* libGreystripeSDK.a */; };
-		FAEF1B32169B74D700204BCD /* JTAdWidget.h in Headers */ = {isa = PBXBuildFile; fileRef = FAEF1B21169B74D700204BCD /* JTAdWidget.h */; };
-		FAEF1B33169B74D700204BCD /* jtUniversalLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FAEF1B22169B74D700204BCD /* jtUniversalLib.a */; };
-		FAEF1B34169B74D700204BCD /* JumpTapAppReport.h in Headers */ = {isa = PBXBuildFile; fileRef = FAEF1B23169B74D700204BCD /* JumpTapAppReport.h */; };
-		FAEF1B35169B74D700204BCD /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FAEF1B24169B74D700204BCD /* libGoogleAdMobAds.a */; };
-		FAEF1B36169B74D700204BCD /* libInMobiAdNetwork-3.6.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FAEF1B25169B74D700204BCD /* libInMobiAdNetwork-3.6.0.a */; };
-		FAEF1B37169B74D700204BCD /* libInMobiCommons-3.6.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FAEF1B26169B74D700204BCD /* libInMobiCommons-3.6.0.a */; };
-		FAEF1B38169B74D700204BCD /* libMMSDK_4.6.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FAEF1B27169B74D700204BCD /* libMMSDK_4.6.2.a */; };
-		FAEF1B39169B74D700204BCD /* libMobclix.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FAEF1B28169B74D700204BCD /* libMobclix.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		39120B6816789BEA009F41AD /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
-		5AF18020157D6EA20043C2CF /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		5AF8AF12153DE65D000A8447 /* libAirFlurry.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAirFlurry.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AF8AF15153DE65D000A8447 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5AF8AF19153DE65D000A8447 /* AirFlurry-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AirFlurry-Prefix.pch"; sourceTree = "<group>"; };
@@ -65,44 +25,8 @@
 		5AF8AF22153DE6D8000A8447 /* FlashRuntimeExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FlashRuntimeExtensions.h; path = "/Applications/Adobe Flash Builder 4.6/sdks/4.6.0/include/FlashRuntimeExtensions.h"; sourceTree = "<absolute>"; };
 		FA20572715E2AA1600030F51 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		FA20572815E2AA1600030F51 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
-		FA20572A15E2AA1600030F51 /* FlurryAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAdDelegate.h; sourceTree = "<group>"; };
-		FA20572B15E2AA1600030F51 /* FlurryAds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAds.h; sourceTree = "<group>"; };
-		FA20572C15E2AA1600030F51 /* libFlurryAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurryAds.a; sourceTree = "<group>"; };
-		FA99090F15EBD3E600AAA396 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		FAD8E79915E8409900BAD3C3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		FAD8E79B15E840A200BAD3C3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		FAD8E79D15E840B800BAD3C3 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		FAD8E79F15E840C100BAD3C3 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		FAD8E7A115E840D200BAD3C3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		FAD8E7A315E840DD00BAD3C3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		FAD8E7A515E8422700BAD3C3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		FAD8E7CD15EBC1AF00BAD3C3 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
-		FAD8E7CF15EBC1B700BAD3C3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		FAD8E7D115EBC1C100BAD3C3 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		FAD8E7D315EBC1C800BAD3C3 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		FAD8E7DE15EBC3E900BAD3C3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		FAD8E7E215EBC51100BAD3C3 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		FAD8E80115EBC5B600BAD3C3 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
-		FAD8E80215EBC5B600BAD3C3 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
-		FAD8E80515EBC5BB00BAD3C3 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		FAD8E80715EBC5C200BAD3C3 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
-		FAEF1B17169B74D700204BCD /* GSAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSAd.h; sourceTree = "<group>"; };
-		FAEF1B18169B74D700204BCD /* GSAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSAdDelegate.h; sourceTree = "<group>"; };
-		FAEF1B19169B74D700204BCD /* GSBannerAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSBannerAdView.h; sourceTree = "<group>"; };
-		FAEF1B1A169B74D700204BCD /* GSConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSConstants.h; sourceTree = "<group>"; };
-		FAEF1B1B169B74D700204BCD /* GSFullscreenAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSFullscreenAd.h; sourceTree = "<group>"; };
-		FAEF1B1C169B74D700204BCD /* GSLeaderboardAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSLeaderboardAdView.h; sourceTree = "<group>"; };
-		FAEF1B1D169B74D700204BCD /* GSMediumRectangleAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSMediumRectangleAdView.h; sourceTree = "<group>"; };
-		FAEF1B1E169B74D700204BCD /* GSMobileBannerAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSMobileBannerAdView.h; sourceTree = "<group>"; };
-		FAEF1B1F169B74D700204BCD /* libGreystripeSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGreystripeSDK.a; sourceTree = "<group>"; };
-		FAEF1B21169B74D700204BCD /* JTAdWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTAdWidget.h; sourceTree = "<group>"; };
-		FAEF1B22169B74D700204BCD /* jtUniversalLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = jtUniversalLib.a; sourceTree = "<group>"; };
-		FAEF1B23169B74D700204BCD /* JumpTapAppReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JumpTapAppReport.h; sourceTree = "<group>"; };
-		FAEF1B24169B74D700204BCD /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
-		FAEF1B25169B74D700204BCD /* libInMobiAdNetwork-3.6.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libInMobiAdNetwork-3.6.0.a"; sourceTree = "<group>"; };
-		FAEF1B26169B74D700204BCD /* libInMobiCommons-3.6.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libInMobiCommons-3.6.0.a"; sourceTree = "<group>"; };
-		FAEF1B27169B74D700204BCD /* libMMSDK_4.6.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMMSDK_4.6.2.a; sourceTree = "<group>"; };
-		FAEF1B28169B74D700204BCD /* libMobclix.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobclix.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,36 +34,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39120B6916789BEA009F41AD /* libz.1.2.5.dylib in Frameworks */,
-				FA99091015EBD3E600AAA396 /* iAd.framework in Frameworks */,
-				FAD8E80815EBC5C200BAD3C3 /* EventKit.framework in Frameworks */,
-				FAD8E80615EBC5BB00BAD3C3 /* CoreMotion.framework in Frameworks */,
-				FAD8E80315EBC5B600BAD3C3 /* AddressBook.framework in Frameworks */,
-				FAD8E80415EBC5B600BAD3C3 /* AddressBookUI.framework in Frameworks */,
-				FAD8E7E315EBC51100BAD3C3 /* MobileCoreServices.framework in Frameworks */,
-				FAD8E7DF15EBC3E900BAD3C3 /* CoreLocation.framework in Frameworks */,
-				FAD8E7D415EBC1C800BAD3C3 /* libz.dylib in Frameworks */,
-				FAD8E7D215EBC1C100BAD3C3 /* libsqlite3.dylib in Frameworks */,
-				FAD8E7D015EBC1B700BAD3C3 /* QuartzCore.framework in Frameworks */,
-				FAD8E7CE15EBC1AF00BAD3C3 /* OpenAL.framework in Frameworks */,
-				FAD8E7A615E8422700BAD3C3 /* AudioToolbox.framework in Frameworks */,
 				FAD8E7A415E840DD00BAD3C3 /* UIKit.framework in Frameworks */,
-				FAD8E7A215E840D200BAD3C3 /* CoreGraphics.framework in Frameworks */,
-				FAD8E7A015E840C100BAD3C3 /* MessageUI.framework in Frameworks */,
-				FAD8E79E15E840B800BAD3C3 /* Security.framework in Frameworks */,
-				FAD8E79C15E840A200BAD3C3 /* AVFoundation.framework in Frameworks */,
 				FAD8E79A15E8409900BAD3C3 /* SystemConfiguration.framework in Frameworks */,
-				5AF18021157D6EA20043C2CF /* MediaPlayer.framework in Frameworks */,
 				5AF8AF16153DE65D000A8447 /* Foundation.framework in Frameworks */,
 				FA20572E15E2AA1600030F51 /* libFlurry.a in Frameworks */,
-				FA20573115E2AA1600030F51 /* libFlurryAds.a in Frameworks */,
-				FAEF1B31169B74D700204BCD /* libGreystripeSDK.a in Frameworks */,
-				FAEF1B33169B74D700204BCD /* jtUniversalLib.a in Frameworks */,
-				FAEF1B35169B74D700204BCD /* libGoogleAdMobAds.a in Frameworks */,
-				FAEF1B36169B74D700204BCD /* libInMobiAdNetwork-3.6.0.a in Frameworks */,
-				FAEF1B37169B74D700204BCD /* libInMobiCommons-3.6.0.a in Frameworks */,
-				FAEF1B38169B74D700204BCD /* libMMSDK_4.6.2.a in Frameworks */,
-				FAEF1B39169B74D700204BCD /* libMobclix.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,27 +66,7 @@
 			children = (
 				5AF8AF22153DE6D8000A8447 /* FlashRuntimeExtensions.h */,
 				FA20572615E2AA1600030F51 /* Flurry */,
-				FA20572915E2AA1600030F51 /* FlurryAds */,
-				FAEF1B15169B74D700204BCD /* Networks */,
-				FAD8E7D315EBC1C800BAD3C3 /* libz.dylib */,
-				FAD8E7D115EBC1C100BAD3C3 /* libsqlite3.dylib */,
-				39120B6816789BEA009F41AD /* libz.1.2.5.dylib */,
-				FA99090F15EBD3E600AAA396 /* iAd.framework */,
-				FAD8E80715EBC5C200BAD3C3 /* EventKit.framework */,
-				FAD8E80515EBC5BB00BAD3C3 /* CoreMotion.framework */,
-				FAD8E80115EBC5B600BAD3C3 /* AddressBook.framework */,
-				FAD8E80215EBC5B600BAD3C3 /* AddressBookUI.framework */,
-				FAD8E7E215EBC51100BAD3C3 /* MobileCoreServices.framework */,
-				FAD8E7DE15EBC3E900BAD3C3 /* CoreLocation.framework */,
-				FAD8E7CF15EBC1B700BAD3C3 /* QuartzCore.framework */,
-				FAD8E7CD15EBC1AF00BAD3C3 /* OpenAL.framework */,
-				FAD8E7A515E8422700BAD3C3 /* AudioToolbox.framework */,
-				5AF18020157D6EA20043C2CF /* MediaPlayer.framework */,
 				FAD8E7A315E840DD00BAD3C3 /* UIKit.framework */,
-				FAD8E7A115E840D200BAD3C3 /* CoreGraphics.framework */,
-				FAD8E79F15E840C100BAD3C3 /* MessageUI.framework */,
-				FAD8E79D15E840B800BAD3C3 /* Security.framework */,
-				FAD8E79B15E840A200BAD3C3 /* AVFoundation.framework */,
 				FAD8E79915E8409900BAD3C3 /* SystemConfiguration.framework */,
 				5AF8AF15153DE65D000A8447 /* Foundation.framework */,
 			);
@@ -222,56 +100,6 @@
 			path = Flurry;
 			sourceTree = "<group>";
 		};
-		FA20572915E2AA1600030F51 /* FlurryAds */ = {
-			isa = PBXGroup;
-			children = (
-				FA20572A15E2AA1600030F51 /* FlurryAdDelegate.h */,
-				FA20572B15E2AA1600030F51 /* FlurryAds.h */,
-				FA20572C15E2AA1600030F51 /* libFlurryAds.a */,
-			);
-			path = FlurryAds;
-			sourceTree = "<group>";
-		};
-		FAEF1B15169B74D700204BCD /* Networks */ = {
-			isa = PBXGroup;
-			children = (
-				FAEF1B16169B74D700204BCD /* Greystripe */,
-				FAEF1B20169B74D700204BCD /* Jumptap */,
-				FAEF1B24169B74D700204BCD /* libGoogleAdMobAds.a */,
-				FAEF1B25169B74D700204BCD /* libInMobiAdNetwork-3.6.0.a */,
-				FAEF1B26169B74D700204BCD /* libInMobiCommons-3.6.0.a */,
-				FAEF1B27169B74D700204BCD /* libMMSDK_4.6.2.a */,
-				FAEF1B28169B74D700204BCD /* libMobclix.a */,
-			);
-			path = Networks;
-			sourceTree = "<group>";
-		};
-		FAEF1B16169B74D700204BCD /* Greystripe */ = {
-			isa = PBXGroup;
-			children = (
-				FAEF1B17169B74D700204BCD /* GSAd.h */,
-				FAEF1B18169B74D700204BCD /* GSAdDelegate.h */,
-				FAEF1B19169B74D700204BCD /* GSBannerAdView.h */,
-				FAEF1B1A169B74D700204BCD /* GSConstants.h */,
-				FAEF1B1B169B74D700204BCD /* GSFullscreenAd.h */,
-				FAEF1B1C169B74D700204BCD /* GSLeaderboardAdView.h */,
-				FAEF1B1D169B74D700204BCD /* GSMediumRectangleAdView.h */,
-				FAEF1B1E169B74D700204BCD /* GSMobileBannerAdView.h */,
-				FAEF1B1F169B74D700204BCD /* libGreystripeSDK.a */,
-			);
-			path = Greystripe;
-			sourceTree = "<group>";
-		};
-		FAEF1B20169B74D700204BCD /* Jumptap */ = {
-			isa = PBXGroup;
-			children = (
-				FAEF1B21169B74D700204BCD /* JTAdWidget.h */,
-				FAEF1B22169B74D700204BCD /* jtUniversalLib.a */,
-				FAEF1B23169B74D700204BCD /* JumpTapAppReport.h */,
-			);
-			path = Jumptap;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -281,18 +109,6 @@
 			files = (
 				5A9BCDD9153E87040018E174 /* FlashRuntimeExtensions.h in Headers */,
 				FA20572D15E2AA1600030F51 /* Flurry.h in Headers */,
-				FA20572F15E2AA1600030F51 /* FlurryAdDelegate.h in Headers */,
-				FA20573015E2AA1600030F51 /* FlurryAds.h in Headers */,
-				FAEF1B29169B74D700204BCD /* GSAd.h in Headers */,
-				FAEF1B2A169B74D700204BCD /* GSAdDelegate.h in Headers */,
-				FAEF1B2B169B74D700204BCD /* GSBannerAdView.h in Headers */,
-				FAEF1B2C169B74D700204BCD /* GSConstants.h in Headers */,
-				FAEF1B2D169B74D700204BCD /* GSFullscreenAd.h in Headers */,
-				FAEF1B2E169B74D700204BCD /* GSLeaderboardAdView.h in Headers */,
-				FAEF1B2F169B74D700204BCD /* GSMediumRectangleAdView.h in Headers */,
-				FAEF1B30169B74D700204BCD /* GSMobileBannerAdView.h in Headers */,
-				FAEF1B32169B74D700204BCD /* JTAdWidget.h in Headers */,
-				FAEF1B34169B74D700204BCD /* JumpTapAppReport.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

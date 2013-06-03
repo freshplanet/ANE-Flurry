@@ -18,13 +18,10 @@
 
 package com.freshplanet.nativeExtensions
 {
-	import flash.display.BitmapData;
-	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.StatusEvent;
 	import flash.external.ExtensionContext;
 	import flash.system.Capabilities;
-	import flash.utils.getTimer;
 
 	/**
 	 * Class handling all frontend analytics 
@@ -62,27 +59,11 @@ package com.freshplanet.nativeExtensions
 		
 		private function onStatus(event:StatusEvent):void
 		{
-			var e:FlurryAdsEvent;
-			
-			switch(event.code)
+			if (event.code == "LOGGING")
 			{
-				case FlurryAdsEvent.SPACE_DID_DISMISS:
-					e = new FlurryAdsEvent(FlurryAdsEvent.SPACE_DID_DISMISS, event.level);
-					break;
-				case FlurryAdsEvent.SPACE_WILL_LEAVE_APPLICATION:
-					e = new FlurryAdsEvent(FlurryAdsEvent.SPACE_WILL_LEAVE_APPLICATION, event.level);
-					break;
-				case FlurryAdsEvent.SPACE_DID_FAIL_TO_RENDER:
-					e = new FlurryAdsEvent(FlurryAdsEvent.SPACE_DID_FAIL_TO_RENDER, event.level);
-					break;
-				case "LOGGING":
-					trace('[Flurry] ' + event.level);
-					break;	
+				trace('[Flurry] ' + event.level);
 			}
-			
-			if (e) dispatchEvent(e);
 		}
-		
 		
 		public static function getInstance() : Flurry
 		{
@@ -104,7 +85,6 @@ package com.freshplanet.nativeExtensions
 			var result:Boolean = this.isIOS || this.isAndroid;
 			return result;
 		}
-
 		
 		
 		/**
@@ -369,125 +349,6 @@ package com.freshplanet.nativeExtensions
 			if (isFlurrySupported)
 			{
 				extCtx.call("stopSession")
-			}
-		}
-		
-		
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
-		// ADS SECTION
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		private var _activeAdSpaces : Array = [];
-		
-		/**
-		 * Display an ad onscreen.
-		 * 
-		 * @param space String: Name of the adSpace that you defined on the Flurry website.
-		 * @param size String: Size of the ad. This is generally overridden on the server-side
-		 * by the size specified on the Flurry website.
-		 * @param timeout int: Maximum time (in ms) ad requests should block before they return.
-		 * For asynchronous requests (recommended for banners), pass 0. (Default: 0)
-		 * @param force Boolean: If true, the ad will be requested no matter what. If false, the
-		 * ad won't be requested if showAd() has been called before for this ad space without
-		 * calling removeAd() afterward. (Default: false).
-		 * 
-		 * @see FlurryAdSize
-		 */ 
-		public function showAd( space : String, size : String, timeout : int = 0, force : Boolean = false ) : Boolean
-		{
-			if (!isFlurrySupported) return false;
-			if (_activeAdSpaces.indexOf(space) != -1 && !force) return true;
-			
-			if (_activeAdSpaces.indexOf(space) == -1) _activeAdSpaces.push(space);
-			
-			trace('[Flurry] Show ad "'+space+'" with size "'+size+'"');
-			
-			return extCtx.call('showAd', space, size, timeout);
-		}
-		
-		/**
-		 * Fetch an ad to be displayed later (with <code>showAd()</code>).
-		 * 
-		 * @param space String: Name of the adSpace that you defined on the Flurry website.
-		 * @param size String: Size of the ad. This is generally overridden on the server-side
-		 * by the size specified on the Flurry website.
-		 * 
-		 * @see #showAd()
-		 * @see FlurryAdSize
-		 */
-		public function fetchAd( space : String, size : String ) : void
-		{
-			if (!isFlurrySupported) return;
-			
-			trace('[Flurry] Fetch ad "'+space+'" with size "'+size+'"');
-			
-			extCtx.call('fetchAd', space, size);
-		}
-		
-		/**
-		 * Remove an ad from the screen.
-		 * 
-		 * @param space String: Name of the adSpace that you defined on the Flurry website.
-		 */ 
-		public function removeAd( space : String ) : void
-		{
-			if (!isFlurrySupported) return;
-			
-			if (_activeAdSpaces.indexOf(space) != -1)
-				_activeAdSpaces.splice(_activeAdSpaces.indexOf(space), 1);
-			
-			trace('[Flurry] Remove ad "'+space+'"');
-			
-			extCtx.call('removeAd', space);
-		}
-		
-		/**
-		 * Adds a key/value pair to the user cookies.
-		 * Those cookies are used once the user install new app.
-		 */
-		public function addUserCookie( key : String, value : String ) : void
-		{
-			if (isFlurrySupported)
-			{
-				extCtx.call("addUserCookie", key, value);
-			}
-		}
-		
-		/**
-		 * Clear the stored cookies.
-		 * 
-		 * @see #addUserCookie()
-		 */
-		public function clearUserCookies() : void
-		{
-			if (isFlurrySupported)
-			{
-				extCtx.call("clearUserCookies");
-			}
-		}
-		
-		/**
-		 * Adds a key/value pair to the targeting keywords.
-		 * Those keywords are used to target ads.
-		 */
-		public function addTargetingKeyword( key : String, value : String ) : void
-		{
-			if (isFlurrySupported)
-			{
-				extCtx.call("addTargetingKeyword", key, value);
-			}
-		}
-		
-		/**
-		 * Clear the stored targeting keywords.
-		 * 
-		 * @see #addTargetingKeyword()
-		 */
-		public function clearTargetingKeywords() : void
-		{
-			if (isFlurrySupported)
-			{
-				extCtx.call("clearTargetingKeywords");
 			}
 		}
 	}

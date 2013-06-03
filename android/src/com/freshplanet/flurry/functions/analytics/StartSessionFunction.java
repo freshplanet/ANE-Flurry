@@ -18,17 +18,12 @@
 
 package com.freshplanet.flurry.functions.analytics;
 
-import android.content.Context;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationManager;
 import android.util.Log;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
 import com.adobe.fre.FREObject;
 import com.flurry.android.FlurryAgent;
-import com.freshplanet.flurry.ExtensionContext;
 
 public class StartSessionFunction implements FREFunction
 {
@@ -55,29 +50,7 @@ public class StartSessionFunction implements FREFunction
 			
 			// Start Flurry session and initialize ads
 			FlurryAgent.onStartSession(arg0.getActivity(), apiKey);
-			FlurryAgent.enableTestAds(false);
-			FlurryAgent.initializeAds(arg0.getActivity());
-			FlurryAgent.setAdListener((ExtensionContext)arg0);
 			Log.d(TAG, "Started session and initalized ads");
-			
-			// Listen to the user location
-			LocationManager locationManager = (LocationManager)(arg0.getActivity().getSystemService(Context.LOCATION_SERVICE));
-			Criteria locationCriteria = new Criteria();
-			locationCriteria.setAccuracy(Criteria.ACCURACY_COARSE);
-			String locationProvider = locationManager.getBestProvider(locationCriteria, true);
-			Location location = locationManager.getLastKnownLocation(locationProvider);
-			if (location != null)
-			{
-				float latitude = (float)location.getLatitude();
-				float longitude = (float)location.getLongitude();
-				FlurryAgent.setLocation(latitude, longitude);
-				
-				Log.d(TAG, "Retrieved user location: ("+latitude+", "+longitude+")");
-			}
-			else
-			{
-				Log.d(TAG, "Couldn't retrieve user location (locationProvider = " + locationProvider + ")");
-			}
 		}
 		else
 		{
