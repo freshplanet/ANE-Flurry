@@ -29,7 +29,7 @@ typedef enum {
  *  For additional information on how to use Flurry's Ads SDK to
  *  attract high-quality users and monetize your user base see <a href="http://wiki.flurry.com/index.php?title=Publisher">Support Center - Publisher</a>.
  *  @author 2010 - 2012 Flurry, Inc. All Rights Reserved.
- *  @version 4.1.0
+ *  @version 4.2.0
  * 
  */
 @protocol FlurryAdDelegate <NSObject>
@@ -77,6 +77,11 @@ typedef enum {
  *  @param interstitial YES/NO if the space to display will be an interstitial.
  */
 - (BOOL) spaceShouldDisplay:(NSString*)adSpace interstitial:(BOOL)interstitial;
+
+/*!
+ *  @brief [Deprecated] This method is deprecated. -[spaceShouldDisplay:interstitial:] should be used.
+ */
+- (BOOL)spaceShouldDisplay:(NSString*)adSpace  forType:(FlurryAdType)type;
 
 /*!
  *  @brief Invoked when an ad fails to render.
@@ -173,6 +178,19 @@ typedef enum {
  */
 - (void) spaceDidReceiveClick:(NSString*)adSpace;
 
+
+/*!
+ *  @brief Invoked when a video finishes playing
+ *  @since 4.2.0
+ *
+ *  This method informs the app that a video associated with an ad has finished playing
+ *
+ *  @param adSpace The placement of an ad in your app, where placement may be splash screen for SPLASH_AD.
+ *
+ */
+- (void)videoDidFinish:(NSString *)adSpace;
+
+
 @optional
 
 #pragma mark App Keys
@@ -222,12 +240,46 @@ typedef enum {
 - (NSString *)appSpotMobclixApplicationID; 
 
 /*!
- *  @brief The Jumptap Application Id.
- *  @since 4.0.0
+ *  @brief The Jumptap Publisher Id.
+ *  @since 4.1.2
  * 
- *  This is the id for your app as set in Jumptap 
+ *  This is the pub id for your app as set in Jumptap 
  */
-- (NSString *)appSpotJumptapApplicationID;
+- (NSString *)appSpotJumptapPublisherID;
+
+/*!
+ *  @brief The Jumptap Site Id.
+ *  @since 4.1.2
+ *
+ *  This is the site id for your app as set in Jumptap. It is an optional parameter.
+ */
+- (NSString *)appSpotJumptapSiteID;
+
+/*!
+ *  @brief Jumptap Banner Ad Spot ID
+ *  @since 4.1.2
+ *
+ *  This is the ad spot id for a Banner (320x50) ad spot set in JumpTap
+ */
+- (NSString *)appSpotJumptapBannerAdSpotID;
+
+/*!
+ *  @brief Jumptap Leaderboard Ad Spot ID
+ *  @since 4.1.2
+ *
+ *  This is the ad spot id for a Leaderboard (720x90) ad spot set in JumpTap
+ */
+- (NSString *)appSpotJumptapLeaderboardAdSpotID;
+
+/*!
+ *  @brief Jumptap Medium Rectange Ad Spot ID
+ *  @since 4.1.2
+ *
+ *  This is the ad spot id for a Medium Rectangle (320x50) ad spot set in JumpTap.
+ *  The Medium Rectangle Ad Spot ID will be used whenever the ad frame can fit it
+ *  (e.g. interstitial ads).
+ */
+- (NSString *)appSpotJumptapMediumRectangleAdSpotID;
 
 /*!
  *  @brief The Greystripe Application Id.

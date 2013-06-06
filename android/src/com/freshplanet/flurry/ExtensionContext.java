@@ -225,4 +225,10 @@ public class ExtensionContext extends FREContext implements FlurryAdListener
 	{
 		Log.d(Extension.TAG, "Ad clicked: " + myAdSpaceName);
 	}
+	
+	@Override 
+	public void onVideoCompleted(String myAdSpaceName)
+	{
+		Log.d(Extension.TAG, "Video opened: " + myAdSpaceName);
+	}
 }

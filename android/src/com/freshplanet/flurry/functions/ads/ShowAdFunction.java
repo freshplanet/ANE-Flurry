@@ -26,7 +26,7 @@ import com.adobe.fre.FREFunction;
 import com.adobe.fre.FREObject;
 import com.adobe.fre.FREWrongThreadException;
 import com.flurry.android.FlurryAdSize;
-import com.flurry.android.FlurryAgent;
+import com.flurry.android.FlurryAds;
 import com.freshplanet.flurry.ExtensionContext;
 
 public class ShowAdFunction implements FREFunction
@@ -93,7 +93,7 @@ public class ShowAdFunction implements FREFunction
 		
 		// Try to show an ad
 		RelativeLayout adLayout = ((ExtensionContext)arg0).getNewAdLayout();
-		Boolean result = FlurryAgent.getAd(arg0.getActivity(), space, adLayout, size, timeout);
+		Boolean result = FlurryAds.getAd(arg0.getActivity(), space, adLayout, size, timeout);
 		
 		// Return the result (true if the ad was shown, false otherwise)
 		try

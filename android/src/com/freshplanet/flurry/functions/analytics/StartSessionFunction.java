@@ -27,6 +27,7 @@ import android.util.Log;
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
 import com.adobe.fre.FREObject;
+import com.flurry.android.FlurryAds;
 import com.flurry.android.FlurryAgent;
 import com.freshplanet.flurry.ExtensionContext;
 
@@ -50,14 +51,15 @@ public class StartSessionFunction implements FREFunction
 		if (apiKey != null)
 		{
 			// Set Flurry logs
-			FlurryAgent.setLogEnabled(false);
-			FlurryAgent.setLogLevel(Log.DEBUG);
+			FlurryAgent.setLogEnabled(true);
+			FlurryAgent.setLogEvents(true);
+			FlurryAgent.setLogLevel(Log.INFO);
 			
 			// Start Flurry session and initialize ads
 			FlurryAgent.onStartSession(arg0.getActivity(), apiKey);
-			FlurryAgent.enableTestAds(false);
-			FlurryAgent.initializeAds(arg0.getActivity());
-			FlurryAgent.setAdListener((ExtensionContext)arg0);
+			FlurryAds.enableTestAds(false);
+			FlurryAds.initializeAds(arg0.getActivity());
+			FlurryAds.setAdListener((ExtensionContext)arg0);
 			Log.d(TAG, "Started session and initalized ads");
 			
 			// Listen to the user location
@@ -70,7 +72,7 @@ public class StartSessionFunction implements FREFunction
 			{
 				float latitude = (float)location.getLatitude();
 				float longitude = (float)location.getLongitude();
-				FlurryAgent.setLocation(latitude, longitude);
+				FlurryAds.setLocation(latitude, longitude);
 				
 				Log.d(TAG, "Retrieved user location: ("+latitude+", "+longitude+")");
 			}

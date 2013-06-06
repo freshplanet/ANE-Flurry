@@ -24,7 +24,7 @@ import android.widget.RelativeLayout;
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
 import com.adobe.fre.FREObject;
-import com.flurry.android.FlurryAgent;
+import com.flurry.android.FlurryAds;
 import com.freshplanet.flurry.ExtensionContext;
 
 public class RemoveAdFunction implements FREFunction
@@ -53,7 +53,7 @@ public class RemoveAdFunction implements FREFunction
 		
 		// Remove the ad
 		RelativeLayout adLayout = ((ExtensionContext)arg0).getCurrentAdLayout();
-		FlurryAgent.removeAd(arg0.getActivity(), space, adLayout);
+		FlurryAds.removeAd(arg0.getActivity(), space, adLayout);
 		
 		return null;
 	}

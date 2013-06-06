@@ -733,14 +733,14 @@ DEFINE_ANE_FUNCTION(addUserCookie)
     uint32_t stringLength;
     
     const uint8_t *keyString;
-    if (FREGetObjectAsUTF8(argv[0], &stringLength, &keyString) == FRE_OK)
+    if (FREGetObjectAsUTF8(argv[0], &stringLength, &keyString) != FRE_OK)
     {
         return nil;
     }
     NSString *key = [NSString stringWithUTF8String:(char*)keyString];
     
     const uint8_t *valueString;
-    if (FREGetObjectAsUTF8(argv[1], &stringLength, &valueString) == FRE_OK)
+    if (FREGetObjectAsUTF8(argv[1], &stringLength, &valueString) != FRE_OK)
     {
         return nil;
     }

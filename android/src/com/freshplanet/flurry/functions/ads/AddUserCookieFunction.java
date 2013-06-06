@@ -25,7 +25,7 @@ import android.util.Log;
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
 import com.adobe.fre.FREObject;
-import com.flurry.android.FlurryAgent;
+import com.flurry.android.FlurryAds;
 import com.freshplanet.flurry.ExtensionContext;
 
 public class AddUserCookieFunction implements FREFunction
@@ -50,7 +50,7 @@ public class AddUserCookieFunction implements FREFunction
 		{
 			Map<String, String> userCookies = ((ExtensionContext)arg0).getUserCookies();
 			userCookies.put(key, value);
-			FlurryAgent.setUserCookies(userCookies);
+			FlurryAds.setUserCookies(userCookies);
 		}
 		else
 		{

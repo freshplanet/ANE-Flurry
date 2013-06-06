@@ -27,7 +27,7 @@ typedef enum {
  *  attract high-quality users and monetize your user base see <a href="http://support.flurry.com/index.php?title=Publishers">Support Center - Publishers</a>.
  *  
  *  @author 2009 - 2012 Flurry, Inc. All Rights Reserved.
- *  @version 4.0.0
+ *  @version 4.2.0
  * 
  */
 @interface FlurryAds : NSObject {
@@ -143,6 +143,41 @@ typedef enum {
  *  be splash screen for SPLASH_AD.
  */
 + (void)displayAdForSpace:(NSString*)space onView:(UIView *)view;
+
+/*!
+ *  @brief Display an ad for the given interstitial @c space.
+ *  @since 4.1.0
+ * 
+ *  This method will display an interstitial ad if one is ready for display on the device for specified UIViewController instance
+ * 
+ *  @note The @c space simply represents the placement of the ad in your app and should be 
+ *  unique for each placement. Only one ad will show at a time for any given ad space. For example, if you are displaying a full screen ad on your 
+ *  splash screen and after level completeion, you may have the following spaces 
+ *  @c @"SPLASH_AD" and @c @"LEVEL_AD".
+ * 
+ *  @see #fetchAdForSpace:view:size: for details on retrieving an ad.\n
+    #adReadyForSpace: for details on verifying is an ad is ready to be displayed. \n
+ *  #removeAdFromSpace: for details on manually removing an ad from a view. \n
+ *  FlurryAdDelegate#spaceShouldDisplay:forType: for details on controlling whether an ad will display immediately before it is set to be rendered to the user.
+ *  FlurryAdDelegate#spaceDidFailToRender:error: for details on notification of error in rendering an ad for this request.
+ *
+ *  @code
+ * in UIViewController based class:
+ *  - (void)showFullscreenAd:(NSString *)placement 
+ {
+ // Placement may be SPLASH_AD as noted above
+ if([FlurryAds adReadyForSpace:placement])
+ {
+    [FlurryAds displayAdForSpace:placement modallyForViewController:self];
+ }
+ }
+ *  @endcode
+ * 
+ *  @param space The placement of an ad in your app, where placement may
+ *  @param viewController The viewController to show the fullscreen ad modally.  
+ *  Note this method should not be used for banners.
+ */
+ + (void)displayAdForSpace:(NSString*)space modallyForViewController:(UIViewController *)viewController;
 
 /*!
  *  @brief [Deprecated] Check if an ad is available for the given @c space.
@@ -337,7 +372,7 @@ typedef enum {
  *  @brief Sets a dictionary of key/value pairs, which will be transmitted to Flurry servers when a user clicks on an ad.
  *  @since 4.0.0
  * 
- *  UserCookies allow the developer to specify information on a user executing an ad action.There is one UserCookie object, and on each ad click that UserCookie is transmitted to the Flurry servers. The UserCookie key/value pairs will be transmitted back to the developer via the app callback if one is set.
+ *  UserCookies allow the developer to specify information on a user executing an ad action. There is one UserCookie object, and on each ad click that UserCookie is transmitted to the Flurry servers. The UserCookie key/value pairs will be transmitted back to the developer via the app callback if one is set. This is useful for rewarded inventory, to identify which of your users should be rewarded when a reward callback is sent.
  * 
  *  @note Calling this method with a nil or empty dictionary has no effect. Calling this method a second time with a valid dictionary will replace the previous entries. To clear previously set userCookies, you must call #clearUserCookies.
  *  @see #clearUserCookies for details on removing user cookies set through this method.
