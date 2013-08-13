@@ -7,7 +7,7 @@ This is an [Air native extension](http://www.adobe.com/devnet/air/native-extensi
 Flurry SDK
 ---------
 
-This ANE uses Flurry SDK version 4.2.1 on iOS and 3.2.0 on Android.
+This ANE uses Flurry SDK version 4.2.3 on iOS and 3.2.0 on Android.
 
 It supports most features of Flurry Analytics. See the documentation [Flurry.as](https://github.com/freshplanet/ANE-Flurry/blob/master/actionscript/src/com/freshplanet/nativeExtensions/Flurry.as) for more information.
 
