@@ -14,6 +14,8 @@
 		FA20572E15E2AA1600030F51 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA20572815E2AA1600030F51 /* libFlurry.a */; };
 		FAD8E79A15E8409900BAD3C3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E79915E8409900BAD3C3 /* SystemConfiguration.framework */; };
 		FAD8E7A415E840DD00BAD3C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E7A315E840DD00BAD3C3 /* UIKit.framework */; };
+		FAFF2C8517BBCCA9007D48DD /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAFF2C8417BBCCA9007D48DD /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		FAFF2C8717BBCCB4007D48DD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAFF2C8617BBCCB4007D48DD /* Security.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +29,8 @@
 		FA20572815E2AA1600030F51 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
 		FAD8E79915E8409900BAD3C3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		FAD8E7A315E840DD00BAD3C3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		FAFF2C8417BBCCA9007D48DD /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		FAFF2C8617BBCCB4007D48DD /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +38,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAFF2C8717BBCCB4007D48DD /* Security.framework in Frameworks */,
+				FAFF2C8517BBCCA9007D48DD /* AdSupport.framework in Frameworks */,
 				FAD8E7A415E840DD00BAD3C3 /* UIKit.framework in Frameworks */,
 				FAD8E79A15E8409900BAD3C3 /* SystemConfiguration.framework in Frameworks */,
 				5AF8AF16153DE65D000A8447 /* Foundation.framework in Frameworks */,
@@ -66,8 +72,10 @@
 			children = (
 				5AF8AF22153DE6D8000A8447 /* FlashRuntimeExtensions.h */,
 				FA20572615E2AA1600030F51 /* Flurry */,
+				FAFF2C8417BBCCA9007D48DD /* AdSupport.framework */,
 				FAD8E7A315E840DD00BAD3C3 /* UIKit.framework */,
 				FAD8E79915E8409900BAD3C3 /* SystemConfiguration.framework */,
+				FAFF2C8617BBCCB4007D48DD /* Security.framework */,
 				5AF8AF15153DE65D000A8447 /* Foundation.framework */,
 			);
 			name = Frameworks;
