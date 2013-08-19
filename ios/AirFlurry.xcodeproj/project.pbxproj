@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5A9BCDD9153E87040018E174 /* FlashRuntimeExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5AF8AF22153DE6D8000A8447 /* FlashRuntimeExtensions.h */; };
+		195154ED17C2CA2600AFA5A8 /* FlashRuntimeExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 195154EC17C2CA2600AFA5A8 /* FlashRuntimeExtensions.h */; };
 		5AF8AF16153DE65D000A8447 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AF8AF15153DE65D000A8447 /* Foundation.framework */; };
 		5AF8AF1C153DE65D000A8447 /* AirFlurry.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF8AF1B153DE65D000A8447 /* AirFlurry.m */; };
 		FA20572D15E2AA1600030F51 /* Flurry.h in Headers */ = {isa = PBXBuildFile; fileRef = FA20572715E2AA1600030F51 /* Flurry.h */; };
@@ -19,12 +19,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		195154EC17C2CA2600AFA5A8 /* FlashRuntimeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashRuntimeExtensions.h; sourceTree = "<group>"; };
 		5AF8AF12153DE65D000A8447 /* libAirFlurry.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAirFlurry.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AF8AF15153DE65D000A8447 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5AF8AF19153DE65D000A8447 /* AirFlurry-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AirFlurry-Prefix.pch"; sourceTree = "<group>"; };
 		5AF8AF1A153DE65D000A8447 /* AirFlurry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AirFlurry.h; sourceTree = "<group>"; };
 		5AF8AF1B153DE65D000A8447 /* AirFlurry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirFlurry.m; sourceTree = "<group>"; };
-		5AF8AF22153DE6D8000A8447 /* FlashRuntimeExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FlashRuntimeExtensions.h; path = "/Applications/Adobe Flash Builder 4.6/sdks/4.6.0/include/FlashRuntimeExtensions.h"; sourceTree = "<absolute>"; };
 		FA20572715E2AA1600030F51 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		FA20572815E2AA1600030F51 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
 		FAD8E79915E8409900BAD3C3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -70,7 +70,7 @@
 		5AF8AF14153DE65D000A8447 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5AF8AF22153DE6D8000A8447 /* FlashRuntimeExtensions.h */,
+				195154EC17C2CA2600AFA5A8 /* FlashRuntimeExtensions.h */,
 				FA20572615E2AA1600030F51 /* Flurry */,
 				FAFF2C8417BBCCA9007D48DD /* AdSupport.framework */,
 				FAD8E7A315E840DD00BAD3C3 /* UIKit.framework */,
@@ -115,8 +115,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A9BCDD9153E87040018E174 /* FlashRuntimeExtensions.h in Headers */,
 				FA20572D15E2AA1600030F51 /* Flurry.h in Headers */,
+				195154ED17C2CA2600AFA5A8 /* FlashRuntimeExtensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -104,7 +104,7 @@ package com.freshplanet.nativeExtensions
 		 */
 		public function logEvent(eventName:String, properties:Object = null):void
 		{
-			trace("[Flurry]", "logEvent", eventName, properties);
+			trace("[Flurry]", "logEvent", eventName, JSON.stringify(properties));
 
 			if (isFlurrySupported)
 			{
