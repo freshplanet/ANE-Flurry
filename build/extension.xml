@@ -16,27 +16,28 @@
 //  
 //////////////////////////////////////////////////////////////////////////////////////-->
 
-<extension xmlns="http://ns.adobe.com/air/extension/3.1">
-  <id>com.freshplanet.AirFlurry</id>
-  <versionNumber>1.0</versionNumber>
-  <platforms>
-    <platform name="iPhone-ARM">
+<extension xmlns="http://ns.adobe.com/air/extension/3.8">
+    <id>com.freshplanet.AirFlurry</id>
+        <versionNumber>1.0</versionNumber>
+        <platforms>
+        <platform name="iPhone-ARM">
             <applicationDeployment>
                 <nativeLibrary>libAirFlurry.a</nativeLibrary>
-                <initializer>AirFlurryInitializer</initializer> 
+                <initializer>AirFlurryInitializer</initializer>
+                <finalizer>AirFlurryFinalizer</finalizer>
             </applicationDeployment>
-    </platform>
- 
-   <platform name="Android-ARM"> 
-        <applicationDeployment> 
-            <nativeLibrary>libAirFlurry.jar</nativeLibrary> 
-            <initializer>com.freshplanet.flurry.Extension</initializer> 
-            <finalizer>com.freshplanet.flurry.Extension</finalizer> 
-        </applicationDeployment> 
-    </platform>
-    
-    <platform name="default"> 
-        <applicationDeployment/> 
-    </platform> 
-  </platforms>
+        </platform>
+
+        <platform name="Android-ARM"> 
+            <applicationDeployment> 
+                <nativeLibrary>libAirFlurry.jar</nativeLibrary> 
+                <initializer>com.freshplanet.flurry.Extension</initializer> 
+                <finalizer>com.freshplanet.flurry.Extension</finalizer> 
+            </applicationDeployment> 
+        </platform>
+
+        <platform name="default"> 
+            <applicationDeployment/> 
+        </platform> 
+    </platforms>
 </extension>

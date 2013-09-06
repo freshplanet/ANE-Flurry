@@ -23,45 +23,40 @@ package com.freshplanet.nativeExtensions
 	import flash.external.ExtensionContext;
 	import flash.system.Capabilities;
 
-	/**
-	 * Class handling all frontend analytics 
-	 * @author titi
-	 * 
-	 */
 	public class Flurry extends EventDispatcher
 	{
-				
-		private static var _instance:Flurry;
+		// --------------------------------------------------------------------------------------//
+		//																						 //
+		// 									   PUBLIC API										 //
+		// 																						 //
+		// --------------------------------------------------------------------------------------//
 		
-		private var extCtx:ExtensionContext;
+		public static const MALE_GENDER:String   = "m";
+		public static const FEMALE_GENDER:String = "f";
+		
+		/** Flurry is supported on iOS and Android devices. */
+		public static function get isSupported() : Boolean
+		{
+			return isAndroid || isIOS;
+		}
 		
 		public function Flurry() 
 		{
 			if (!_instance)
 			{
-				if (this.isFlurrySupported)
+				_context = ExtensionContext.createExtensionContext(EXTENSION_ID, null);
+				if (!_context)
 				{
-					trace('[Flurry] creating Flurry context');
-					extCtx = ExtensionContext.createExtensionContext("com.freshplanet.AirFlurry", null);
-					extCtx.addEventListener(StatusEvent.STATUS, onStatus);
-				} else
-				{
-					trace('[Flurry] Flurry is not supported', "no log will be displayed");
+					log("ERROR - Extension context is null. Please check if extension.xml is setup correctly.");
+					return;
 				}
+				_context.addEventListener(StatusEvent.STATUS, onStatus);
+				
 				_instance = this;
 			}
 			else
 			{
-				throw Error( '[Flurry Error] This is a singleton, use getInstance, do not call the constructor directly');
-			}
-
-		}
-		
-		private function onStatus(event:StatusEvent):void
-		{
-			if (event.code == "LOGGING")
-			{
-				trace('[Flurry] ' + event.level);
+				throw Error("This is a singleton, use getInstance(), do not call the constructor directly.");
 			}
 		}
 		
@@ -69,287 +64,327 @@ package com.freshplanet.nativeExtensions
 		{
 			return _instance ? _instance : new Flurry();
 		}
-
-		private function get isAndroid():Boolean
-		{
-			return Capabilities.manufacturer.indexOf('Android') > -1;
-		}
-		
-		private function get isIOS():Boolean
-		{
-			return Capabilities.manufacturer.indexOf('iOS') > -1;
-		}
-
-		private function get isFlurrySupported():Boolean
-		{
-			var result:Boolean = this.isIOS || this.isAndroid;
-			return result;
-		}
-		
 		
 		/**
-		 * Log an event (not timed). For timed events, @see startTimedEvent
-		 *  
-		 * @param eventName name of the event. Limits :
-		 * <ul>
-		 * <li>300 event name differents per project</li>
-		 * <li>event name below 255 characters</li>
-		 * <li>each session can log up to 200 events and up to 100 unique event names</li>
-		 * </ul>
-		 * @param properties map of additional parameters sent with the event. Limits :
-		 * <ul>
-		 * <li>max 10 parameters per event</li>
-		 * <li>key and value name below 255 characters</li>
-		 * </ul>
+		 * If <code>true</code>, logs will be displayed at the Actionscript level.
+		 * If <code>false</code>, logs will be displayed only at the native level.
 		 */
-		public function logEvent(eventName:String, properties:Object = null):void
+		public function get logEnabled() : Boolean
 		{
-			trace("[Flurry]", "logEvent", eventName, JSON.stringify(properties));
-
-			if (isFlurrySupported)
-			{
-				if (!checkLength(eventName))
-				{
-					trace("[Flurry Warning]", "event name too long (>255 characters)", eventName);
-					return;
-				}
-
-				var parameterKeys:Array = [];
-				var parameterValues:Array = [];
-				if (properties != null)
-				{
-					var value:String;
-					var count:int = 0;
-					for (var key:String in properties)
-					{
-						if (count > 10)
-						{
-							trace("[Flurry Warning]", "too many properties sent (>10) for event", eventName);
-							break;
-						}
-						value = properties[key].toString();
-						if (checkLength(value) && checkLength(key))
-						{
-							parameterKeys.push(key);
-							parameterValues.push(value);
-						} else
-						{
-							trace("[Flurry Warning]", "key or value too long (>255 characters)", key, value);
-						}
-						count++;
-					}
-					trace("[Flurry]", "logEvent", eventName, parameterKeys, parameterValues);
-					extCtx.call("logEvent", eventName, parameterKeys, parameterValues);
-				} else
-				{
-					trace("[Flurry]", "logEvent", eventName);
-					extCtx.call("logEvent", eventName, [], []);
-				}
-			}
+			return _logEnabled;
 		}
 		
-		private function checkLength(value:String):Boolean
+		public function set logEnabled( value : Boolean ) : void
 		{
-			return value != null && value.length < 255;
-		}
-		
-		
-		
-		/**
-		 * Report Application errors. Limits:
-		 * Flurry will report the first 10 errors to occur in each session
-		 * 
-		 * We also limit error and message to 255 characters (truncate if higher). 
-		 * 
-		 * @param errorId
-		 * @param message
-		 * 
-		 */
-		public function logError(errorId:String, message:String):void
-		{
-			if (isFlurrySupported && errorId != null)
-			{
-				errorId = errorId.length > 255 ? errorId.substr(0, 253) : errorId;
-				
-				message = message == null ? "" : message;
-				message = message.length > 255 ? message.substr(0, 253) : message;
-
-				extCtx.call("logError", errorId, message)
-			}
-		}
-		
-		
-		/**
-		 * Set the user id associated with the current session. 
-		 * @param userId 
-		 * 
-		 */
-		public function setUserId(userId:String):void
-		{
-			if (isFlurrySupported)
-			{
-				extCtx.call("setUserId", userId)
-			}
-		}
-		
-		public static const MALE_GENDER:String   = "m";
-		public static const FEMALE_GENDER:String = "f";
-
-		
-		/**
-		 * Set the user info associated with the current session 
-		 * @param age age of the user ( > 0)
-		 * @param gender gender of the user. Must be one of the two defined constants: @see MALE_GENDER, @see FEMALE_GENDER
-		 * 
-		 */
-		public function setUserInfo(age:int, gender:String):void
-		{
-			if (isFlurrySupported)
-			{
-				if ([MALE_GENDER, FEMALE_GENDER].indexOf(gender) == -1)
-				{
-					trace("[Flurry]", "wrong gender provided", gender, "must be Flurry.MALE_GENDER or Flurry.FEMALE_GENDER")
-				}
-				extCtx.call("setUserInfo", age, gender)
-			}
-		}
-		
-		
-		/**
-		 * Set the version name sent for this session. Limits:
-		 * There is a maximum of 605 versions allowed for a single app. 
-		 * This method must be called prior to invoking startSession:.
-		 * @param versionName
-		 * 
-		 */
-		public function setAppVersion(versionName:String):void
-		{
-			if (isFlurrySupported)
-			{
-				extCtx.call("setAppVersion", versionName)
-			}
+			_logEnabled = value;
 		}
 		
 		/**
-		 * Switch the send events when user pauses the app. 
-		 * @param value True : send events on pause. False : send events on stop.
+		 * Enable/disable crash reporting on iOS.
+		 * <br><br>
 		 * 
+		 * You can only have one crash handler per app on iOS, so this feature is disabled by default.
 		 */
-		public function setSendEventsOnPause(value:Boolean):void
+		public function get iOSCrashReportingEnabled():Boolean
 		{
-			if (isFlurrySupported)
-			{
-				extCtx.call("setSendEventsOnPause", value)
-			}
-		}
-
-		
-		/**
-		 * Start logging a timed event. 
-		 * @param eventName
-		 * 
-		 */
-		public function startTimedEvent(eventName:String):void
-		{
-			trace("[Flurry]", "startTimedEvent", eventName);
-
-			if (isFlurrySupported)
-			{
-				if (!checkLength(eventName))
-				{
-					trace("[Flurry Warning]", "event name too long (>255 characters)", eventName);
-					return;
-				}
-				trace("[Flurry]", "start logEvent Timed", eventName);
-
-				extCtx.call("startTimedEvent", eventName)
-			}
+			return _iOSCrashReportingEnabled;
 		}
 		
-		
-		/**
-		 * Stop recording the given timed event. 
-		 * @param eventName
-		 * 
-		 */
-		public function stopTimedEvent(eventName:String):void
+		public function set iOSCrashReportingEnabled(value:Boolean):void
 		{
-			trace("[Flurry]", "stopTimedEvent", eventName);
-
-			if (isFlurrySupported)
+			_iOSCrashReportingEnabled = value;
+			if (isIOS)
 			{
-				if (!checkLength(eventName))
-				{
-					trace("[Flurry Warning]", "event name too long (>255 characters)", eventName);
-					return;
-				}
-				trace("[Flurry]", "stop logEvent Timed", eventName);
-
-				extCtx.call("stopTimedEvent", eventName)
+				log("iOS crash reporting " + (_iOSCrashReportingEnabled ? "enabled" : "disabled"));
+				_context.call("setCrashReportingEnabled", _iOSCrashReportingEnabled);
 			}
-		}
-
-		
-		/**
-		 * Start a new Flurry Session. 
-		 * Every event will be recorded afterwards.
-		 * 
-		 */
-		public function startSession():void
-		{
-			trace('start session');
-			if (isFlurrySupported)
-			{
-				
-				var apiKey:String = getApiKeyFromDevice();
-				if (apiKey != null)
-				{
-					trace('start session with api key'+apiKey);
-					extCtx.call("startSession", apiKey)
-				} else
-				{
-					trace("[Flurry Warning]", "api key not found");
-				}
-			}
-		}
-		
-		private var iOSApiKey:String;
-		private var androidApiKey:String;
-
-		
-		private function getApiKeyFromDevice():String
-		{
-			if (this.isAndroid)
-			{
-				return androidApiKey;
-			}
-			if (this.isIOS)
-			{
-				return iOSApiKey;
-			}
-			return null;
 		}
 		
 		public function setIOSAPIKey(apiKey:String):void
 		{
-			this.iOSApiKey = apiKey;
+			_iOSApiKey = apiKey;
 		}
 		
 		public function setAndroidAPIKey(apiKey:String):void
 		{
-			this.androidApiKey = apiKey;
+			_androidApiKey = apiKey;
 		}
-
 		
 		/**
-		 * Stop the current session. 
+		 * This method must be called prior to <code>startSession()</code>.
+		 * <br><br>
+		 * 
+		 * Note: There is a maximum of 605 versions allowed for a single app.  
 		 */
+		public function setAppVersion(versionName:String):void
+		{
+			log("Set app version to " + versionName);
+			
+			if (isSupported)
+			{
+				_context.call("setAppVersion", versionName)
+			}
+		}
+		
+		/**
+		 * Start the Flurry session.
+		 * <br><br>
+		 * 
+		 * Note: You must set your API keys with <code>setIOSAPIKey()</code> and/or <code>setAndroidAPIKey</code>
+		 * before calling <code>startSession()</code>.
+		 */
+		public function startSession():void
+		{
+			var apiKey:String = getApiKeyFromDevice();
+			if (apiKey)
+			{
+				log("Start session with API key " + apiKey);
+				
+				if (isSupported)
+				{
+					_context.call("startSession", apiKey)
+				}
+			}
+		}
+		
 		public function stopSession():void
 		{
-			if (isFlurrySupported)
+			log("Stop session");
+			
+			if (isSupported)
 			{
-				extCtx.call("stopSession")
+				_context.call("stopSession")
 			}
+		}
+		
+		public function setUserId(userId:String):void
+		{
+			log("Set user ID to " + userId);
+			
+			if (isSupported)
+			{
+				_context.call("setUserId", userId)
+			}
+		}
+		
+		/**
+		 * @param age Must be > 0.
+		 * @param gender Must be one of the two defined constants <code>MALE_GENDER</code> or <code>FEMALE_GENDER</code>.
+		 */
+		public function setUserInfo(age:int, gender:String):void
+		{
+			if (age <= 0)
+			{
+				log("Couldn't set user info. Age must be > 0 (value provided: " + age + ")");
+				return;
+			}
+			else if (gender != MALE_GENDER && gender != FEMALE_GENDER)
+			{
+				log("Couldn't set user info. Gender must be Flurry.MALE_GENDER or Flurry.FEMALE_GENDER (value provided: " + gender + ")");
+				return;
+			}
+			
+			log("Set user info - Age = " + age + " - Gender = " + gender); 
+			
+			if (isSupported)
+			{				
+				_context.call("setUserInfo", age, gender);
+			}
+		}
+		
+		public function setSendEventsOnPause(value:Boolean):void
+		{
+			if (isSupported)
+			{
+				_context.call("setSendEventsOnPause", value)
+			}
+		}
+		
+		/**
+		 * Log a regular event.
+		 *  
+		 * @param eventName Name of the event. Limits :
+		 * <ul>
+		 * <li>300 unique event names per application</li>
+		 * <li>Event name must be below 255 characters</li>
+		 * <li>Each session can log up to 200 events and up to 100 unique event names</li>
+		 * </ul>
+		 * 
+		 * @param properties map of additional parameters sent with the event. Limits :
+		 * <ul>
+		 * <li>Max 10 parameters per event</li>
+		 * <li>Key and value names must be below 255 characters</li>
+		 * </ul>
+		 */
+		public function logEvent(eventName:String, properties:Object = null):void
+		{	
+			if (!checkLength(eventName))
+			{
+				log("Couldn't log event " + eventName + " (too long)");
+				return;
+			}
+			
+			log("Log event - " + eventName + (properties ? " - " + JSON.stringify(properties) : ""));
+			
+			var parameterKeys:Array = [];
+			var parameterValues:Array = [];
+			if (properties)
+			{
+				var value:String;
+				var count:int = 0;
+				for (var key:String in properties)
+				{
+					if (count > 10)
+					{
+						log("Too many properties provided. Only kept " + JSON.stringify(parameterKeys));
+						break;
+					}
+					
+					value = properties[key].toString();
+					if (checkLength(value) && checkLength(key))
+					{
+						parameterKeys.push(key);
+						parameterValues.push(value);
+					}
+					else
+					{
+						log("Skipped property " + key + ". Value " + value + " was too long");
+					}
+					count++;
+				}
+			}
+			
+			if (isSupported)
+			{
+				_context.call("logEvent", eventName, parameterKeys, parameterValues);
+			}
+		}
+		
+		public function startTimedEvent(eventName:String):void
+		{
+			if (!checkLength(eventName))
+			{
+				log("Couldn't start timed event " + eventName + " (too long)");
+				return;
+			}
+			
+			log("Start timed event - " + eventName);
+			
+			if (isSupported)
+			{
+				_context.call("startTimedEvent", eventName)
+			}
+		}
+		
+		public function stopTimedEvent(eventName:String):void
+		{
+			if (!checkLength(eventName))
+			{
+				log("Couldn't stop timed event " + eventName + " (too long)");
+				return;
+			}
+			
+			log("Stop timed event - " + eventName);
+			
+			if (isSupported)
+			{
+				_context.call("stopTimedEvent", eventName)
+			}
+		}
+		
+		/**
+		 * Log an error.
+		 * <br><br>
+		 * 
+		 * Limits:
+		 * <ul>
+		 * <li>Flurry only reports the first 10 errors in each session.</li>
+		 * <li>Error ID and message are truncated to 255 characters.</li>
+		 * </ul>
+		 */
+		public function logError(errorId:String, message:String = null):void
+		{
+			if (!errorId)
+			{
+				log("Couldn't log error. You need to provide an error ID.");
+				return;
+			}
+			
+			if (errorId.length > 255)
+			{
+				errorId = errorId.substr(0, 255);
+			}
+			
+			message = message || "";
+			if (message.length > 255)
+			{
+				message = message.substr(0, 255);
+			}
+			
+			log("Log error - " + errorId + (message.length > 0 ? " - " + message : ""))
+			
+			if (isSupported)
+			{
+				_context.call("logError", errorId, message)
+			}
+		}
+		
+		
+		// --------------------------------------------------------------------------------------//
+		//																						 //
+		// 									 	PRIVATE API										 //
+		// 																						 //
+		// --------------------------------------------------------------------------------------//
+		
+		private static const EXTENSION_ID : String = "com.freshplanet.AirFlurry";
+		
+		private static var _instance : Flurry;
+		
+		private var _context : ExtensionContext;
+		private var _logEnabled : Boolean;
+		private var _iOSCrashReportingEnabled:Boolean;
+		private var _iOSApiKey:String;
+		private var _androidApiKey:String;
+		
+		private static function get isAndroid():Boolean
+		{
+			return Capabilities.manufacturer.indexOf("Android") > -1;
+		}
+		
+		private static function get isIOS():Boolean
+		{
+			return Capabilities.manufacturer.indexOf("iOS") > -1;
+		}
+		
+		private function getApiKeyFromDevice():String
+		{
+			if (isAndroid)
+			{
+				return _androidApiKey;
+			}
+			if (isIOS)
+			{
+				return _iOSApiKey;
+			}
+			return null;
+		}
+		
+		private function checkLength(value:String):Boolean
+		{
+			return value && value.length < 255;
+		}
+		
+		private function onStatus(event:StatusEvent):void
+		{
+			if (event.code == "LOGGING")
+			{
+				log(event.level);
+			}
+		}
+
+		private function log(message:String):void
+		{
+			if (_logEnabled) trace("[Flurry] " + message);
 		}
 	}
 }

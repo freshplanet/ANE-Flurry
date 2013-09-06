@@ -4,12 +4,11 @@ Air Native Extension for Flurry Analytics (iOS + Android)
 This is an [Air native extension](http://www.adobe.com/devnet/air/native-extensions-for-air.html) for [Flurry](http://flurry.com) SDK on iOS and Android. It has been developed by [FreshPlanet](http://freshplanet.com) and is used in the game [SongPop](http://songpop.fm).
 
 
-Flurry SDK
+Flurry SDK Versions
 ---------
 
-This ANE uses Flurry SDK version 4.2.3 on iOS and 3.2.0 on Android.
-
-It supports most features of Flurry Analytics. See the documentation [Flurry.as](https://github.com/freshplanet/ANE-Flurry/blob/master/actionscript/src/com/freshplanet/nativeExtensions/Flurry.as) for more information.
+* iOS: 4.2.3
+* Android: 3.2.0
 
 
 Installation
@@ -18,15 +17,28 @@ Installation
 The ANE binary (AirFlurry.ane) is located in the *bin* folder. You should add it to your application project's Build Path and make sure to package it with your app (more information [here](http://help.adobe.com/en_US/air/build/WS597e5dadb9cc1e0253f7d2fc1311b491071-8000.html)).
 
 
+Documentation
+--------
+
+Actionscript documentation is available in HTML format in the *docs* folder.
+
+
 Build script
 ---------
 
 Should you need to edit the extension source code and/or recompile it, you will find an ant build script (build.xml) in the *build* folder:
 
-    cd /path/to/the/ane/build
-    mv example.build.config build.config
-    #edit the build.config file to provide your machine-specific paths
-    ant
+```bash
+cd /path/to/the/ane
+
+# Setup build configuration
+cd build
+mv example.build.config build.config
+# Edit build.config file to provide your machine-specific paths
+
+# Build the ANE
+ant
+```
 
 
 Authors

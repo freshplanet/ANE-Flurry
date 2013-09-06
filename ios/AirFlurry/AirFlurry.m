@@ -278,6 +278,17 @@ DEFINE_ANE_FUNCTION(stopTimedEvent)
     return NULL;
 }
 
+DEFINE_ANE_FUNCTION(setCrashReportingEnabled)
+{
+    uint32_t enabled = NO;
+    if (FREGetObjectAsBool(argv[0], &enabled) == FRE_OK)
+    {
+        [Flurry setCrashReportingEnabled:enabled];
+    }
+    
+    return nil;
+}
+
 
 #pragma mark - ANE setup
 
@@ -285,7 +296,7 @@ void AirFlurryContextInitializer(void* extData, const uint8_t* ctxType, FREConte
                                 uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet) 
 {    
     // Register the links btwn AS3 and ObjC. (dont forget to modify the nbFuntionsToLink integer if you are adding/removing functions)
-    NSInteger nbFuntionsToLink = 10;
+    NSInteger nbFuntionsToLink = 11;
     *numFunctionsToTest = nbFuntionsToLink;
     
     FRENamedFunction* func = (FRENamedFunction*) malloc(sizeof(FRENamedFunction) * nbFuntionsToLink);
@@ -334,6 +345,10 @@ void AirFlurryContextInitializer(void* extData, const uint8_t* ctxType, FREConte
     func[9].name = (const uint8_t*) "stopTimedEvent";
     func[9].functionData = NULL;
     func[9].function = &stopTimedEvent;
+    
+    func[10].name = (const uint8_t*) "setCrashReportingEnabled";
+    func[10].functionData = NULL;
+    func[10].function = &setCrashReportingEnabled;
     
 
     AirFlurryCtx = ctx;
