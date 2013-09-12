@@ -224,7 +224,16 @@ package com.freshplanet.nativeExtensions
 				return;
 			}
 			
-			log("Log event - " + eventName + (properties ? " - " + JSON.stringify(properties) : ""));
+			var strProperties:String;
+			try
+			{
+				strProperties = properties ? " - " + JSON.stringify(properties) : "";
+			}
+			catch (e:Error)
+			{
+				strProperties = " - Couldn't unserialize the event properties!";
+			}
+			log("Log event - " + eventName + strProperties);
 			
 			var parameterKeys:Array = [];
 			var parameterValues:Array = [];
