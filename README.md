@@ -7,8 +7,8 @@ This is an [Air native extension](http://www.adobe.com/devnet/air/native-extensi
 Flurry SDK Versions
 ---------
 
-* iOS: 4.2.3
-* Android: 3.2.0
+* iOS: 5.2.0
+* Android: 4.0.0
 
 
 Installation
