@@ -17,6 +17,10 @@ Installation
 The ANE binary (AirFlurry.ane) is located in the *bin* folder. You should add it to your application project's Build Path and make sure to package it with your app (more information [here](http://help.adobe.com/en_US/air/build/WS597e5dadb9cc1e0253f7d2fc1311b491071-8000.html)).
 
 
+Notes:
+* included binary has been compiled for 64-bit iOS support
+
+
 Documentation
 --------
 
