@@ -1,0 +1,296 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		195154ED17C2CA2600AFA5A8 /* FlashRuntimeExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 195154EC17C2CA2600AFA5A8 /* FlashRuntimeExtensions.h */; };
+		5AF8AF16153DE65D000A8447 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AF8AF15153DE65D000A8447 /* Foundation.framework */; };
+		5AF8AF1C153DE65D000A8447 /* AirFlurry.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF8AF1B153DE65D000A8447 /* AirFlurry.m */; };
+		FA20572D15E2AA1600030F51 /* Flurry.h in Headers */ = {isa = PBXBuildFile; fileRef = FA20572715E2AA1600030F51 /* Flurry.h */; };
+		FA20572E15E2AA1600030F51 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA20572815E2AA1600030F51 /* libFlurry.a */; };
+		FAD8E79A15E8409900BAD3C3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E79915E8409900BAD3C3 /* SystemConfiguration.framework */; };
+		FAD8E7A415E840DD00BAD3C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD8E7A315E840DD00BAD3C3 /* UIKit.framework */; };
+		FAFF2C8517BBCCA9007D48DD /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAFF2C8417BBCCA9007D48DD /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		FAFF2C8717BBCCB4007D48DD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAFF2C8617BBCCB4007D48DD /* Security.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		195154EC17C2CA2600AFA5A8 /* FlashRuntimeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashRuntimeExtensions.h; sourceTree = "<group>"; };
+		5AF8AF12153DE65D000A8447 /* libAirFlurry.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAirFlurry.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AF8AF15153DE65D000A8447 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		5AF8AF19153DE65D000A8447 /* AirFlurry-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AirFlurry-Prefix.pch"; sourceTree = "<group>"; };
+		5AF8AF1A153DE65D000A8447 /* AirFlurry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AirFlurry.h; sourceTree = "<group>"; };
+		5AF8AF1B153DE65D000A8447 /* AirFlurry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirFlurry.m; sourceTree = "<group>"; };
+		FA20572715E2AA1600030F51 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		FA20572815E2AA1600030F51 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
+		FAD8E79915E8409900BAD3C3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		FAD8E7A315E840DD00BAD3C3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		FAFF2C8417BBCCA9007D48DD /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		FAFF2C8617BBCCB4007D48DD /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5AF8AF0F153DE65D000A8447 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAFF2C8717BBCCB4007D48DD /* Security.framework in Frameworks */,
+				FAFF2C8517BBCCA9007D48DD /* AdSupport.framework in Frameworks */,
+				FAD8E7A415E840DD00BAD3C3 /* UIKit.framework in Frameworks */,
+				FAD8E79A15E8409900BAD3C3 /* SystemConfiguration.framework in Frameworks */,
+				5AF8AF16153DE65D000A8447 /* Foundation.framework in Frameworks */,
+				FA20572E15E2AA1600030F51 /* libFlurry.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5AF8AF07153DE65D000A8447 = {
+			isa = PBXGroup;
+			children = (
+				5AF8AF17153DE65D000A8447 /* AirFlurry */,
+				5AF8AF14153DE65D000A8447 /* Frameworks */,
+				5AF8AF13153DE65D000A8447 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5AF8AF13153DE65D000A8447 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5AF8AF12153DE65D000A8447 /* libAirFlurry.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5AF8AF14153DE65D000A8447 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				195154EC17C2CA2600AFA5A8 /* FlashRuntimeExtensions.h */,
+				FA20572615E2AA1600030F51 /* Flurry */,
+				FAFF2C8417BBCCA9007D48DD /* AdSupport.framework */,
+				FAD8E7A315E840DD00BAD3C3 /* UIKit.framework */,
+				FAD8E79915E8409900BAD3C3 /* SystemConfiguration.framework */,
+				FAFF2C8617BBCCB4007D48DD /* Security.framework */,
+				5AF8AF15153DE65D000A8447 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5AF8AF17153DE65D000A8447 /* AirFlurry */ = {
+			isa = PBXGroup;
+			children = (
+				5AF8AF1A153DE65D000A8447 /* AirFlurry.h */,
+				5AF8AF1B153DE65D000A8447 /* AirFlurry.m */,
+				5AF8AF18153DE65D000A8447 /* Supporting Files */,
+			);
+			path = AirFlurry;
+			sourceTree = "<group>";
+		};
+		5AF8AF18153DE65D000A8447 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5AF8AF19153DE65D000A8447 /* AirFlurry-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FA20572615E2AA1600030F51 /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				FA20572715E2AA1600030F51 /* Flurry.h */,
+				FA20572815E2AA1600030F51 /* libFlurry.a */,
+			);
+			path = Flurry;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		5AF8AF10153DE65D000A8447 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA20572D15E2AA1600030F51 /* Flurry.h in Headers */,
+				195154ED17C2CA2600AFA5A8 /* FlashRuntimeExtensions.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		5AF8AF11153DE65D000A8447 /* AirFlurry */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5AF8AF1F153DE65D000A8447 /* Build configuration list for PBXNativeTarget "AirFlurry" */;
+			buildPhases = (
+				5AF8AF0E153DE65D000A8447 /* Sources */,
+				5AF8AF0F153DE65D000A8447 /* Frameworks */,
+				5AF8AF10153DE65D000A8447 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AirFlurry;
+			productName = AirFlurry;
+			productReference = 5AF8AF12153DE65D000A8447 /* libAirFlurry.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5AF8AF09153DE65D000A8447 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = 5AF8AF0C153DE65D000A8447 /* Build configuration list for PBXProject "AirFlurry" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 5AF8AF07153DE65D000A8447;
+			productRefGroup = 5AF8AF13153DE65D000A8447 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5AF8AF11153DE65D000A8447 /* AirFlurry */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5AF8AF0E153DE65D000A8447 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5AF8AF1C153DE65D000A8447 /* AirFlurry.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		5AF8AF1D153DE65D000A8447 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		5AF8AF1E153DE65D000A8447 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5AF8AF20153DE65D000A8447 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				DSTROOT = /tmp/AirFlurry.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AirFlurry/AirFlurry-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = ../;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Flurry\"",
+					"\"$(SRCROOT)/FlurryAds\"",
+					"\"$(SRCROOT)/Networks\"",
+					"\"$(SRCROOT)/Networks/Greystripe\"",
+					"\"$(SRCROOT)/Networks/Jumptap\"",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5AF8AF21153DE65D000A8447 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				DSTROOT = /tmp/AirFlurry.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AirFlurry/AirFlurry-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = ../;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Flurry\"",
+					"\"$(SRCROOT)/FlurryAds\"",
+					"\"$(SRCROOT)/Networks\"",
+					"\"$(SRCROOT)/Networks/Greystripe\"",
+					"\"$(SRCROOT)/Networks/Jumptap\"",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5AF8AF0C153DE65D000A8447 /* Build configuration list for PBXProject "AirFlurry" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5AF8AF1D153DE65D000A8447 /* Debug */,
+				5AF8AF1E153DE65D000A8447 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5AF8AF1F153DE65D000A8447 /* Build configuration list for PBXNativeTarget "AirFlurry" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5AF8AF20153DE65D000A8447 /* Debug */,
+				5AF8AF21153DE65D000A8447 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5AF8AF09153DE65D000A8447 /* Project object */;
+}

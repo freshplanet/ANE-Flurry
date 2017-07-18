@@ -1,7 +1,0 @@
-<platform xmlns="http://ns.adobe.com/air/extension/3.8">
-    <sdkVersion>7.0</sdkVersion>
-    <linkerOptions>
-    	<option>-framework Security</option>
-    	<option>-weak_framework AdSupport</option>
-    </linkerOptions> 
-</platform>
