@@ -1,368 +1,436 @@
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright 2012 Freshplanet (http://freshplanet.com | opensource@freshplanet.com)
-//  
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//  
-//    http://www.apache.org/licenses/LICENSE-2.0
-//  
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
-//  
-//////////////////////////////////////////////////////////////////////////////////////
+/*
+ * Copyright 2017 FreshPlanet
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #import "AirFlurry.h"
-#import "Flurry.h"
+#import "Constants.h"
 
-FREContext AirFlurryCtx = nil;
+@interface AirFlurry ()
+    @property (nonatomic, readonly) FREContext context;
+@end
 
 
 @implementation AirFlurry
 
 
-#pragma mark - Singleton
-
-static id sharedInstance = nil;
-
-+ (AirFlurry *)sharedInstance
-{
-    if (sharedInstance == nil)
-    {
-        sharedInstance = [[super allocWithZone:NULL] init];
+- (instancetype)initWithContext:(FREContext)extensionContext {
+    
+    if ((self = [super init])) {
+        
+        _context = extensionContext;
     }
     
-    return sharedInstance;
-}
-
-+ (id)allocWithZone:(NSZone *)zone
-{
-    return [self sharedInstance];
-}
-
-- (id)copy
-{
     return self;
 }
 
 
-#pragma mark - Analytics
+-(void)flurrySessionDidCreateWithInfo:(NSDictionary *)info {
 
-- (void)startSession:(NSString *)apiKey
-{    
-    [Flurry setDebugLogEnabled:NO];
-    [Flurry startSession:apiKey];
+    [self sendEvent:kAirFlurryEvent_SESSION_STARTED];
 }
 
 
 #pragma mark - Other
 
-+ (void)log:(NSString *)message
-{
-    FREDispatchStatusEventAsync(AirFlurryCtx, (const uint8_t *)"LOGGING", (const uint8_t *)[message UTF8String]);
+- (void) sendLog:(NSString*)log {
+    [self sendEvent:@"log" level:log];
+}
+
+- (void) sendEvent:(NSString*)code {
+    [self sendEvent:code level:@""];
+}
+
+- (void) sendEvent:(NSString*)code level:(NSString*)level {
+    FREDispatchStatusEventAsync(_context, (const uint8_t*)[code UTF8String], (const uint8_t*)[level UTF8String]);
 }
 
 @end
 
+AirFlurry* GetAirFlurryContextNativeData(FREContext context) {
+    
+    CFTypeRef controller;
+    FREGetContextNativeData(context, (void**)&controller);
+    return (__bridge AirFlurry*)controller;
+}
 
 #pragma mark - C interface - Flurry setup
 
-DEFINE_ANE_FUNCTION(startSession)
-{
-    uint32_t stringLength;
+DEFINE_ANE_FUNCTION(init) {
+    AirFlurry* controller = GetAirFlurryContextNativeData(context);
     
-    const uint8_t *value;
-    if (FREGetObjectAsUTF8(argv[0], &stringLength, &value) == FRE_OK)
-    {
-        NSString *apiKey = [NSString stringWithUTF8String:(char*)value];
-        [[AirFlurry sharedInstance] startSession:apiKey];
-    }
-    return nil;
-}
-
-DEFINE_ANE_FUNCTION(stopSession)
-{
-    // Doesn't do anything on iOS.
-    return nil;
-}
-
-
-#pragma mark - C interface - Analytics
-
-DEFINE_ANE_FUNCTION(setAppVersion)
-{
-    uint32_t stringLength = 0;
+    if (!controller)
+        return FPANE_CreateError(@"context's AirFlurry is null", 0);
     
-    const uint8_t *value = NULL;
-    if (FREGetObjectAsUTF8(argv[0], &stringLength, &value) == FRE_OK)
-    {
-        NSString *versionName = [NSString stringWithUTF8String:(char*)value];
-        [Flurry setAppVersion:versionName];
-    }
-    
-    return nil;
-}
-
-DEFINE_ANE_FUNCTION(logEvent)
-{
-    uint32_t stringLength;
-    
-    const uint8_t *value;
-    if (FREGetObjectAsUTF8(argv[0], &stringLength, &value) != FRE_OK)
-    {
-        return nil;
-    }
-    NSString *eventName = [NSString stringWithUTF8String:(char*)value];
-    
-    NSMutableDictionary *params;
-    if (argc > 1 && argv[1] != NULL && argv[2] != NULL && argv[1] != nil && argv[2] != NULL)
-    {
-        FREObject arrKey = argv[1]; // array
-        uint32_t arr_len = 0; // array length
+    @try {
+        NSString *apiKey = FPANE_FREObjectToNSString(argv[0]);
+        NSString *appVersion = FPANE_FREObjectToNSString(argv[1]);
+        NSInteger continueSessionInSeconds = (NSInteger) FPANE_FREObjectToInt(argv[1]) / 1000; // value sent is in millis
         
-        FREObject arrValue = argv[2]; // array
+        [Flurry setDelegate:controller];
         
-        if (arrKey != nil)
-        {
-            if (FREGetArrayLength(arrKey, &arr_len) != FRE_OK)
-            {
-                arr_len = 0;
-            }
-            
+        FlurrySessionBuilder* builder = [[[[[FlurrySessionBuilder new]
+                                            withLogLevel:FlurryLogLevelAll]
+                                           withCrashReporting:NO]
+                                          withSessionContinueSeconds:continueSessionInSeconds]
+                                         withAppVersion:appVersion];
+        
+        [Flurry startSession:apiKey withSessionBuilder:builder];
+    }
+    @catch (NSException *exception) {
+        [controller sendLog:[@"Exception occured while trying to init Flurry : " stringByAppendingString:exception.reason]];
+    }
+    
+    return nil;
+}
+
+
+DEFINE_ANE_FUNCTION(logEvent) {
+    
+    AirFlurry* controller = GetAirFlurryContextNativeData(context);
+    
+    if (!controller)
+        return FPANE_CreateError(@"context's AirFlurry is null", 0);
+
+    @try {
+        NSString *eventName = FPANE_FREObjectToNSString(argv[0]);
+        NSMutableDictionary *params = nil;
+        if (argc > 1 && argv[1] != NULL && argv[2] != NULL && argv[1] != nil && argv[2] != NULL) {
             params = [[NSMutableDictionary alloc] init];
-            
-            for (int32_t i = arr_len-1; i >= 0; i--)
-            {
-                // get an element at index
-                FREObject key;
-                if (FREGetArrayElementAt(arrKey, i, &key) != FRE_OK)
-                {
-                    continue;
-                }
-                
-                FREObject value;
-                if (FREGetArrayElementAt(arrValue, i, &value) != FRE_OK)
-                {
-                    continue;
-                }
-                
-                // convert it to NSString
-                uint32_t stringLength;
-                const uint8_t *keyString;
-                if (FREGetObjectAsUTF8(key, &stringLength, &keyString) != FRE_OK)
-                {
-                    continue;
-                }
-                
-                const uint8_t *valueString;
-                if (FREGetObjectAsUTF8(value, &stringLength, &valueString) != FRE_OK)
-                {
-                    continue;
-                }
-                
-                [params setValue:[NSString stringWithUTF8String:(char*)valueString] forKey:[NSString stringWithUTF8String:(char*)keyString]];
+            NSArray *arrayKeys = FPANE_FREObjectToNSArrayOfNSString(argv[1]);
+            NSArray *arrayValues = FPANE_FREObjectToNSArrayOfNSString(argv[2]);
+            int i;
+            for (i = 0; i < [arrayKeys count]; i++) {
+                NSString *key = [arrayKeys objectAtIndex:i];
+                NSString *value = [arrayValues objectAtIndex:i];
+                [params setValue:value forKey:key];
             }
         }
-    }
-    
-    if (params != nil && params.count > 0)
-    {
-        [Flurry logEvent:eventName withParameters:params];
-    }
-    else
-    {
-        [Flurry logEvent:eventName];
-    }
- 
-    return nil;
-}
+        
+        if (params != nil && params.count > 0) {
+            [Flurry logEvent:eventName withParameters:params];
+        }
+        else {
+            [Flurry logEvent:eventName];
+        }
 
-DEFINE_ANE_FUNCTION(logError)
-{
-    uint32_t stringLength;
-    
-    const uint8_t *valueId;
-    if (FREGetObjectAsUTF8(argv[0], &stringLength, &valueId) != FRE_OK)
-    {
-        return nil;
     }
-    NSString *errorId = [NSString stringWithUTF8String:(char*)valueId];
-    
-    const uint8_t *valueMessage;
-    if (FREGetObjectAsUTF8(argv[1], &stringLength, &valueMessage) != FRE_OK)
-    {
-        return nil;
+    @catch (NSException *exception) {
+        [controller sendLog:[@"Exception occured while trying to logEvent : " stringByAppendingString:exception.reason]];
     }
-    NSString *message = [NSString stringWithUTF8String:(char*)valueMessage];
-    
-    [Flurry logError:errorId message:message error:nil];
     
     return nil;
 }
 
-DEFINE_ANE_FUNCTION(setUserId)
-{
-    uint32_t stringLength;
+DEFINE_ANE_FUNCTION(logError) {
     
-    const uint8_t *value;
-    if (FREGetObjectAsUTF8(argv[0], &stringLength, &value) == FRE_OK)
-    {
-        NSString *userId = [NSString stringWithUTF8String:(char*)value];
+    AirFlurry* controller = GetAirFlurryContextNativeData(context);
+    
+    if (!controller)
+        return FPANE_CreateError(@"context's AirFlurry is null", 0);
+    
+    @try {
+        NSString *errorId = FPANE_FREObjectToNSString(argv[0]);
+        NSString *message = FPANE_FREObjectToNSString(argv[1]);
+        
+        [Flurry logError:errorId message:message error:nil];
+        
+    }
+    @catch (NSException *exception) {
+        [controller sendLog:[@"Exception occured while trying to logError : " stringByAppendingString:exception.reason]];
+    }
+
+    
+    return nil;
+}
+
+DEFINE_ANE_FUNCTION(setLocation) {
+    
+    AirFlurry* controller = GetAirFlurryContextNativeData(context);
+    
+    if (!controller)
+        return FPANE_CreateError(@"context's AirFlurry is null", 0);
+    
+    @try {
+        
+        double latitude = FPANE_FREObjectToDouble(argv[0]);
+        double longitude = FPANE_FREObjectToDouble(argv[1]);
+        float horizontalAccuracy = (float) FPANE_FREObjectToDouble(argv[2]);
+        float verticalAccuracy = (float) FPANE_FREObjectToDouble(argv[3]);
+        [Flurry setLatitude:latitude
+                  longitude:longitude
+         horizontalAccuracy:horizontalAccuracy
+           verticalAccuracy:verticalAccuracy];
+        
+    }
+    @catch (NSException *exception) {
+        [controller sendLog:[@"Exception occured while trying to setLocation : " stringByAppendingString:exception.reason]];
+    }
+    
+    
+    return nil;
+}
+
+DEFINE_ANE_FUNCTION(setUserId) {
+    
+    AirFlurry* controller = GetAirFlurryContextNativeData(context);
+    
+    if (!controller)
+        return FPANE_CreateError(@"context's AirFlurry is null", 0);
+    
+    @try {
+        NSString *userId = FPANE_FREObjectToNSString(argv[0]);
         [Flurry setUserID:userId];
     }
+    @catch (NSException *exception) {
+        [controller sendLog:[@"Exception occured while trying to setUserId : " stringByAppendingString:exception.reason]];
+    }
     
     return nil;
 }
 
-DEFINE_ANE_FUNCTION(setUserInfo)
-{
-    int32_t age = 0;
-    if (FREGetObjectAsInt32(argv[0], &age) == FRE_OK)
-    {
-        [Flurry setAge:age];
-    }
-
-    uint32_t stringLength = 0;
+DEFINE_ANE_FUNCTION(setUserAge) {
     
-    const uint8_t *value = NULL;
-    if (FREGetObjectAsUTF8(argv[1], &stringLength, &value ) == FRE_OK)
-    {
-        NSString *gender = [NSString stringWithUTF8String:(char*)value];
-        [Flurry setGender:gender];
+    AirFlurry* controller = GetAirFlurryContextNativeData(context);
+    
+    if (!controller)
+        return FPANE_CreateError(@"context's AirFlurry is null", 0);
+    
+    @try {
+        NSInteger userAge = FPANE_FREObjectToInt(argv[0]);
+        [Flurry setAge: (int) userAge];
     }
-   
+    @catch (NSException *exception) {
+        [controller sendLog:[@"Exception occured while trying to setUserAge : " stringByAppendingString:exception.reason]];
+    }
+    
+    
+    
     return nil;
 }
 
-DEFINE_ANE_FUNCTION(setSendEventsOnPause)
-{
-    uint32_t onPause = NO;
-    if (FREGetObjectAsBool(argv[0], &onPause) == FRE_OK)
-    {
-        [Flurry setSessionReportsOnPauseEnabled:onPause];
-        [Flurry setSessionReportsOnCloseEnabled:!onPause];
+DEFINE_ANE_FUNCTION(setUserGender) {
+    
+    AirFlurry* controller = GetAirFlurryContextNativeData(context);
+    
+    if (!controller)
+        return FPANE_CreateError(@"context's AirFlurry is null", 0);
+    
+    @try {
+        NSString *userGender = FPANE_FREObjectToNSString(argv[0]);
+        [Flurry setGender:userGender];
+    }
+    @catch (NSException *exception) {
+        [controller sendLog:[@"Exception occured while trying to setUserGender : " stringByAppendingString:exception.reason]];
+    }
+    
+    return nil;
+}
+
+DEFINE_ANE_FUNCTION(setSessionReportsOnCloseEnabled) {
+    AirFlurry* controller = GetAirFlurryContextNativeData(context);
+    
+    if (!controller)
+        return FPANE_CreateError(@"context's AirFlurry is null", 0);
+    
+    @try {
+        BOOL enabled = FPANE_FREObjectToBool(argv[0]);
+        [Flurry setSessionReportsOnCloseEnabled:enabled];
+    }
+    @catch (NSException *exception) {
+        [controller sendLog:[@"Exception occured while trying to setSessionReportsOnCloseEnabled : " stringByAppendingString:exception.reason]];
     }
   
     return nil;
 }
 
-DEFINE_ANE_FUNCTION(startTimedEvent)
-{
-    uint32_t stringLength;
+DEFINE_ANE_FUNCTION(setSessionReportsOnPauseEnabled) {
+    AirFlurry* controller = GetAirFlurryContextNativeData(context);
     
-    const uint8_t *value;
-    if (FREGetObjectAsUTF8(argv[0], &stringLength, &value) == FRE_OK)
-    {
-        NSString *eventName = [NSString stringWithUTF8String:(char*)value];
-        [Flurry logEvent:eventName timed:YES];
+    if (!controller)
+        return FPANE_CreateError(@"context's AirFlurry is null", 0);
+    
+    @try {
+        BOOL enabled = FPANE_FREObjectToBool(argv[0]);
+        [Flurry setSessionReportsOnPauseEnabled:enabled];
     }
-
+    @catch (NSException *exception) {
+        [controller sendLog:[@"Exception occured while trying to setSessionReportsOnPauseEnabled : " stringByAppendingString:exception.reason]];
+    }
+    
     return nil;
 }
 
-DEFINE_ANE_FUNCTION(stopTimedEvent)
-{
-    uint32_t stringLength;
+DEFINE_ANE_FUNCTION(setBackgroundSessionEnabled) {
+    AirFlurry* controller = GetAirFlurryContextNativeData(context);
     
-    const uint8_t *value;
-    if (FREGetObjectAsUTF8(argv[0], &stringLength, &value) == FRE_OK)
-    {
-        NSString *eventName = [NSString stringWithUTF8String:(char*)value];
-        [Flurry endTimedEvent:eventName withParameters:nil];
+    if (!controller)
+        return FPANE_CreateError(@"context's AirFlurry is null", 0);
+    
+    @try {
+        BOOL enabled = FPANE_FREObjectToBool(argv[0]);
+        [Flurry setBackgroundSessionEnabled:enabled];
+    }
+    @catch (NSException *exception) {
+        [controller sendLog:[@"Exception occured while trying to setBackgroundSessionEnabled : " stringByAppendingString:exception.reason]];
+    }
+    
+    return nil;
+}
+
+DEFINE_ANE_FUNCTION(pauseBackgroundSession) {
+    [Flurry pauseBackgroundSession];
+    return nil;
+}
+
+DEFINE_ANE_FUNCTION(logPageView) {
+    [Flurry logPageView];
+    return nil;
+}
+
+DEFINE_ANE_FUNCTION(startTimedEvent) {
+    AirFlurry* controller = GetAirFlurryContextNativeData(context);
+    
+    if (!controller)
+        return FPANE_CreateError(@"context's AirFlurry is null", 0);
+    
+    @try {
+        NSString *eventName = FPANE_FREObjectToNSString(argv[0]);
+        NSMutableDictionary *params = nil;
+        if (argc > 1 && argv[1] != NULL && argv[2] != NULL && argv[1] != nil && argv[2] != NULL) {
+            params = [[NSMutableDictionary alloc] init];
+            NSArray *arrayKeys = FPANE_FREObjectToNSArrayOfNSString(argv[1]);
+            NSArray *arrayValues = FPANE_FREObjectToNSArrayOfNSString(argv[2]);
+            int i;
+            for (i = 0; i < [arrayKeys count]; i++) {
+                NSString *key = [arrayKeys objectAtIndex:i];
+                NSString *value = [arrayValues objectAtIndex:i];
+                [params setValue:value forKey:key];
+            }
+        }
+        
+        if (params != nil && params.count > 0) {
+            [Flurry logEvent:eventName withParameters:params timed:YES];
+        }
+        else {
+            [Flurry logEvent:eventName timed:YES];
+        }
+        
+    }
+    @catch (NSException *exception) {
+        [controller sendLog:[@"Exception occured while trying to startTimedEvent : " stringByAppendingString:exception.reason]];
+    }
+    
+    return nil;
+}
+
+DEFINE_ANE_FUNCTION(stopTimedEvent) {
+    
+    AirFlurry* controller = GetAirFlurryContextNativeData(context);
+    
+    if (!controller)
+        return FPANE_CreateError(@"context's AirFlurry is null", 0);
+    
+    @try {
+        NSString *eventName = FPANE_FREObjectToNSString(argv[0]);
+        NSMutableDictionary *params = nil;
+        if (argc > 1 && argv[1] != NULL && argv[2] != NULL && argv[1] != nil && argv[2] != NULL){
+            params = [[NSMutableDictionary alloc] init];
+            NSArray *arrayKeys = FPANE_FREObjectToNSArrayOfNSString(argv[1]);
+            NSArray *arrayValues = FPANE_FREObjectToNSArrayOfNSString(argv[2]);
+            int i;
+            for (i = 0; i < [arrayKeys count]; i++) {
+                NSString *key = [arrayKeys objectAtIndex:i];
+                NSString *value = [arrayValues objectAtIndex:i];
+                [params setValue:value forKey:key];
+            }
+        }
+        
+        if (params != nil && params.count > 0){
+             [Flurry endTimedEvent:eventName withParameters:params];
+        }
+        else{
+            [Flurry endTimedEvent:eventName withParameters:nil];
+        }
+        
+    }
+    @catch (NSException *exception) {
+        [controller sendLog:[@"Exception occured while trying to stopTimedEvent : " stringByAppendingString:exception.reason]];
     }
 
+   
     return NULL;
 }
 
-DEFINE_ANE_FUNCTION(setCrashReportingEnabled)
-{
-    uint32_t enabled = NO;
-    if (FREGetObjectAsBool(argv[0], &enabled) == FRE_OK)
-    {
-        [Flurry setCrashReportingEnabled:enabled];
+DEFINE_ANE_FUNCTION(isSessionOpen) {
+    
+    AirFlurry* controller = GetAirFlurryContextNativeData(context);
+    
+    if (!controller)
+        return FPANE_CreateError(@"context's AirFlurry is null", 0);
+    
+    @try {
+        return FPANE_BOOLToFREObject([Flurry activeSessionExists]);
+    }
+    @catch (NSException *exception) {
+        [controller sendLog:[@"Exception occured while trying to check for open session : " stringByAppendingString:exception.reason]];
     }
     
-    return nil;
+    
+    return FPANE_BOOLToFREObject(NO);
 }
-
 
 #pragma mark - ANE setup
 
 void AirFlurryContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, 
-                                uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet) 
-{    
-    // Register the links btwn AS3 and ObjC. (dont forget to modify the nbFuntionsToLink integer if you are adding/removing functions)
-    NSInteger nbFuntionsToLink = 11;
-    *numFunctionsToTest = nbFuntionsToLink;
-    
-    FRENamedFunction* func = (FRENamedFunction*) malloc(sizeof(FRENamedFunction) * nbFuntionsToLink);
-    
-    // Session
-    
-    func[0].name = (const uint8_t*) "startSession";
-    func[0].functionData = NULL;
-    func[0].function = &startSession;
-    
-    func[1].name = (const uint8_t*) "stopSession";
-    func[1].functionData = NULL;
-    func[1].function = &stopSession;
-    
-    
-    // Analytics
-    
-    func[2].name = (const uint8_t*) "setAppVersion";
-    func[2].functionData = NULL;
-    func[2].function = &setAppVersion;
-    
-    func[3].name = (const uint8_t*) "logEvent";
-    func[3].functionData = NULL;
-    func[3].function = &logEvent;
-    
-    func[4].name = (const uint8_t*) "logError";
-    func[4].functionData = NULL;
-    func[4].function = &logError;
-    
-    func[5].name = (const uint8_t*) "setUserId";
-    func[5].functionData = NULL;
-    func[5].function = &setUserId;
+                                uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet) {
 
-    func[6].name = (const uint8_t*) "setUserInfo";
-    func[6].functionData = NULL;
-    func[6].function = &setUserInfo;
-
-    func[7].name = (const uint8_t*) "setSendEventsOnPause";
-    func[7].functionData = NULL;
-    func[7].function = &setSendEventsOnPause;
-
-    func[8].name = (const uint8_t*) "startTimedEvent";
-    func[8].functionData = NULL;
-    func[8].function = &startTimedEvent;
-
-    func[9].name = (const uint8_t*) "stopTimedEvent";
-    func[9].functionData = NULL;
-    func[9].function = &stopTimedEvent;
+    AirFlurry* controller = [[AirFlurry alloc] initWithContext:ctx];
+    FRESetContextNativeData(ctx, (void*)CFBridgingRetain(controller));
     
-    func[10].name = (const uint8_t*) "setCrashReportingEnabled";
-    func[10].functionData = NULL;
-    func[10].function = &setCrashReportingEnabled;
+    static FRENamedFunction functions[] = {
+        MAP_FUNCTION(init, NULL),
+        MAP_FUNCTION(logEvent, NULL),
+        MAP_FUNCTION(logError, NULL),
+        MAP_FUNCTION(setLocation, NULL),
+        MAP_FUNCTION(setUserId, NULL),
+        MAP_FUNCTION(setUserAge, NULL),
+        MAP_FUNCTION(setUserGender, NULL),
+        MAP_FUNCTION(startTimedEvent, NULL),
+        MAP_FUNCTION(stopTimedEvent, NULL),
+        MAP_FUNCTION(setSessionReportsOnCloseEnabled, NULL),
+        MAP_FUNCTION(setSessionReportsOnPauseEnabled, NULL),
+        MAP_FUNCTION(setBackgroundSessionEnabled, NULL),
+        MAP_FUNCTION(pauseBackgroundSession, NULL),
+        MAP_FUNCTION(logPageView, NULL),
+        MAP_FUNCTION(isSessionOpen, NULL),
+    };
     
+    *numFunctionsToTest = sizeof(functions) / sizeof(FRENamedFunction);
+    *functionsToSet = functions;
 
-    AirFlurryCtx = ctx;
-    
-    *functionsToSet = func;
 }
 
-void AirFlurryContextFinalizer(FREContext ctx) {}
+void AirFlurryContextFinalizer(FREContext ctx) {
+    CFTypeRef controller;
+    FREGetContextNativeData(ctx, (void **)&controller);
+    CFBridgingRelease(controller);
+}
 
-void AirFlurryInitializer(void** extDataToSet, FREContextInitializer* ctxInitializerToSet, FREContextFinalizer* ctxFinalizerToSet ) 
-{
-	*extDataToSet = NULL;
-	*ctxInitializerToSet = &AirFlurryContextInitializer; 
-	*ctxFinalizerToSet = &AirFlurryContextFinalizer;
+void AirFlurryInitializer(void** extDataToSet, FREContextInitializer* ctxInitializerToSet, FREContextFinalizer* ctxFinalizerToSet ) {
+    *extDataToSet = NULL;
+    *ctxInitializerToSet = &AirFlurryContextInitializer;
+    *ctxFinalizerToSet = &AirFlurryContextFinalizer;
 }
 
 void AirFlurryFinalizer(void *extData) {}

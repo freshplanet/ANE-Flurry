@@ -7,8 +7,8 @@ This is an [Air native extension](http://www.adobe.com/devnet/air/native-extensi
 Flurry SDK Versions
 ---------
 
-* iOS: 5.2.0
-* Android: 4.0.0
+* iOS: 8.1.0
+* Android: 7.0.0
 
 
 Installation
@@ -48,7 +48,7 @@ ant
 Authors
 ------
 
-This ANE has been written by [Thibaut Crenn](https://github.com/titi-us) and [Alexis Taugeron](http://alexistaugeron.com). It belongs to [FreshPlanet Inc.](http://freshplanet.com) and is distributed under the [Apache Licence, version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
+This ANE has been written by [Thibaut Crenn](https://github.com/titi-us), [Alexis Taugeron](http://alexistaugeron.com) and [Mateo Kozomara](mateo.kozomara@gmail.com). It belongs to [FreshPlanet Inc.](http://freshplanet.com) and is distributed under the [Apache Licence, version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
 
 
