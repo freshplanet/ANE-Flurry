@@ -73,7 +73,7 @@ import flash.events.EventDispatcher;
 
 			}
 			if (isSupported)
-				_context.call("init", apiKey, appVersion, continueSessionInMillis);
+				_context.call("initFlurry", apiKey, appVersion, continueSessionInMillis);
 
 		}
 

@@ -66,7 +66,7 @@ AirFlurry* GetAirFlurryContextNativeData(FREContext context) {
 
 #pragma mark - C interface - Flurry setup
 
-DEFINE_ANE_FUNCTION(init) {
+DEFINE_ANE_FUNCTION(initFlurry) {
     AirFlurry* controller = GetAirFlurryContextNativeData(context);
     
     if (!controller)
@@ -86,6 +86,8 @@ DEFINE_ANE_FUNCTION(init) {
                                          withAppVersion:appVersion];
         
         [Flurry startSession:apiKey withSessionBuilder:builder];
+        
+        
     }
     @catch (NSException *exception) {
         [controller sendLog:[@"Exception occured while trying to init Flurry : " stringByAppendingString:exception.reason]];
@@ -399,7 +401,7 @@ void AirFlurryContextInitializer(void* extData, const uint8_t* ctxType, FREConte
     FRESetContextNativeData(ctx, (void*)CFBridgingRetain(controller));
     
     static FRENamedFunction functions[] = {
-        MAP_FUNCTION(init, NULL),
+        MAP_FUNCTION(initFlurry, NULL),
         MAP_FUNCTION(logEvent, NULL),
         MAP_FUNCTION(logError, NULL),
         MAP_FUNCTION(setLocation, NULL),

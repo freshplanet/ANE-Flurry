@@ -52,7 +52,7 @@ public class AirFlurryExtensionContext extends FREContext
 	public Map<String, FREFunction> getFunctions()
 	{
 		Map<String, FREFunction> functionMap = new HashMap<String, FREFunction>();
-		functionMap.put("init", new InitFunction());
+		functionMap.put("initFlurry", new InitFunction());
 		functionMap.put("logEvent", new LogEventFunction());
 		functionMap.put("logError", new LogErrorFunction());
 		functionMap.put("setUserId", new SetUserIdFunction());
