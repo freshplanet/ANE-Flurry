@@ -73,7 +73,7 @@ import flash.events.EventDispatcher;
 
 			}
 			if (isSupported)
-				_context.call("init", apiKey, appVersion, continueSessionInMillis);
+				_context.call("initFlurry", apiKey, appVersion, continueSessionInMillis);
 
 		}
 
@@ -363,7 +363,7 @@ import flash.events.EventDispatcher;
 				_instance = this;
 			}
 			else {
-				throw Error("This is a singleton, use getInstance(), do not call the constructor directly.");
+				throw Error("This is a singleton, use instance, do not call the constructor directly.");
 			}
 		}
 
