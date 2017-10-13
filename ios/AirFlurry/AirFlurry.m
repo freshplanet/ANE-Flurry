@@ -70,12 +70,12 @@ DEFINE_ANE_FUNCTION(initFlurry) {
     AirFlurry* controller = GetAirFlurryContextNativeData(context);
     
     if (!controller)
-        return FPANE_CreateError(@"context's AirFlurry is null", 0);
+        return AirFlurry_FPANE_CreateError(@"context's AirFlurry is null", 0);
     
     @try {
-        NSString *apiKey = FPANE_FREObjectToNSString(argv[0]);
-        NSString *appVersion = FPANE_FREObjectToNSString(argv[1]);
-        NSInteger continueSessionInSeconds = (NSInteger) FPANE_FREObjectToInt(argv[1]) / 1000; // value sent is in millis
+        NSString *apiKey = AirFlurry_FPANE_FREObjectToNSString(argv[0]);
+        NSString *appVersion = AirFlurry_FPANE_FREObjectToNSString(argv[1]);
+        NSInteger continueSessionInSeconds = (NSInteger) AirFlurry_FPANE_FREObjectToInt(argv[1]) / 1000; // value sent is in millis
         
         [Flurry setDelegate:controller];
         
@@ -102,15 +102,15 @@ DEFINE_ANE_FUNCTION(logEvent) {
     AirFlurry* controller = GetAirFlurryContextNativeData(context);
     
     if (!controller)
-        return FPANE_CreateError(@"context's AirFlurry is null", 0);
+        return AirFlurry_FPANE_CreateError(@"context's AirFlurry is null", 0);
 
     @try {
-        NSString *eventName = FPANE_FREObjectToNSString(argv[0]);
+        NSString *eventName = AirFlurry_FPANE_FREObjectToNSString(argv[0]);
         NSMutableDictionary *params = nil;
         if (argc > 1 && argv[1] != NULL && argv[2] != NULL && argv[1] != nil && argv[2] != NULL) {
             params = [[NSMutableDictionary alloc] init];
-            NSArray *arrayKeys = FPANE_FREObjectToNSArrayOfNSString(argv[1]);
-            NSArray *arrayValues = FPANE_FREObjectToNSArrayOfNSString(argv[2]);
+            NSArray *arrayKeys = AirFlurry_FPANE_FREObjectToNSArrayOfNSString(argv[1]);
+            NSArray *arrayValues = AirFlurry_FPANE_FREObjectToNSArrayOfNSString(argv[2]);
             int i;
             for (i = 0; i < [arrayKeys count]; i++) {
                 NSString *key = [arrayKeys objectAtIndex:i];
@@ -139,11 +139,11 @@ DEFINE_ANE_FUNCTION(logError) {
     AirFlurry* controller = GetAirFlurryContextNativeData(context);
     
     if (!controller)
-        return FPANE_CreateError(@"context's AirFlurry is null", 0);
+        return AirFlurry_FPANE_CreateError(@"context's AirFlurry is null", 0);
     
     @try {
-        NSString *errorId = FPANE_FREObjectToNSString(argv[0]);
-        NSString *message = FPANE_FREObjectToNSString(argv[1]);
+        NSString *errorId = AirFlurry_FPANE_FREObjectToNSString(argv[0]);
+        NSString *message = AirFlurry_FPANE_FREObjectToNSString(argv[1]);
         
         [Flurry logError:errorId message:message error:nil];
         
@@ -161,14 +161,14 @@ DEFINE_ANE_FUNCTION(setLocation) {
     AirFlurry* controller = GetAirFlurryContextNativeData(context);
     
     if (!controller)
-        return FPANE_CreateError(@"context's AirFlurry is null", 0);
+        return AirFlurry_FPANE_CreateError(@"context's AirFlurry is null", 0);
     
     @try {
         
-        double latitude = FPANE_FREObjectToDouble(argv[0]);
-        double longitude = FPANE_FREObjectToDouble(argv[1]);
-        float horizontalAccuracy = (float) FPANE_FREObjectToDouble(argv[2]);
-        float verticalAccuracy = (float) FPANE_FREObjectToDouble(argv[3]);
+        double latitude = AirFlurry_FPANE_FREObjectToDouble(argv[0]);
+        double longitude = AirFlurry_FPANE_FREObjectToDouble(argv[1]);
+        float horizontalAccuracy = (float) AirFlurry_FPANE_FREObjectToDouble(argv[2]);
+        float verticalAccuracy = (float) AirFlurry_FPANE_FREObjectToDouble(argv[3]);
         [Flurry setLatitude:latitude
                   longitude:longitude
          horizontalAccuracy:horizontalAccuracy
@@ -188,10 +188,10 @@ DEFINE_ANE_FUNCTION(setUserId) {
     AirFlurry* controller = GetAirFlurryContextNativeData(context);
     
     if (!controller)
-        return FPANE_CreateError(@"context's AirFlurry is null", 0);
+        return AirFlurry_FPANE_CreateError(@"context's AirFlurry is null", 0);
     
     @try {
-        NSString *userId = FPANE_FREObjectToNSString(argv[0]);
+        NSString *userId = AirFlurry_FPANE_FREObjectToNSString(argv[0]);
         [Flurry setUserID:userId];
     }
     @catch (NSException *exception) {
@@ -206,10 +206,10 @@ DEFINE_ANE_FUNCTION(setUserAge) {
     AirFlurry* controller = GetAirFlurryContextNativeData(context);
     
     if (!controller)
-        return FPANE_CreateError(@"context's AirFlurry is null", 0);
+        return AirFlurry_FPANE_CreateError(@"context's AirFlurry is null", 0);
     
     @try {
-        NSInteger userAge = FPANE_FREObjectToInt(argv[0]);
+        NSInteger userAge = AirFlurry_FPANE_FREObjectToInt(argv[0]);
         [Flurry setAge: (int) userAge];
     }
     @catch (NSException *exception) {
@@ -226,10 +226,10 @@ DEFINE_ANE_FUNCTION(setUserGender) {
     AirFlurry* controller = GetAirFlurryContextNativeData(context);
     
     if (!controller)
-        return FPANE_CreateError(@"context's AirFlurry is null", 0);
+        return AirFlurry_FPANE_CreateError(@"context's AirFlurry is null", 0);
     
     @try {
-        NSString *userGender = FPANE_FREObjectToNSString(argv[0]);
+        NSString *userGender = AirFlurry_FPANE_FREObjectToNSString(argv[0]);
         [Flurry setGender:userGender];
     }
     @catch (NSException *exception) {
@@ -243,10 +243,10 @@ DEFINE_ANE_FUNCTION(setSessionReportsOnCloseEnabled) {
     AirFlurry* controller = GetAirFlurryContextNativeData(context);
     
     if (!controller)
-        return FPANE_CreateError(@"context's AirFlurry is null", 0);
+        return AirFlurry_FPANE_CreateError(@"context's AirFlurry is null", 0);
     
     @try {
-        BOOL enabled = FPANE_FREObjectToBool(argv[0]);
+        BOOL enabled = AirFlurry_FPANE_FREObjectToBool(argv[0]);
         [Flurry setSessionReportsOnCloseEnabled:enabled];
     }
     @catch (NSException *exception) {
@@ -260,10 +260,10 @@ DEFINE_ANE_FUNCTION(setSessionReportsOnPauseEnabled) {
     AirFlurry* controller = GetAirFlurryContextNativeData(context);
     
     if (!controller)
-        return FPANE_CreateError(@"context's AirFlurry is null", 0);
+        return AirFlurry_FPANE_CreateError(@"context's AirFlurry is null", 0);
     
     @try {
-        BOOL enabled = FPANE_FREObjectToBool(argv[0]);
+        BOOL enabled = AirFlurry_FPANE_FREObjectToBool(argv[0]);
         [Flurry setSessionReportsOnPauseEnabled:enabled];
     }
     @catch (NSException *exception) {
@@ -277,10 +277,10 @@ DEFINE_ANE_FUNCTION(setBackgroundSessionEnabled) {
     AirFlurry* controller = GetAirFlurryContextNativeData(context);
     
     if (!controller)
-        return FPANE_CreateError(@"context's AirFlurry is null", 0);
+        return AirFlurry_FPANE_CreateError(@"context's AirFlurry is null", 0);
     
     @try {
-        BOOL enabled = FPANE_FREObjectToBool(argv[0]);
+        BOOL enabled = AirFlurry_FPANE_FREObjectToBool(argv[0]);
         [Flurry setBackgroundSessionEnabled:enabled];
     }
     @catch (NSException *exception) {
@@ -304,15 +304,15 @@ DEFINE_ANE_FUNCTION(startTimedEvent) {
     AirFlurry* controller = GetAirFlurryContextNativeData(context);
     
     if (!controller)
-        return FPANE_CreateError(@"context's AirFlurry is null", 0);
+        return AirFlurry_FPANE_CreateError(@"context's AirFlurry is null", 0);
     
     @try {
-        NSString *eventName = FPANE_FREObjectToNSString(argv[0]);
+        NSString *eventName = AirFlurry_FPANE_FREObjectToNSString(argv[0]);
         NSMutableDictionary *params = nil;
         if (argc > 1 && argv[1] != NULL && argv[2] != NULL && argv[1] != nil && argv[2] != NULL) {
             params = [[NSMutableDictionary alloc] init];
-            NSArray *arrayKeys = FPANE_FREObjectToNSArrayOfNSString(argv[1]);
-            NSArray *arrayValues = FPANE_FREObjectToNSArrayOfNSString(argv[2]);
+            NSArray *arrayKeys = AirFlurry_FPANE_FREObjectToNSArrayOfNSString(argv[1]);
+            NSArray *arrayValues = AirFlurry_FPANE_FREObjectToNSArrayOfNSString(argv[2]);
             int i;
             for (i = 0; i < [arrayKeys count]; i++) {
                 NSString *key = [arrayKeys objectAtIndex:i];
@@ -341,15 +341,15 @@ DEFINE_ANE_FUNCTION(stopTimedEvent) {
     AirFlurry* controller = GetAirFlurryContextNativeData(context);
     
     if (!controller)
-        return FPANE_CreateError(@"context's AirFlurry is null", 0);
+        return AirFlurry_FPANE_CreateError(@"context's AirFlurry is null", 0);
     
     @try {
-        NSString *eventName = FPANE_FREObjectToNSString(argv[0]);
+        NSString *eventName = AirFlurry_FPANE_FREObjectToNSString(argv[0]);
         NSMutableDictionary *params = nil;
         if (argc > 1 && argv[1] != NULL && argv[2] != NULL && argv[1] != nil && argv[2] != NULL){
             params = [[NSMutableDictionary alloc] init];
-            NSArray *arrayKeys = FPANE_FREObjectToNSArrayOfNSString(argv[1]);
-            NSArray *arrayValues = FPANE_FREObjectToNSArrayOfNSString(argv[2]);
+            NSArray *arrayKeys = AirFlurry_FPANE_FREObjectToNSArrayOfNSString(argv[1]);
+            NSArray *arrayValues = AirFlurry_FPANE_FREObjectToNSArrayOfNSString(argv[2]);
             int i;
             for (i = 0; i < [arrayKeys count]; i++) {
                 NSString *key = [arrayKeys objectAtIndex:i];
@@ -379,17 +379,17 @@ DEFINE_ANE_FUNCTION(isSessionOpen) {
     AirFlurry* controller = GetAirFlurryContextNativeData(context);
     
     if (!controller)
-        return FPANE_CreateError(@"context's AirFlurry is null", 0);
+        return AirFlurry_FPANE_CreateError(@"context's AirFlurry is null", 0);
     
     @try {
-        return FPANE_BOOLToFREObject([Flurry activeSessionExists]);
+        return AirFlurry_FPANE_BOOLToFREObject([Flurry activeSessionExists]);
     }
     @catch (NSException *exception) {
         [controller sendLog:[@"Exception occured while trying to check for open session : " stringByAppendingString:exception.reason]];
     }
     
     
-    return FPANE_BOOLToFREObject(NO);
+    return AirFlurry_FPANE_BOOLToFREObject(NO);
 }
 
 #pragma mark - ANE setup

@@ -19,19 +19,19 @@
 #define MAP_FUNCTION(fn, data) { (const uint8_t*)(#fn), (data), &(fn) }
 #define ROOT_VIEW_CONTROLLER [[[UIApplication sharedApplication] keyWindow] rootViewController]
 
-void FPANE_DispatchEvent(FREContext context, NSString* eventName);
-void FPANE_DispatchEventWithInfo(FREContext context, NSString* eventName, NSString* eventInfo);
-void FPANE_Log(FREContext context, NSString* message);
+void AirFlurry_FPANE_DispatchEvent(FREContext context, NSString* eventName);
+void AirFlurry_FPANE_DispatchEventWithInfo(FREContext context, NSString* eventName, NSString* eventInfo);
+void AirFlurry_FPANE_Log(FREContext context, NSString* message);
 
-NSString* FPANE_FREObjectToNSString(FREObject object);
-NSArray* FPANE_FREObjectToNSArrayOfNSString(FREObject object);
-NSDictionary* FPANE_FREObjectsToNSDictionaryOfNSString(FREObject keys, FREObject values);
-BOOL FPANE_FREObjectToBool(FREObject object);
-NSInteger FPANE_FREObjectToInt(FREObject object);
-double FPANE_FREObjectToDouble(FREObject object);
+NSString* AirFlurry_FPANE_FREObjectToNSString(FREObject object);
+NSArray* AirFlurry_FPANE_FREObjectToNSArrayOfNSString(FREObject object);
+NSDictionary* AirFlurry_FPANE_FREObjectsToNSDictionaryOfNSString(FREObject keys, FREObject values);
+BOOL AirFlurry_FPANE_FREObjectToBool(FREObject object);
+NSInteger AirFlurry_FPANE_FREObjectToInt(FREObject object);
+double AirFlurry_FPANE_FREObjectToDouble(FREObject object);
 
-FREObject FPANE_BOOLToFREObject(BOOL boolean);
-FREObject FPANE_IntToFREObject(NSInteger i);
-FREObject FPANE_DoubleToFREObject(double d);
-FREObject FPANE_NSStringToFREObject(NSString* string);
-FREObject FPANE_CreateError(NSString* error, NSInteger* id);
+FREObject AirFlurry_FPANE_BOOLToFREObject(BOOL boolean);
+FREObject AirFlurry_FPANE_IntToFREObject(NSInteger i);
+FREObject AirFlurry_FPANE_DoubleToFREObject(double d);
+FREObject AirFlurry_FPANE_NSStringToFREObject(NSString* string);
+FREObject AirFlurry_FPANE_CreateError(NSString* error, NSInteger* id);
