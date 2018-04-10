@@ -8,7 +8,7 @@
 
      minimumPatchLevel - The minimum patch level of the AIR runtime required to run the application. Optional. -->
 
-<application xmlns="http://ns.adobe.com/air/application/26.0">
+<application xmlns="http://ns.adobe.com/air/application/29.0">
 
     <!-- A universally unique application identifier. Must be unique across all AIR applications.
          Using a reverse DNS-style name as the id is recommended. (Eg. com.example.ExampleApplication.) Required. -->
@@ -224,6 +224,7 @@
         <manifestAdditions>
             <![CDATA[
             <manifest android:installLocation="auto">
+            <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="27"></uses-sdk>
                 <uses-permission android:name="android.permission.INTERNET"/>
                 <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>-->
                 <!--<uses-permission android:name="android.permission.READ_PHONE_STATE"/>-->
