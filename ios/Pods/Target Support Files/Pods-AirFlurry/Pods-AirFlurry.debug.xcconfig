@@ -1,9 +1,9 @@
-ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Flurry-iOS-SDK"
-LIBRARY_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/Flurry-iOS-SDK" $(inherited) "${PODS_ROOT}/Flurry-iOS-SDK/Flurry"
+LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Flurry-iOS-SDK" "${PODS_ROOT}/Flurry-iOS-SDK/Flurry"
 OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/Flurry-iOS-SDK"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"Flurry-iOS-SDK" -l"Flurry_8.1.0" -framework "Foundation" -framework "Security" -framework "SystemConfiguration" -framework "UIKit" -weak_framework "WatchConnectivity"
-PODS_BUILD_DIR = $BUILD_DIR
-PODS_CONFIGURATION_BUILD_DIR = $PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+OTHER_LDFLAGS = $(inherited) -ObjC -l"Flurry-iOS-SDK" -l"Flurry_9.0.0" -framework "Foundation" -framework "Security" -framework "SystemConfiguration" -framework "UIKit" -weak_framework "CoreLocation" -weak_framework "WatchConnectivity"
+PODS_BUILD_DIR = ${BUILD_DIR}
+PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
 PODS_ROOT = ${SRCROOT}/Pods
