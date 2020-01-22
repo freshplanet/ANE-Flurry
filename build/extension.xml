@@ -33,6 +33,21 @@
             </applicationDeployment> 
         </platform>
 
+        <platform name="Android-ARM64">
+            <applicationDeployment>
+                <nativeLibrary>libAirFlurry.jar</nativeLibrary>
+                <initializer>com.freshplanet.ane.AirFlurry.AirFlurryExtension</initializer>
+                <finalizer>com.freshplanet.ane.AirFlurry.AirFlurryExtension</finalizer>
+            </applicationDeployment>
+        </platform>
+
+        <platform name="Android-x86">
+            <applicationDeployment>
+                <nativeLibrary>libAirFlurry.jar</nativeLibrary>
+                <initializer>com.freshplanet.ane.AirFlurry.AirFlurryExtension</initializer>
+                <finalizer>com.freshplanet.ane.AirFlurry.AirFlurryExtension</finalizer>
+            </applicationDeployment>
+        </platform>
         <platform name="default"> 
             <applicationDeployment/> 
         </platform> 
